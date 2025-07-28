@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings version="3.0"
+    xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/jaxb https://jakarta.ee/xml/ns/jaxb/bindingschema_3_0.xsd"
+    xmlns:annox="urn:jaxb.jvnet.org:annox"
+    jaxb:extensionBindingPrefixes="xjc annox">
+
+    <jaxb:globalBindings>
+        <xjc:simple />
+        <xjc:serializable uid="-1" />
+        <jaxb:javaType name="java.util.Calendar" xmlType="xs:dateTime"
+            parseMethod="jakarta.xml.bind.DatatypeConverter.parseDateTime"
+            printMethod="jakarta.xml.bind.DatatypeConverter.printDateTime" />
+    </jaxb:globalBindings>
+
+    <jaxb:bindings schemaLocation="Semantic.xsd" node="/xs:schema">
+        <jaxb:bindings node="xs:element[@name='outputSet']">
+            <annox:annotate target="field">@jakarta.xml.bind.annotation.XmlElementRef</annox:annotate>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+</jaxb:bindings>
