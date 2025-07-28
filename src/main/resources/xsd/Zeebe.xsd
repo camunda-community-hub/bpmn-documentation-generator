@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified"
+            xmlns="http://camunda.org/schema/zeebe/1.0"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://camunda.org/schema/zeebe/1.0">
+
+<!--    <xsd:import namespace="http://www.omg.org/spec/BPMN/20100524/MODEL" schemaLocation="Semantic.xsd"/>-->
+
+    <xsd:element name="taskDefinition">
+        <xsd:complexType>
+            <xsd:attribute name="type" type="xsd:string"/>
+            <xsd:attribute name="retries" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="ioMapping">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="input" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="output" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="input">
+        <xsd:complexType>
+            <xsd:attribute name="source" type="xsd:string"/>
+            <xsd:attribute name="target" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="output">
+        <xsd:complexType>
+            <xsd:attribute name="source" type="xsd:string"/>
+            <xsd:attribute name="target" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="taskHeaders">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="header" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="header">
+        <xsd:complexType>
+            <xsd:attribute name="key" type="xsd:string"/>
+            <xsd:attribute name="value" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="executionListeners">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="executionListener" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="executionListener">
+        <xsd:complexType>
+            <xsd:attribute name="eventType" type="xsd:string"/>
+            <xsd:attribute name="retries" type="xsd:string"/>
+            <xsd:attribute name="type" type="executionListenerType"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="executionListenerType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Start"/>
+            <xsd:enumeration value="End"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="properties">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="property" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:attribute name="name" type="xsd:string"/>
+                        <xsd:attribute name="value" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="formDefinition">
+        <xsd:complexType>
+            <xsd:attribute name="formKey" type="xsd:string"/>
+            <xsd:attribute name="retries" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="userTaskForm">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+<!--    <xsd:element name="script">-->
+<!--        <xsd:complexType>-->
+<!--            <xsd:attribute name="expression" type="xsd:string"/>-->
+<!--            <xsd:attribute name="resultVariable" type="xsd:string"/>-->
+<!--        </xsd:complexType>-->
+<!--    </xsd:element>-->
+
+    <xsd:element name="subscription">
+        <xsd:complexType>
+            <xsd:attribute name="correlationKey" type="xsd:string" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="versionTag">
+        <xsd:complexType>
+            <xsd:attribute name="value" type="xsd:string" />
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>
