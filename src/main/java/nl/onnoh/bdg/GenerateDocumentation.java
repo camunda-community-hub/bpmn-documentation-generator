@@ -65,8 +65,7 @@ public class GenerateDocumentation implements Callable<Integer> {
     }
 
     @Override
-    public Integer call() throws Exception {
-//        private static int generate(String bpmnFile, String outputType) {
+    public Integer call() {
         log.info("Analyzing {}", bpmnFile);
 
         if (!checkFile(bpmnFile)) {
@@ -79,7 +78,9 @@ public class GenerateDocumentation implements Callable<Integer> {
         if (generateOutput(bpmnFile, bpmnDocumentation, outputFormat)) {
             log.info("Generated BPMN documentation: {}", bpmnDocumentation);
             return 0;
-        };
+        }  else {
+            log.error("Failed to generate documentation for {}", bpmnFile);
+        }
 
         return 1;
     }
@@ -103,16 +104,16 @@ public class GenerateDocumentation implements Callable<Integer> {
             bpmnDocumentation.setFileName(bpmnFile);
             bpmnDocumentation.setExporter(definitions.getExporter());
             bpmnDocumentation.setExporterVersion(definitions.getExporterVersion());
-            definitions.getOtherAttributes().entrySet().forEach(entry -> {
-                switch (entry.getKey().getLocalPart()) {
+            definitions.getOtherAttributes().forEach((key, value) -> {
+                switch (key.getLocalPart()) {
                     case MODELER_EXECUTION_PLATFORM:
-                        bpmnDocumentation.setExecutionPlatform(entry.getValue());
+                        bpmnDocumentation.setExecutionPlatform(value);
                         break;
                     case MODELER_EXECUTION_PLATFORM_VERSION:
-                        bpmnDocumentation.setExecutionPlatformVersion(entry.getValue());
+                        bpmnDocumentation.setExecutionPlatformVersion(value);
                         break;
                     default:
-                        log.warn("Unknown definition attribute: " + entry.getKey().getLocalPart());
+                        log.warn("Unknown definition attribute: {}", key.getLocalPart());
                 }
             });
 
@@ -140,7 +141,7 @@ public class GenerateDocumentation implements Callable<Integer> {
                         errors.add(parseError(root.getValue()));
                         break;
                     default:
-                        log.warn("Unknown root element : {}" + root.getName());
+                        log.warn("Unknown root element : {}", root.getName());
                 }
             });
             bpmnDocumentation.setProcesses(processes);
@@ -161,25 +162,23 @@ public class GenerateDocumentation implements Callable<Integer> {
         String templateFile = TEMPLATES_FOLDER + File.separator + "bpmn-documentation-" + outputType + TEMPLATE_SUFFIX;
         String outputFile = bpmnFile.replace(".bpmn", "." + outputType);
         Map<String, Object> templateVariables = new HashMap<>();
-        try {
-            Configuration configuration = initTemplateEngine();
-            templateVariables.put("bpmn", bpmnDocumentation);
-            processTemplate(configuration, templateFile, outputFile, templateVariables);
-        } catch (Exception e) {
-            log.error("Error processing template {}", templateFile);
-            return false;
-        }
+        Configuration configuration = initTemplateEngine();
+        templateVariables.put("bpmn", bpmnDocumentation);
+        processTemplate(configuration, templateFile, outputFile, templateVariables);
         return true;
     }
 
     private static boolean checkFile(String bpmnFile) {
         Path filePath = Paths.get(bpmnFile);
-        try {
-            if (!Files.exists(filePath)) {
-                log.error("File not found: {}", bpmnFile);
-                return false;
-            }
-        } catch (Exception e) {
+        if (!Files.exists(filePath)) {
+            log.error("File not found: {}", bpmnFile);
+            return false;
+        }
+        if (!Files.isRegularFile(filePath)) {
+            log.error("Not a regular file: {}", bpmnFile);
+            return false;
+        }
+        if (!Files.isReadable(filePath)) {
             log.error("Error reading file: {}", bpmnFile);
             return false;
         }
