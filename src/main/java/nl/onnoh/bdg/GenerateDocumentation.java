@@ -101,7 +101,8 @@ public class GenerateDocumentation implements Callable<Integer> {
             Definitions definitions = (Definitions) jaxbUnmarshaller.unmarshal(new File(bpmnFile));
 
             bpmnDocumentation.setId(definitions.getId());
-            bpmnDocumentation.setFileName(bpmnFile);
+            bpmnDocumentation.setFilePath(bpmnFile);
+            bpmnDocumentation.setFileName(new File(bpmnFile).getName());
             bpmnDocumentation.setExporter(definitions.getExporter());
             bpmnDocumentation.setExporterVersion(definitions.getExporterVersion());
             definitions.getOtherAttributes().forEach((key, value) -> {
@@ -159,7 +160,7 @@ public class GenerateDocumentation implements Callable<Integer> {
     }
 
     private static boolean generateOutput(String bpmnFile, BpmnDocumentation bpmnDocumentation, String outputType) {
-        String templateFile = TEMPLATES_FOLDER + File.separator + "bpmn-documentation-" + outputType + TEMPLATE_SUFFIX;
+        String templateFile = TEMPLATES_FOLDER + File.separator + outputType + File.separator + "bpmn-documentation" +TEMPLATE_SUFFIX;
         String outputFile = bpmnFile.replace(".bpmn", "." + outputType);
         Map<String, Object> templateVariables = new HashMap<>();
         Configuration configuration = initTemplateEngine();

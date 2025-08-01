@@ -15,6 +15,7 @@ import java.util.List;
 public class BpmnDocumentation {
     String id;
     String fileName;
+    String filePath;
     String exporter;
     String exporterVersion;
     String executionPlatform;
