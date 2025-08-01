@@ -201,6 +201,24 @@
     </bpmn:userTask>
     <bpmn:serviceTask id="Activity_13v1y0x" name="Service Task">
       <bpmn:documentation>Service Task Documentation</bpmn:documentation>
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="execute-service-task" retries="5" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=&#34;one&#34;" target="input" />
+          <zeebe:output source="=&#34;one&#34;" target="output" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="header" value="&#34;one&#34;" />
+        </zeebe:taskHeaders>
+        <zeebe:properties>
+          <zeebe:property name="camundaModeler:exampleOutputJson" value="{ &#34;key&#34;: &#34;value&#34; }" />
+          <zeebe:property name="extension" value="&#34;one&#34;" />
+        </zeebe:properties>
+        <zeebe:executionListeners>
+          <zeebe:executionListener eventType="start" retries="1" type="startListener" />
+          <zeebe:executionListener eventType="end" retries="2" type="endListener" />
+        </zeebe:executionListeners>
+      </bpmn:extensionElements>
     </bpmn:serviceTask>
     <bpmn:sendTask id="Activity_0h21a18" name="Send Task">
       <bpmn:documentation>Send Task Documentation</bpmn:documentation>
