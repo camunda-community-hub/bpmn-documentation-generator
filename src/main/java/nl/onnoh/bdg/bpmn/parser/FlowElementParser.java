@@ -132,7 +132,7 @@ public class FlowElementParser {
                         parsedFlowElements.add(parseAdHocSubProcess(processId, flowType, flowElement.getValue()));
                         break;
                     case BPMN_ELEMENT_SEQUENCE_FLOW:
-//                        parsedFlowElements.add(parseSequenceFlow(processId, flowType, flowElement.getValue()));
+                        parsedFlowElements.add(parseSequenceFlow(processId, flowType, flowElement.getValue()));
                         break;
                     case BPMN_ELEMENT_INTERMEDIATE_THROW_EVENT:
                         parsedFlowElements.add(parseIntermediateThrowEvent(processId, flowType, flowElement.getValue()));

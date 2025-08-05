@@ -11,5 +11,6 @@ public class Participant {
     String name;
     String documentation;
     String processRef;
+    String processName;
     Map<String, Object> extensions;
 }

@@ -151,12 +151,31 @@ public class GenerateDocumentation implements Callable<Integer> {
             bpmnDocumentation.setEscalations(escalations);
             bpmnDocumentation.setCategories(categories);
             bpmnDocumentation.setErrors(errors);
+            updateParticipantInformation(bpmnDocumentation);
 
         } catch (JAXBException e) {
             log.error("JAXB exception {}", e.getMessage());
             return null;
         }
         return bpmnDocumentation;
+    }
+
+    private static void updateParticipantInformation(BpmnDocumentation bpmnDocumentation) {
+        if (bpmnDocumentation.getCollaboration() != null && bpmnDocumentation.getCollaboration().getParticipants() != null) {
+            bpmnDocumentation.getCollaboration().getParticipants().forEach(participant -> {
+                String processId = participant.getProcessRef();
+                if (processId == null || processId.isEmpty()) {
+                    log.warn("Participant {} has no process reference", participant.getId());
+                } else {
+                    bpmnDocumentation.getProcesses().stream()
+                            .filter(process -> process.getId().equals(processId))
+                            .findFirst()
+                            .ifPresent(process -> {
+                                participant.setProcessName(process.getName());
+                            });
+                }
+            });
+        }
     }
 
     private static boolean generateOutput(String bpmnFile, BpmnDocumentation bpmnDocumentation, String outputType) {
