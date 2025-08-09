@@ -1,0 +1,33 @@
+<#macro listOutput outputs>
+
+    <#if outputs?has_content>
+        <details>
+            <summary><h4>Outputs</h4></summary>
+            <table>
+                <thead>
+                <#list outputs[0] as outputKey, outputValue>
+                    <tr>
+                        <#list outputValue as key, value>
+                            <th>${key?capitalize}</th>
+                        </#list>
+                    </tr>
+                </#list>
+                </thead>
+                <tbody>
+                <#list outputs as output>
+                    <#list output as outputKey, outputValue>
+                        <tr>
+                            <#list outputValue as key, value>
+                                <td>${value}</td>
+                            </#list>
+                        </tr>
+                    </#list>
+                </#list>
+                </tbody>
+            </table>
+        </details>
+    <#else>
+        <p>No outputs defined.</p>
+    </#if>
+
+</#macro>

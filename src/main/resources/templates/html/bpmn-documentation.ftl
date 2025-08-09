@@ -1,9 +1,7 @@
 <#import "../bpmn-template-util.ftl" as util/>
 <#import "bpmn-collaboration.ftl" as collaboration/>
-<#import "bpmn-lanes.ftl" as lanes/>
-<#import "bpmn-tasks.ftl" as tasks/>
-<#import "bpmn-events.ftl" as events/>
-<#import "bpmn-gateways.ftl" as gateways/>
+<#import "bpmn-processes.ftl" as processes/>
+<#import "bpmn-globals.ftl" as globals/>
 
 <#assign aDateTime = .now/>
 <#assign aDate = aDateTime?date/>
@@ -38,9 +36,9 @@
 <table>
     <thead>
     <tr>
-        <td>Property</td>
-        <td>Value</td>
-        <td>Version</td>
+        <th>Property</th>
+        <th>Value</th>
+        <th>Version</th>
     </tr>
     </thead>
     <tbody>
@@ -66,88 +64,14 @@
     <@collaboration.listCollaboration bpmn.collaboration />
 </#if>
 
-<details open>
-    <summary><h2>Processes</h2></summary>
-    <#if bpmn.processes?has_content>
-        <#list bpmn.processes as process>
-            <details>
-                <summary><h3 id="${process.id}"><@util.emptyOrNull process.name "process"/></h3></summary>
-                <sup>(id: ${process.id})</sup><br/><br/>
-                <#if process.documentation?has_content>
-                    <blockquote>${process.documentation}</blockquote>
-                <#else>
-                    <blockquote>Not documented.</blockquote>
-                </#if>
-                <#if process.laneSets?has_content>
-                    <@lanes.listLanes processLaneSets=process.laneSets />
-                </#if>
-                <#if process.elements?has_content>
-                    <@tasks.listTasks processElements=process.elements />
-                    <@events.listEvents processElements=process.elements />
-                    <@gateways.listGateways processElements=process.elements />
-                </#if>
-            </details>
-        </#list> <!-- End of Process -->
-    <#else>
-        <p>No processes present.</p>
-    </#if>
-</details> <!-- End of processes -->
+<#if bpmn.processes?has_content>
+    <@processes.listProcesses bpmn.processes />
+<#else>
+    <p>No processes present.</p>
+</#if>
 
-<details>
-    <summary><h2>Globals</h2></summary>
-    <h3>Messages</h3>
-    <#if bpmn.messages?has_content>
-        <#list bpmn.messages>
-            <ul>
-                <#items as message>
-                    <li><@util.emptyOrNull message.name "message" /> <sup>(${message.id})</sup></li>
-                </#items>
-            </ul>
-        </#list>
-    <#else>
-        <p>No global messages.</p>
-    </#if>
+<@globals.listGlobals bpmn />
 
-    <h3>Errors</h3>
-    <#if bpmn.errors?has_content>
-        <#list bpmn.errors>
-            <ul>
-            <#items as error>
-                <li><@util.emptyOrNull error.name "error" />} <sup>(${error.id})</sup> - Code ${error.errorCode}</li>
-            </#items>
-            </ul>
-        </#list>
-    <#else>
-        <p>No global errors.</p>
-    </#if>
-
-    <h3>Signals</h3>
-    <#if bpmn.signals?has_content>
-        <#list bpmn.signals>
-            <ul>
-            <#items as signal>
-                <li><@util.emptyOrNull signal.name "signal" /> <sup>(${signal.id})</sup></li>
-            </#items>
-            </ul>
-        </#list>
-    <#else>
-        <p>No global signals.</p>
-    </#if>
-
-    <h3>Escalations</h3>
-    <#if bpmn.escalations?has_content>
-        <#list bpmn.escalations>
-            <ul>
-            <#items as escalation>
-                <li><@util.emptyOrNull escalation.name "escalation" /> <sup>(${escalation.id})</sup> - Code ${escalation.escalationCode}</li>
-            </#items>
-            </ul>
-        </#list>
-    <#else>
-        <p>No global escalations.</p>
-    </#if>
-
-</details> <!-- End of Globals -->
 </article>
 </body>
 </html>

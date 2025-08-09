@@ -1,4 +1,5 @@
 <#import "../bpmn-template-util.ftl" as util/>
+<#import "bpmn-extensions.ftl" as extensions>
 
 <#macro listLanes processLaneSets>
 
@@ -14,8 +15,13 @@
             <#else>
                 <blockquote>Not documented.</blockquote>
             </#if>
-        </#list> <!-- End of Lanes -->
-    </#list> <!-- End of LaneSets -->
+            <#if lane.extensions?has_content>
+                <p>
+                    <@extensions.listExtensions lane.extensions />
+                </p>
+            </#if>
+        </#list>
+    </#list>
 </details>
 
 </#macro>

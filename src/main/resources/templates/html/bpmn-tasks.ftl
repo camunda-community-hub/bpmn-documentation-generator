@@ -1,5 +1,5 @@
 <#import "../bpmn-template-util.ftl" as util/>
-<#import "bpmn-task-extensions.ftl" as extensions>
+<#import "bpmn-extensions.ftl" as extensions>
 
 <#macro listTasks processElements>
 
@@ -14,7 +14,6 @@
 ]/>
 
 <#assign noTasks = processElements?filter(element -> element.flowType?ends_with("Task"))/>
-
 
 <details>
     <summary><h4>Tasks</h4></summary>
@@ -41,8 +40,8 @@
         <#list type as taskType, title>
             <#assign tasks = processElements?filter(element -> element.flowType == taskType)/>
             <#if (tasks?size > 0)>
-                <details open>
-                    <summary><h5>${title}</h5></summary>
+                <details>
+                    <summary><h4>${title}</h4></summary>
                         <#list tasks as task>
                             <p>
                                 <strong><@util.emptyOrNull task.name "task" /></strong>

@@ -1,4 +1,5 @@
 <#import "../bpmn-template-util.ftl" as util/>
+<#import "bpmn-extensions.ftl" as extensions>
 
 <#macro listEvents processElements>
 
@@ -32,5 +33,50 @@
         <p>No events.</p>
     </#if>
 </details>
+
+<#if (noEvents?size > 0)>
+    <#list eventTypes as type>
+        <#list type as eventType, title>
+            <#assign events = processElements?filter(element -> element.flowType == eventType)/>
+            <#if (events?size > 0)>
+                <details>
+                    <summary><h4>${title}</h4></summary>
+                    <#list events as event>
+                        <p>
+                            <strong><@util.emptyOrNull event.name "event" /></strong>
+                        <table>
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Version</th>
+                            </tr>
+                            <tr>
+                                <td>ID</td>
+                                <td>${event.id}</td>
+                                <td>n/a</td>
+                            </tr>
+                            <tr>
+                                <td>Template</td>
+                                <td><@util.emptyOrNull event.template.name "template" /></td>
+                                <td><@util.emptyOrNull event.template.version "template version" /></td>
+                            </tr>
+                        </table>
+                        <#if event.documentation?has_content>
+                            <blockquote>${event.documentation}</blockquote>
+                        <#else>
+                            <blockquote>Not documented.</blockquote>
+                        </#if>
+                        </p>
+                        <#if event.extensions?has_content>
+                            <p>
+                                <@extensions.listExtensions event.extensions />
+                            </p>
+                        </#if>
+                    </#list>
+                </details>
+            </#if>
+        </#list>
+    </#list>
+</#if>
 
 </#macro>

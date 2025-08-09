@@ -1,4 +1,5 @@
 <#import "../bpmn-template-util.ftl" as util/>
+<#import "bpmn-extensions.ftl" as extensions>
 
 <#macro listCollaboration collaboration>
 
@@ -12,49 +13,9 @@
         <blockquote>Not documented.</blockquote>
     </#if>
 
-    <#list collaboration.extensions>
-        <#items as extensionKey, extensionValue>
-            <#if extensionKey == "properties">
-                <h4><em>Properties</em></h4>
-                <table>
-                    <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Value</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <#list extensionValue>
-                        <#items as itemKey, itemValue>
-                            <tr>
-                                <td>${itemKey}</td>
-                                <td>${itemValue}</td>
-                            </tr>
-                        </#items>
-                    </#list>
-                    </tbody>
-                </table>
-            </#if>
-        </#items>
-    </#list>
-
-    <#list collaboration.extensions>
-        <#items as extensionKey, extensionValue>
-            <#if extensionKey == "exampleData">
-                <h4><em>Example Data</em></h4>
-                <#list extensionValue>
-
-                    <#items as itemKey, itemValue>
-                        <pre>
-                        <code class="language-json">
-                            ${itemValue}
-                        </code>
-                    </pre>
-                    </#items>
-                </#list>
-            </#if>
-        </#items>
-    </#list>
+    <#if collaboration.extensions?has_content>
+        <@extensions.listExtensions extensions=collaboration.extensions />
+    </#if>
 </details>
 
 <#if collaboration.participants?has_content>
@@ -78,51 +39,12 @@
                 <#else>
                     <blockquote>Not documented.</blockquote>
                 </#if>
-                <p>process <a href="#${participant.processRef}">(<strong>${participant.processRef}</strong>)</a></p>
-
-                <#list collaboration.extensions>
-                    <#items as extensionKey, extensionValue>
-                        <#if extensionKey == "properties">
-                            <h4><em>Properties</em></h4>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Value</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <#list extensionValue>
-                                    <#items as itemKey, itemValue>
-                                        <tr>
-                                            <td>${itemKey}</td>
-                                            <td>${itemValue}</td>
-                                        </tr>
-                                    </#items>
-                                </#list>
-                                </tbody>
-                            </table>
-                        </#if>
-                    </#items>
-                </#list>
-
-                <#list participant.extensions>
-                    <#items as extensionKey, extensionValue>
-                        <#if extensionKey == "exampleData">
-                            <h4><em>Example Data</em></h4>
-
-                            <#list extensionValue>
-                                <#items as itemKey, itemValue>
-                                    <pre>
-                                    <code class="language-json">
-                                        ${itemValue}
-                                    </code>
-                                </pre>
-                                </#items>
-                            </#list>
-                        </#if>
-                    </#items>
-                </#list>
+                <p>Connected to process <a href="#${participant.processRef}"><strong>${participant.processName}</strong></a></p>
+                <#if participant.extensions?has_content>
+                    <p>
+                        <@extensions.listExtensions participant.extensions />
+                    </p>
+                </#if>
             </#items>
         <#else>
             <p>None.</p>

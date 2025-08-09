@@ -18,7 +18,7 @@
             <#list type as gatewayType, title>
                 <#assign gateways = processElements?filter(element -> element.flowType == gatewayType)/>
                 <#if (gateways?size > 0)>
-                    <h5>${title}</h5>
+                    <h4>${title}</h4>
                     <ul>
                         <#list gateways as gateway>
                             <li><@util.emptyOrNull gateway.name "gateway" /> (${gateway.id})</li>
@@ -31,5 +31,50 @@
         <p>No gateways.</p>
     </#if>
 </details>
+
+<#if (noGateways?size > 0)>
+    <#list gatewayTypes as type>
+        <#list type as gatewayType, title>
+            <#assign gateways = processElements?filter(element -> element.flowType == gatewayType)/>
+            <#if (gateways?size > 0)>
+                <details>
+                    <summary><h4>${title}</h4></summary>
+                    <#list gateways as gateway>
+                        <p>
+                            <strong><@util.emptyOrNull gateway.name "gateway" /></strong>
+                        <table>
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                                <th>Version</th>
+                            </tr>
+                            <tr>
+                                <td>ID</td>
+                                <td>${gateway.id}</td>
+                                <td>n/a</td>
+                            </tr>
+                            <tr>
+                                <td>Template</td>
+                                <td><@util.emptyOrNull gateway.template.name "template" /></td>
+                                <td><@util.emptyOrNull gateway.template.version "template version" /></td>
+                            </tr>
+                        </table>
+                        <#if gateway.documentation?has_content>
+                            <blockquote>${gateway.documentation}</blockquote>
+                        <#else>
+                            <blockquote>Not documented.</blockquote>
+                        </#if>
+                        </p>
+                        <p>
+                            <#if gateway.extensions?has_content>
+                                <@extensions.listExtensions gateway.extensions />
+                            </#if>
+                        </p>
+                    </#list>
+                </details>
+            </#if>
+        </#list>
+    </#list>
+</#if>
 
 </#macro>
