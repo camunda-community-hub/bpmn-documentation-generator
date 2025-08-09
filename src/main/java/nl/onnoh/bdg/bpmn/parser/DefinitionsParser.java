@@ -143,10 +143,7 @@ public class DefinitionsParser {
         Message parsedMessage = new Message();
         parsedMessage.setId(message.getValue().getId());
         parsedMessage.setName(message.getValue().getName());
-        Map<String, Object> extensionElements = parseExtensionElements(message.getValue().getExtensionElements());
-        extensionElements.entrySet().forEach(entry -> {
-
-        });
+        parsedMessage.setExtensions(parseExtensionElements(message.getValue().getExtensionElements()));
 
         return parsedMessage;
     }

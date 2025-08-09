@@ -11,6 +11,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 
 import javax.xml.namespace.QName;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,9 @@ import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_EXECUTION_LISTENER
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_FORM_DEFINITION;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_IO_MAPPING;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_IO_MAPPING_INPUT;
+import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_IO_MAPPING_INPUTS;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_IO_MAPPING_OUTPUT;
+import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_IO_MAPPING_OUTPUTS;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_IO_TASK_HEADER;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_IO_TASK_HEADERS;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_MODELER_TEMPLATE;
@@ -57,27 +60,42 @@ public class CommonParser {
     }
 
     public static Map<String, Object> parseExtensionElements(ExtensionElements extensionElements) {
+//        Element -> Attributes
+//        Child Elements -> Attributes
+//
         Map<String, Object> parsedExtensionElements = new HashMap<>();
 
         if (extensionElements != null) {
             List<Element> elements = extensionElements.getAnies();
-            log.debug(" Parsing {} Anies", elements.size());
+            log.debug("Parsing {} anies", elements.size());
             for (Element element : elements) {
-                log.debug("Parsing {} {}:{}", element.getLocalName(), element.getNamespaceURI(), element.getNodeName());
+                log.debug("Parsing ani {} {}:{}", element.getLocalName(), element.getNamespaceURI(), element.getNodeName());
                 switch (element.getLocalName()) {
                     case CAMUNDA_ELEMENT_PROPERTIES:
-                        Map<String, String> properties = parseZeebeChildElements(element, CAMUNDA_ELEMENT_PROPERTY);
-                        Map<String, String> exampleData = new HashMap<>();
-                        if (properties.containsKey(CAMUNDA_MODELER_EXAMPLE_OUTPUT_JSON)) {
-                            exampleData.put(CAMUNDA_MODELER_EXAMPLE_OUTPUT_JSON, properties.get(CAMUNDA_MODELER_EXAMPLE_OUTPUT_JSON));
-                            properties.remove(CAMUNDA_MODELER_EXAMPLE_OUTPUT_JSON);
-                        }
-                        parsedExtensionElements.put(CAMUNDA_EXAMPLE_DATA, exampleData);
-                        parsedExtensionElements.put(CAMUNDA_ELEMENT_PROPERTIES, properties);
+                        List<Map<String, Object>> propertyList = parseZeebeChildElements(element, CAMUNDA_ELEMENT_PROPERTY);
+                        propertyList.forEach(property -> {
+                            Object propertiesMap = property.get(CAMUNDA_ELEMENT_PROPERTY);
+                            log.debug("Property: {}", propertiesMap);
+                            if (propertiesMap instanceof Map) {
+                                Map<String, String> propertyMap = (Map<String, String>) propertiesMap;
+                                String name = propertyMap.get("name");
+                                if (name != null ) {
+                                    if (CAMUNDA_MODELER_EXAMPLE_OUTPUT_JSON.equals(name)) {
+                                        parsedExtensionElements.put(CAMUNDA_EXAMPLE_DATA, List.of(property));
+                                    } else {
+                                        parsedExtensionElements.put(CAMUNDA_ELEMENT_PROPERTY, List.of(property));
+                                    }
+                                } else {
+                                    log.warn("Property name is null: {}", propertyMap);
+                                }
+                            } else {
+                                log.warn("Expected a Map for property, but got: {}", propertiesMap.getClass().getName());
+                            }
+                        });
                         break;
                     case ZEEBE_IO_MAPPING:
-                        parsedExtensionElements.put(ZEEBE_IO_MAPPING_INPUT, parseZeebeChildElements(element, ZEEBE_IO_MAPPING_INPUT));
-                        parsedExtensionElements.put(ZEEBE_IO_MAPPING_OUTPUT, parseZeebeChildElements(element, ZEEBE_IO_MAPPING_OUTPUT));
+                        parsedExtensionElements.put(ZEEBE_IO_MAPPING_INPUTS, parseZeebeChildElements(element, ZEEBE_IO_MAPPING_INPUT));
+                        parsedExtensionElements.put(ZEEBE_IO_MAPPING_OUTPUTS, parseZeebeChildElements(element, ZEEBE_IO_MAPPING_OUTPUT));
                         break;
                     case ZEEBE_IO_TASK_HEADERS:
                         parsedExtensionElements.put(ZEEBE_IO_TASK_HEADERS, parseZeebeChildElements(element, ZEEBE_IO_TASK_HEADER));
@@ -90,13 +108,13 @@ public class CommonParser {
                         UserTaskForm userTaskForm = objectFactory.createUserTaskForm();
                         parsedExtensionElements.put(ZEEBE_USER_TASK_FORM, userTaskForm);
                         break;
-                    case ZEEBE_FORM_DEFINITION:
-                    case ZEEBE_TASK_DEFINITION:
-                    case ZEEBE_CALLED_ELEMENT:
-                    case ZEEBE_CALLED_DECISION:
-                    case ZEEBE_SUBSCRIPTION:
-                    case ZEEBE_SCRIPT:
-                    case ZEEBE_VERSION_TAG:
+                    case ZEEBE_FORM_DEFINITION,
+                         ZEEBE_TASK_DEFINITION,
+                         ZEEBE_CALLED_ELEMENT,
+                         ZEEBE_CALLED_DECISION,
+                         ZEEBE_SUBSCRIPTION,
+                         ZEEBE_SCRIPT,
+                         ZEEBE_VERSION_TAG:
                         parsedExtensionElements.put(element.getLocalName(), parseZeebeElementAttributes(element));
                         break;
                     default:
@@ -109,62 +127,29 @@ public class CommonParser {
         return parsedExtensionElements;
     }
 
-    private static Map<String, String> parseOtherAttributes(Map<QName, String> otherAttributes) {
-        Map<String, String> parsedOtherAttributes = new HashMap<>();
-        if (otherAttributes != null) {
-            for (Map.Entry<QName, String> attr : otherAttributes.entrySet()) {
-                log.debug("Other Attribute: {} - {}", attr.getKey(),  attr.getValue());
-                parsedOtherAttributes.put(attr.getKey().getLocalPart(), attr.getValue());
-            }
-        }
-        return parsedOtherAttributes;
-    }
+    private static List<Map<String, Object>> parseZeebeChildElements(Element element, String elementName) {
 
-    private static Map<String, String> parseZeebeChildElements(Element element, String elementName) {
-        Map<String, String> parsedElements = new HashMap<>();
+        List<Map<String, Object>> parsedElements = new ArrayList<>();
         NodeList nodeList = element.getElementsByTagNameNS(ZEEBE_NS, elementName);
+        log.debug("Parsing element {} with {} children", elementName, nodeList.getLength());
         for (int node = 0; node < nodeList.getLength(); node++) {
-            NamedNodeMap inputAttributes = nodeList.item(node).getAttributes();
-            String key = "unknown";
-            String value = "unknown";
-            for (int attribute = 0; attribute < inputAttributes.getLength(); attribute++) {
-                switch (inputAttributes.item(attribute).getLocalName()) {
-                    case "name":
-                    case "source":
-                    case "key":
-                        key = inputAttributes.item(attribute).getNodeValue();
-                        break;
-                    case "value":
-                    case "target":
-                        value = inputAttributes.item(attribute).getNodeValue();
-                        break;
-                    case "eventType":
-                    case "retries":
-                    case "type":
-                        key = inputAttributes.item(attribute).getLocalName();
-                        value = inputAttributes.item(attribute).getNodeValue();
-                        break;
-                    default:
-                        log.warn("Unknown attribute name: {}", inputAttributes.item(attribute).getLocalName());
-                        break;
-                }
-            }
-            parsedElements.put(key, value);
+            log.debug("Parsing child element {}", nodeList.item(node).getNodeName());
+            parsedElements.add(Map.of(elementName, parseZeebeElementAttributes((Element) nodeList.item(node))));
         }
         return parsedElements;
     }
 
     private static Map<String, String> parseZeebeElementAttributes(Element element) {
-        Map<String, String> parsedElementAttributes = new HashMap<>();
+        Map<String, String> parsedAttributes = new HashMap<>();
         NamedNodeMap attributes = element.getAttributes();
+        log.debug("Parsing {} attributes", attributes.getLength());
         for (int attribute = 0; attribute < attributes.getLength(); attribute++) {
             if (attributes.item(attribute).getNamespaceURI() == null) {
-                String key = attributes.item(attribute).getLocalName();
-                String value = attributes.item(attribute).getNodeValue();
-                parsedElementAttributes.put(key, value);
+                log.debug("Parsing attribute {} - {}", attributes.item(attribute).getLocalName(), attributes.item(attribute).getNodeValue());
+                parsedAttributes.put(attributes.item(attribute).getLocalName(), attributes.item(attribute).getNodeValue());
             }
         }
-        return parsedElementAttributes;
+        return parsedAttributes;
     }
 
     public static ElementTemplate parseElementTemplate(Map<QName, String> otherAttributes) {

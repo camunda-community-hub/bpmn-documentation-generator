@@ -10,6 +10,8 @@ public class BpmnModelZeebeConstants {
     public static final String ZEEBE_IO_MAPPING = "ioMapping";
     public static final String ZEEBE_IO_MAPPING_INPUT = "input";
     public static final String ZEEBE_IO_MAPPING_OUTPUT = "output";
+    public static final String ZEEBE_IO_MAPPING_INPUTS = "inputs";
+    public static final String ZEEBE_IO_MAPPING_OUTPUTS = "outputs";
     public static final String ZEEBE_IO_TASK_HEADER = "header";
     public static final String ZEEBE_IO_TASK_HEADERS = "taskHeaders";
     public static final String ZEEBE_CALLED_DECISION = "calledDecision";
