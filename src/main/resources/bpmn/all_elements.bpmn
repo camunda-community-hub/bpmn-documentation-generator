@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1ni8zkt" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.37.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1ni8zkt" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.37.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.0">
   <bpmn:collaboration id="Collaboration_0ubx1zn">
+    <bpmn:documentation>&lt;h1&gt;Bla&lt;/h1&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ol&gt;&lt;li data-list="ordered"&gt;&lt;span class="ql-ui" contenteditable="false"&gt;&lt;/span&gt;agshdgadhaa&lt;/li&gt;&lt;li data-list="ordered"&gt;&lt;span class="ql-ui" contenteditable="false"&gt;&lt;/span&gt;asdasdas&lt;/li&gt;&lt;li data-list="ordered"&gt;&lt;span class="ql-ui" contenteditable="false"&gt;&lt;/span&gt;asdasdas&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</bpmn:documentation>
+    <bpmn:extensionElements />
     <bpmn:participant id="Participant_0zjpbqu" name="Participant" processRef="Process_0q6xqy6" />
     <bpmn:participant id="Participant_1mjjhgg" name="Another Participant" processRef="Process_13kfc6y" />
     <bpmn:participant id="Participant_0yhlfwp" name="Sub Processes" processRef="Process_16pnmun" />
@@ -20,7 +22,7 @@
     <bpmn:association id="Association_1nxqjur" associationDirection="None" sourceRef="Group_0f39rin" targetRef="TextAnnotation_1yl992s" />
     <bpmn:association id="Association_1rmf6x7" associationDirection="None" sourceRef="DataStoreReference_001hcwr" targetRef="TextAnnotation_1emwbrz" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_0q6xqy6" name="" isExecutable="true">
+  <bpmn:process id="Process_0q6xqy6" name="Main" isExecutable="true">
     <bpmn:extensionElements>
       <zeebe:versionTag value="v1" />
     </bpmn:extensionElements>
@@ -141,6 +143,7 @@
       <bpmn:signalEventDefinition id="SignalEventDefinition_0d1ijzp" signalRef="Signal_2fiobci" />
     </bpmn:intermediateCatchEvent>
     <bpmn:intermediateCatchEvent id="Event_0nnsfty" name="Link Intermediate Catch">
+      <bpmn:extensionElements />
       <bpmn:linkEventDefinition id="LinkEventDefinition_0pd3g93" name="Link" />
     </bpmn:intermediateCatchEvent>
     <bpmn:intermediateCatchEvent id="Event_1ry580y" name="Timer Intermediate Catch">
@@ -204,11 +207,14 @@
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="execute-service-task" retries="5" />
         <zeebe:ioMapping>
-          <zeebe:input source="=&#34;one&#34;" target="input" />
-          <zeebe:output source="=&#34;one&#34;" target="output" />
+          <zeebe:input source="=&#34;one&#34;" target="input1" />
+          <zeebe:input source="=&#34;two&#34;" target="input2" />
+          <zeebe:output source="=&#34;one&#34;" target="output1" />
+          <zeebe:output source="=&#34;two&#34;" target="output2" />
         </zeebe:ioMapping>
         <zeebe:taskHeaders>
-          <zeebe:header key="header" value="&#34;one&#34;" />
+          <zeebe:header key="header1" value="&#34;one&#34;" />
+          <zeebe:header key="header2" value="&#34;two&#34;" />
         </zeebe:taskHeaders>
         <zeebe:properties>
           <zeebe:property name="camundaModeler:exampleOutputJson" value="{ &#34;key&#34;: &#34;value&#34; }" />
@@ -338,7 +344,7 @@
   </bpmn:message>
   <bpmn:signal id="Signal_2fiobci" name="Signal" />
   <bpmn:escalation id="Escalation_2kob6ea" name="Escalation" escalationCode="=escalationCode" />
-  <bpmn:process id="Process_13kfc6y" name="" isExecutable="false">
+  <bpmn:process id="Process_13kfc6y" name="Another Participant Process" isExecutable="false">
     <bpmn:extensionElements>
       <zeebe:versionTag value="v2" />
     </bpmn:extensionElements>
@@ -947,9 +953,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1maad4u" bpmnElement="Group_1twakwb">
-        <dc:Bounds x="235" y="2370" width="365" height="130" />
+        <dc:Bounds x="1050" y="827" width="210" height="112" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="381" y="2377" width="73" height="14" />
+          <dc:Bounds x="1118" y="834" width="73" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1emwbrz_di" bpmnElement="TextAnnotation_1emwbrz">
