@@ -27,7 +27,7 @@
             </table>
         </details>
     <#else>
-        <p>No headers defined.</p>
+        <@util.emptySection skip=skipEmptySections section="headers defined" quote=false markdown=false/>
     </#if>
 
 </#macro>

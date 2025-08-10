@@ -33,7 +33,7 @@ Generated on ${aDate} at ${aTime}
             <#if process.documentation?has_content>
 > ${process.documentation}
             <#else>
-> Not documented.
+                <@util.emptySection skipEmptySections=skipEmptySections sectionName="documentation" quote=false markdown=true/>
             </#if>
             <#if process.laneSets?has_content>
                 <@lanes.listLanes processLaneSets=process.laneSets/>
@@ -45,7 +45,7 @@ Generated on ${aDate} at ${aTime}
             </#if>
         </#list>
     <#else>
-No processes present.
+        <@util.emptySection skipEmptySections=skipEmptySections sectionName="processes" quote=false markdown=true/>
     </#if>
 
 ## Globals

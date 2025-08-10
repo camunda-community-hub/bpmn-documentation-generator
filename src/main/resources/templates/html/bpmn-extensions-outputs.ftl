@@ -27,7 +27,7 @@
             </table>
         </details>
     <#else>
-        <p>No outputs defined.</p>
+        <@util.emptySection skip=skipEmptySections section="outputs defined" quote=false markdown=false/>
     </#if>
 
 </#macro>

@@ -27,7 +27,7 @@
             </table>
         </details>
     <#else>
-        <p>No execution listeners defined.</p>
+        <@util.emptySection skip=skipEmptySections section="execution listeners defined" quote=false markdown=false/>
     </#if>
 
 </#macro>

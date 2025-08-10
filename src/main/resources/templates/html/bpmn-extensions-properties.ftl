@@ -27,7 +27,7 @@
             </table>
     </details>
 <#else>
-    <p>No properties defined.</p>
+    <@util.emptySection skip=skipEmptySections section="properties defined" quote=false markdown=false/>
 </#if>
 
 </#macro>

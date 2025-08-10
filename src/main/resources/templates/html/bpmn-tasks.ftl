@@ -15,7 +15,8 @@
 
 <#assign noTasks = processElements?filter(element -> element.flowType?ends_with("Task"))/>
 
-<details>
+<#if (noTasks?size = 0) && !skipEmptySections>
+    <details>
     <summary><h4>Tasks</h4></summary>
     <#if (noTasks?size > 0)>
         <#list taskTypes as type>
@@ -32,9 +33,11 @@
             </#list>
         </#list>
     <#else>
-        <p>No tasks.</p>
+        <@util.emptySection skip=skipEmptySections section="tasks" quote=false markdown=false />
     </#if>
 </details>
+</#if>
+
 <#if (noTasks?size > 0)>
     <#list taskTypes as type>
         <#list type as taskType, title>
@@ -65,7 +68,7 @@
                                 <#if task.documentation?has_content>
                                     <blockquote>${task.documentation}</blockquote>
                                 <#else>
-                                    <blockquote>Not documented.</blockquote>
+                                    <@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=false />
                                 </#if>
                             </p>
                             <p>

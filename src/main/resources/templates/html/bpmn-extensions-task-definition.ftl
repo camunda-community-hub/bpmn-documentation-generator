@@ -1,3 +1,5 @@
+<#import "../bpmn-template-util.ftl" as util/>
+
 <#macro listDefinition definition>
 
 <#if definition?has_content>
@@ -10,7 +12,7 @@
         </ul>
     </details>
 <#else>
-    <p>No definition defined.</p>
+    <@util.emptySection skip=skipEmptySections section="task definition" quote=false markdown=false/>
 </#if>
 
 </#macro>

@@ -28,7 +28,7 @@
             </#list>
         </#list>
     <#else>
-        <p>No gateways.</p>
+        <@util.emptySection skip=skipEmptySections section="gateways" quote=false markdown=false />
     </#if>
 </details>
 
@@ -62,7 +62,7 @@
                         <#if gateway.documentation?has_content>
                             <blockquote>${gateway.documentation}</blockquote>
                         <#else>
-                            <blockquote>Not documented.</blockquote>
+                            <@util.emptySection skip=skipEmptySections section="gateways" quote=false markdown=false/>
                         </#if>
                         </p>
                         <p>

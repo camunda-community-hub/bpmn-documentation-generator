@@ -16,7 +16,7 @@
                 </pre>
         </details>
     <#else>
-        <p>No example data defined.</p>
+        <@util.emptySection skip=skipEmptySections section="example data" quote=false markdown=false/>
     </#if>
 
 </#macro>

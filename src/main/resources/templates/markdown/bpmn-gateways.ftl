@@ -26,7 +26,7 @@
         </#list>
     </#list>
 <#else>
-No gateways.
+    <@util.emptySection skipEmptySections=skipEmptySections sectionName="gateways" quote=false markdown=true/>
 </#if>
 
 </#macro>

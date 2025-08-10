@@ -31,7 +31,7 @@
         </#list>
     </#list>
 <#else>
-No tasks.
+    <@util.emptySection skipEmptySections=skipEmptySections sectionName="tasks" quote=false markdown=true/>
 </#if>
 <#if (noTasks?size > 0)>
     <#list taskTypes as type>
@@ -49,7 +49,7 @@ No tasks.
                     <#if task.documentation?has_content>
 > ${task.documentation}
                     <#else>
-> Not documented.
+                        <@util.emptySection skipEmptySections=skipEmptySections sectionName="documentation" quote=false markdown=true/>
                     </#if>
                     <#if task.extensions?has_content>
                         <@extensions.listExtensions task.extensions />

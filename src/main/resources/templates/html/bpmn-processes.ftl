@@ -22,7 +22,7 @@
             <#if process.documentation?has_content>
                 <blockquote>${process.documentation}</blockquote>
             <#else>
-                <blockquote>Not documented.</blockquote>
+                <@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=false />
             </#if>
             <#if process.laneSets?has_content>
                 <@lanes.listLanes processLaneSets=process.laneSets />

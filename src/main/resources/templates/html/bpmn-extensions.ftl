@@ -1,4 +1,4 @@
-<#import "bpmn-extensions-definitions.ftl" as definition/>
+<#import "bpmn-extensions-task-definition.ftl" as definition/>
 <#import "bpmn-extensions-headers.ftl" as header/>
 <#import "bpmn-extensions-inputs.ftl" as input/>
 <#import "bpmn-extensions-outputs.ftl" as output/>
@@ -9,8 +9,8 @@
 
 <#macro listExtensions extensions>
     <p>
-    <#if extensions.definitions?has_content>
-        <@definition.listDefinition extensions.definition />
+    <#if extensions.taskDefinition?has_content>
+        <@definition.listDefinition extensions.taskDefinition />
     </#if>
     <#if extensions.headers?has_content>
         <@header.listHeader extensions.headers />

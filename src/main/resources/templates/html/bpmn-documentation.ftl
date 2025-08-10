@@ -3,9 +3,12 @@
 <#import "bpmn-processes.ftl" as processes/>
 <#import "bpmn-globals.ftl" as globals/>
 
-<#assign aDateTime = .now/>
-<#assign aDate = aDateTime?date/>
-<#assign aTime = aDateTime?time/>
+<#assign aDateTime=.now/>
+<#assign aDate=aDateTime?date/>
+<#assign aTime=aDateTime?time/>
+
+<#global skipEmptySections=bpmn.suppressEmptySections>
+
 <html lang="en">
 <head>
     <title>BPMN ${bpmn.fileName}</title>
@@ -30,6 +33,9 @@
 <article class="markdown-body">
 <h1>BPMN ${bpmn.fileName}</h1>
 <p>Generated on ${aDate} at ${aTime}</p>
+    <#if skipEmptySections>
+        <p><strong>Note:</strong> This documentation skips empty sections.</p>
+    </#if>
 <p>
     <img alt="BPMN ${bpmn.fileName} image" src="${bpmn.fileName?replace('.bpmn', '.svg', 'i')}"/>
 </p>
@@ -67,7 +73,7 @@
 <#if bpmn.processes?has_content>
     <@processes.listProcesses bpmn.processes />
 <#else>
-    <p>No processes present.</p>
+    <@util.emptySection skip=skipEmptySections section="processes" quote=false markdown=false />
 </#if>
 
 <@globals.listGlobals bpmn />

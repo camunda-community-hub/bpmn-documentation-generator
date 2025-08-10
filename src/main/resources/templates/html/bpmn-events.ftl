@@ -13,6 +13,7 @@
 
 <#assign noEvents = processElements?filter(element -> element.flowType?ends_with("Event"))/>
 
+<#if (noEvents?size = 0) && !skipEmptySections>
 <details>
     <summary><h4>Events</h4></summary>
     <#if (noEvents?size > 0)>
@@ -30,9 +31,10 @@
             </#list>
         </#list>
     <#else>
-        <p>No events.</p>
+        <@util.emptySection skip=skipEmptySections section="events" quote=false markdown=false />
     </#if>
 </details>
+</#if>
 
 <#if (noEvents?size > 0)>
     <#list eventTypes as type>
@@ -64,7 +66,7 @@
                         <#if event.documentation?has_content>
                             <blockquote>${event.documentation}</blockquote>
                         <#else>
-                            <blockquote>Not documented.</blockquote>
+                            <@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=false/>
                         </#if>
                         </p>
                         <#if event.extensions?has_content>
