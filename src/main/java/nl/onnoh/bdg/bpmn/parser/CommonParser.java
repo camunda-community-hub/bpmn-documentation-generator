@@ -60,9 +60,7 @@ public class CommonParser {
     }
 
     public static Map<String, Object> parseExtensionElements(ExtensionElements extensionElements) {
-//        Element -> Attributes
-//        Child Elements -> Attributes
-//
+
         Map<String, Object> parsedExtensionElements = new HashMap<>();
 
         if (extensionElements != null) {

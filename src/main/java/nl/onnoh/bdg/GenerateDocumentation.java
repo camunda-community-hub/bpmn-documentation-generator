@@ -59,6 +59,9 @@ public class GenerateDocumentation implements Callable<Integer> {
     @CommandLine.Option(names = {"-of", "--output-format"}, defaultValue = "html", description = "The document format (default: ${DEFAULT-VALUE}).")
     private String outputFormat;
 
+    @CommandLine.Option(names = {"-s", "--suppress-empty-sections"}, defaultValue = "false", description = "Suppress empty sections (default: ${DEFAULT-VALUE}).")
+    private boolean suppressEmptySections;
+
     public static void main(String... args) {
         int exitCode = new CommandLine(new GenerateDocumentation()).execute(args);
         System.exit(exitCode);
@@ -74,6 +77,7 @@ public class GenerateDocumentation implements Callable<Integer> {
 
         BpmnDocumentation bpmnDocumentation = buildTemplateVariables(bpmnFile);
         if (bpmnDocumentation == null) return 1;
+        bpmnDocumentation.setSuppressEmptySections(suppressEmptySections);
 
         if (generateOutput(bpmnFile, bpmnDocumentation, outputFormat)) {
             log.info("Generated BPMN documentation: {}", bpmnDocumentation);
