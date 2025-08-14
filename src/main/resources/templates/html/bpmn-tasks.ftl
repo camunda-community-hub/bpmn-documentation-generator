@@ -16,7 +16,7 @@
 <#assign noTasks = processElements?filter(element -> element.flowType?ends_with("Task"))/>
 
 <#if (noTasks?size = 0) && !skipEmptySections>
-    <details>
+    <details ${openSections}>
     <summary><h4>Tasks</h4></summary>
     <#if (noTasks?size > 0)>
         <#list taskTypes as type>
@@ -43,11 +43,11 @@
         <#list type as taskType, title>
             <#assign tasks = processElements?filter(element -> element.flowType == taskType)/>
             <#if (tasks?size > 0)>
-                <details>
+                <details ${openSections}>
                     <summary><h4>${title}</h4></summary>
                         <#list tasks as task>
                             <p>
-                                <strong><@util.emptyOrNull task.name "task" /></strong>
+                                <h5><@util.emptyOrNull task.name "task" /></h5>
                                 <table>
                                     <tr>
                                         <th>Property</th>

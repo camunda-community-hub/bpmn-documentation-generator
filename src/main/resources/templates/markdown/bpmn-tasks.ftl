@@ -1,5 +1,5 @@
 <#import "../bpmn-template-util.ftl" as util/>
-<#import "bpmn-task-extensions.ftl" as extensions>
+<#import "bpmn-extensions.ftl" as extensions>
 
 <#macro listTasks processElements>
 

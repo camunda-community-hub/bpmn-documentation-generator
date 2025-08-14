@@ -62,6 +62,9 @@ public class GenerateDocumentation implements Callable<Integer> {
     @CommandLine.Option(names = {"-s", "--suppress-empty-sections"}, defaultValue = "false", description = "Suppress empty sections (default: ${DEFAULT-VALUE}).")
     private boolean suppressEmptySections;
 
+    @CommandLine.Option(names = {"-o", "--open-sections"}, defaultValue = "false", description = "Open all sections (default: ${DEFAULT-VALUE}).")
+    private boolean openSections;
+
     public static void main(String... args) {
         int exitCode = new CommandLine(new GenerateDocumentation()).execute(args);
         System.exit(exitCode);
@@ -78,9 +81,11 @@ public class GenerateDocumentation implements Callable<Integer> {
         BpmnDocumentation bpmnDocumentation = buildTemplateVariables(bpmnFile);
         if (bpmnDocumentation == null) return 1;
         bpmnDocumentation.setSuppressEmptySections(suppressEmptySections);
+        bpmnDocumentation.setOpenSections(openSections);
 
         if (generateOutput(bpmnFile, bpmnDocumentation, outputFormat)) {
-            log.info("Generated BPMN documentation: {}", bpmnDocumentation);
+            log.info("Generated BPMN documentation.");
+            log.debug("Data object : {}", bpmnDocumentation);
             return 0;
         }  else {
             log.error("Failed to generate documentation for {}", bpmnFile);

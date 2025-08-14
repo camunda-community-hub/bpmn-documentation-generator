@@ -3,7 +3,7 @@
 
 <#macro listCollaboration collaboration>
 
-<details>
+<details ${openSections}>
     <summary><h2>Collaboration</h2></summary>
     <sup>(${collaboration.id})</sup><br/><br/>
 
@@ -19,7 +19,7 @@
 </details>
 
 <#if collaboration.participants?has_content>
-    <details>
+    <details ${openSections}>
         <summary><h2>Participants</h2></summary>
 
         <#list collaboration.participants>

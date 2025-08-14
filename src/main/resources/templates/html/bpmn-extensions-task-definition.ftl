@@ -1,18 +1,28 @@
 <#import "../bpmn-template-util.ftl" as util/>
 
-<#macro listDefinition definition>
+<#macro listTaskDefinition taskDefinition>
 
-<#if definition?has_content>
-    <details>
-        <summary><h4>Task Definition</h4></summary>
-        <ul>
-            <#list definition as key, value>
-            <li><strong>${key}:</strong> ${value}</li>
+<#if taskDefinition?has_content>
+    <h6>Task Definition</h6>
+    <table>
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <#list taskDefinition as key, value>
+                <tr>
+                    <td>${key?capitalize}</td>
+                    <td>${value}</td>
+                </tr>
             </#list>
-        </ul>
-    </details>
+        </tbody>
+    </table>
 <#else>
     <@util.emptySection skip=skipEmptySections section="task definition" quote=false markdown=false/>
 </#if>
 
 </#macro>
+

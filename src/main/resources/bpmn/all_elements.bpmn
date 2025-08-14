@@ -54,7 +54,7 @@
         <bpmn:extensionElements>
           <zeebe:properties>
             <zeebe:property name="name" value="Upper" />
-            <zeebe:property name="camundaModeler:exampleOutputJson" value="{ &#34;name&#34;: &#34;Upper&#34; }" />
+            <zeebe:property name="camundaModeler:exampleOutputJson" value="{ &#34;name&#34;: &#34;upper&#34; }" />
           </zeebe:properties>
         </bpmn:extensionElements>
         <bpmn:flowNodeRef>Event_0oyahcf</bpmn:flowNodeRef>
@@ -63,7 +63,6 @@
         <bpmn:flowNodeRef>Event_0pejm4x</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0rrnlul</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1si59d3</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_09578x0</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1i0s84g" name="Intermediate Catch Events">
         <bpmn:flowNodeRef>Event_1iulo9w</bpmn:flowNodeRef>
@@ -72,7 +71,6 @@
         <bpmn:flowNodeRef>Event_0nnsfty</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1ry580y</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0u1woce</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_07b170r</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1i8x991" name="Start Events">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
@@ -80,7 +78,6 @@
         <bpmn:flowNodeRef>Event_09k6osj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1qd1qbu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_18mkoti</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_1m7cg1s</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_158dy3y" name="End Events">
         <bpmn:flowNodeRef>Event_0jdptl2</bpmn:flowNodeRef>
@@ -90,7 +87,6 @@
         <bpmn:flowNodeRef>Event_1a6holr</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_051lb4r</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1hjgahz</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_0gm7fg4</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0yggpi0" name="Gateways">
         <bpmn:flowNodeRef>Gateway_0oj9z9b</bpmn:flowNodeRef>
@@ -98,7 +94,6 @@
         <bpmn:flowNodeRef>Gateway_17o8j50</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0njo4e3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_144bnbe</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Gateway_175cxhd</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0g0x0qu" name="Tasks">
         <bpmn:flowNodeRef>Activity_0n44k4m</bpmn:flowNodeRef>
@@ -121,23 +116,26 @@
     </bpmn:laneSet>
     <bpmn:intermediateThrowEvent id="Event_0oyahcf" name="Intermediate Throw" />
     <bpmn:intermediateThrowEvent id="Event_00wb87x" name="Message Intermediate Throw">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="throw-message" retries="1" />
+      </bpmn:extensionElements>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1fqxuzu" />
     </bpmn:intermediateThrowEvent>
     <bpmn:intermediateThrowEvent id="Event_15oq7h0" name="Compensate Intermediate Throw">
-      <bpmn:compensateEventDefinition id="CompensateEventDefinition_0cxtkbw" />
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_0cxtkbw" activityRef="Activity_1vvqncd" />
     </bpmn:intermediateThrowEvent>
     <bpmn:intermediateThrowEvent id="Event_0pejm4x" name="Escalation Intermediate Throw">
       <bpmn:escalationEventDefinition id="EscalationEventDefinition_0lmw2qd" escalationRef="Escalation_2kob6ea" />
     </bpmn:intermediateThrowEvent>
     <bpmn:intermediateThrowEvent id="Event_0rrnlul" name="Signal Intermediate Throw">
-      <bpmn:signalEventDefinition id="SignalEventDefinition_188npkv" />
+      <bpmn:signalEventDefinition id="SignalEventDefinition_188npkv" signalRef="Signal_2fiobci" />
     </bpmn:intermediateThrowEvent>
     <bpmn:intermediateThrowEvent id="Event_1si59d3" name="Link Intermediate Throw">
       <bpmn:linkEventDefinition id="LinkEventDefinition_10mr0av" name="Link" />
     </bpmn:intermediateThrowEvent>
     <bpmn:intermediateCatchEvent id="Event_1iulo9w" name="Intermediate Catch" />
     <bpmn:intermediateCatchEvent id="Event_1q3jneg" name="Message Intermediate Catch">
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0nzynvd" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0nzynvd" messageRef="Message_2hl01s7" />
     </bpmn:intermediateCatchEvent>
     <bpmn:intermediateCatchEvent id="Event_0kv5yqo" name="Signal Intermediate Catch">
       <bpmn:signalEventDefinition id="SignalEventDefinition_0d1ijzp" signalRef="Signal_2fiobci" />
@@ -147,7 +145,9 @@
       <bpmn:linkEventDefinition id="LinkEventDefinition_0pd3g93" name="Link" />
     </bpmn:intermediateCatchEvent>
     <bpmn:intermediateCatchEvent id="Event_1ry580y" name="Timer Intermediate Catch">
-      <bpmn:timerEventDefinition id="TimerEventDefinition_0rwelat" />
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0rwelat">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:intermediateCatchEvent id="Event_0u1woce" name="Conditional Intermediate Catch">
       <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_03lta4o">
@@ -173,19 +173,22 @@
     </bpmn:startEvent>
     <bpmn:endEvent id="Event_0jdptl2" name="End" />
     <bpmn:endEvent id="Event_1ty5fiu" name="Compensate End">
-      <bpmn:compensateEventDefinition id="CompensateEventDefinition_013noip" />
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_013noip" activityRef="Activity_1vvqncd" />
     </bpmn:endEvent>
     <bpmn:endEvent id="Event_1ixq9ff" name="Message End">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="end-with-message" retries="2" />
+      </bpmn:extensionElements>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0t0i0v2" />
     </bpmn:endEvent>
     <bpmn:endEvent id="Event_1vmwzhf" name="Escalation End">
-      <bpmn:escalationEventDefinition id="EscalationEventDefinition_0mb01cy" />
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_0mb01cy" escalationRef="Escalation_2kob6ea" />
     </bpmn:endEvent>
     <bpmn:endEvent id="Event_1a6holr" name="Signal End">
-      <bpmn:signalEventDefinition id="SignalEventDefinition_01y088x" />
+      <bpmn:signalEventDefinition id="SignalEventDefinition_01y088x" signalRef="Signal_2fiobci" />
     </bpmn:endEvent>
     <bpmn:endEvent id="Event_051lb4r" name="Error End">
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_0cteh8m" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0cteh8m" errorRef="Error_1iz9cqu" />
     </bpmn:endEvent>
     <bpmn:endEvent id="Event_1hjgahz" name="Terminate End">
       <bpmn:terminateEventDefinition id="TerminateEventDefinition_04e39lk" />
@@ -228,8 +231,11 @@
     </bpmn:serviceTask>
     <bpmn:sendTask id="Activity_0h21a18" name="Send Task">
       <bpmn:documentation>Send Task Documentation</bpmn:documentation>
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="execute-send-task" retries="99" />
+      </bpmn:extensionElements>
     </bpmn:sendTask>
-    <bpmn:receiveTask id="Activity_0knna2o" name="Receive Task">
+    <bpmn:receiveTask id="Activity_0knna2o" name="Receive Task" messageRef="Message_2hl01s7">
       <bpmn:documentation>Receive Task Documentation</bpmn:documentation>
     </bpmn:receiveTask>
     <bpmn:businessRuleTask id="Activity_1dy40d6" name="Business Rule Task">
@@ -292,10 +298,14 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_0oqe881" messageRef="Message_2hl01s7" />
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_1o6dk2p" name="Non Interrupting Timer Boundary" cancelActivity="false" attachedToRef="Activity_0ixyrdg">
-      <bpmn:timerEventDefinition id="TimerEventDefinition_0jfn4a4" />
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0jfn4a4">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_0x2z30j" name="Timer Boundary" attachedToRef="Activity_0ixyrdg">
-      <bpmn:timerEventDefinition id="TimerEventDefinition_055pgm6" />
+      <bpmn:timerEventDefinition id="TimerEventDefinition_055pgm6">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_1j8wqgl" name="Non Interrupting Conditional Boundary" cancelActivity="false" attachedToRef="Activity_1nfc7aj">
       <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0djy9bk">
@@ -308,30 +318,25 @@
       </bpmn:conditionalEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_057eksd" name="Escalation Boundary" attachedToRef="Activity_0ghuv2t">
-      <bpmn:escalationEventDefinition id="EscalationEventDefinition_1qzqcox" />
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_1qzqcox" escalationRef="Escalation_2kob6ea" />
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_0njs1mb" name="Compensate Boundary" attachedToRef="Activity_1vvqncd">
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_1ri69ez" />
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_13g9uhy" name="Signal Boundary" attachedToRef="Activity_1t6r6l3">
-      <bpmn:signalEventDefinition id="SignalEventDefinition_0i3ps1j" />
+      <bpmn:signalEventDefinition id="SignalEventDefinition_0i3ps1j" signalRef="Signal_2fiobci" />
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_0vyy6th" name="Non Interrupting Signal Boundary" cancelActivity="false" attachedToRef="Activity_1t6r6l3">
-      <bpmn:signalEventDefinition id="SignalEventDefinition_0rgw1pk" />
+      <bpmn:signalEventDefinition id="SignalEventDefinition_0rgw1pk" signalRef="Signal_2fiobci" />
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_10u8pj5" name="Non Interrupting Escalation Boundary" cancelActivity="false" attachedToRef="Activity_0ghuv2t">
-      <bpmn:escalationEventDefinition id="EscalationEventDefinition_0kgomhd" />
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_0kgomhd" escalationRef="Escalation_2kob6ea" />
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_18rwysv" name="Error Boundary" attachedToRef="Activity_06k6u38">
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0vdtqs4" errorRef="Error_1iz9cqu" />
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_0uo9t0m" sourceRef="Event_17jxcy1" targetRef="Activity_0i9cljj" />
     <bpmn:sequenceFlow id="Flow_1nut1ih" sourceRef="Activity_0i9cljj" targetRef="Event_0c647d6" />
-    <bpmn:intermediateThrowEvent id="Event_09578x0" />
-    <bpmn:startEvent id="Event_1m7cg1s" />
-    <bpmn:intermediateCatchEvent id="Event_07b170r" name="" />
-    <bpmn:endEvent id="Event_0gm7fg4" />
-    <bpmn:exclusiveGateway id="Gateway_175cxhd" />
     <bpmn:task id="Activity_0ecex6m" />
   </bpmn:process>
   <bpmn:category id="Category_0et0dq0">
@@ -738,24 +743,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1yv6ujw" bpmnElement="Activity_06k6u38">
         <dc:Bounds x="390" y="1030" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_09578x0_di" bpmnElement="Event_09578x0">
-        <dc:Bounds x="872" y="122" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1m7cg1s_di" bpmnElement="Event_1m7cg1s">
-        <dc:Bounds x="872" y="372" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1dpzsic" bpmnElement="Event_07b170r">
-        <dc:Bounds x="872" y="242" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="860" y="285" width="62" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0gm7fg4_di" bpmnElement="Event_0gm7fg4">
-        <dc:Bounds x="872" y="492" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_175cxhd_di" bpmnElement="Gateway_175cxhd" isMarkerVisible="true">
-        <dc:Bounds x="865" y="605" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ecex6m_di" bpmnElement="Activity_0ecex6m">
         <dc:Bounds x="1110" y="850" width="100" height="80" />

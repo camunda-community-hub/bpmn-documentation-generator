@@ -1,5 +1,6 @@
-<#import "../bpmn-template-util.ftl" as util/>
-<#import "bpmn-extensions.ftl" as extensions>
+<#import "../bpmn-template-util.ftl" as util />
+<#import "bpmn-events-definition.ftl" as eventsDefinition>" />
+<#import "bpmn-extensions.ftl" as extensions />
 
 <#macro listEvents processElements>
 
@@ -14,7 +15,7 @@
 <#assign noEvents = processElements?filter(element -> element.flowType?ends_with("Event"))/>
 
 <#if (noEvents?size = 0) && !skipEmptySections>
-<details>
+<details ${openSections}>
     <summary><h4>Events</h4></summary>
     <#if (noEvents?size > 0)>
         <#list eventTypes as type>
@@ -41,11 +42,11 @@
         <#list type as eventType, title>
             <#assign events = processElements?filter(element -> element.flowType == eventType)/>
             <#if (events?size > 0)>
-                <details>
+                <details ${openSections}>
                     <summary><h4>${title}</h4></summary>
                     <#list events as event>
                         <p>
-                            <strong><@util.emptyOrNull event.name "event" /></strong>
+                            <h5><@util.emptyOrNull event.name "event" /></h5>
                         <table>
                             <tr>
                                 <th>Property</th>
@@ -69,6 +70,11 @@
                             <@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=false/>
                         </#if>
                         </p>
+                        <#if event.eventDefinitions?has_content>
+                            <p>
+                                <@eventsDefinition.listEventDefinition event.eventDefinitions />
+                            </p>
+                        </#if>
                         <#if event.extensions?has_content>
                             <p>
                                 <@extensions.listExtensions event.extensions />

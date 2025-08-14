@@ -1,15 +1,15 @@
-<#import "bpmn-task-extensions-definitions.ftl" as definition/>
-<#import "bpmn-task-extensions-headers.ftl" as header/>
-<#import "bpmn-task-extensions-inputs.ftl" as input/>
-<#import "bpmn-task-extensions-outputs.ftl" as output/>
-<#import "bpmn-task-extensions-properties.ftl" as properties/>
-<#import "bpmn-task-extensions-execution-listeners.ftl" as executionListeners/>
-<#import "bpmn-task-extensions-example-data.ftl" as exampleData/>
+<#import "bpmn-extensions-task-definitions.ftl" as definition/>
+<#import "bpmn-extensions-headers.ftl" as header/>
+<#import "bpmn-extensions-inputs.ftl" as input/>
+<#import "bpmn-extensions-outputs.ftl" as output/>
+<#import "bpmn-extensions-properties.ftl" as properties/>
+<#import "bpmn-extensions-execution-listeners.ftl" as executionListeners/>
+<#import "bpmn-extensions-example-data.ftl" as exampleData/>
 
 
 <#macro listExtensions extensions>
     <#if extensions.definitions?has_content>
-        <@definition.listDefinition extensions.definition />
+        <@definition.listDefinition extensions.taskDefinition />
     </#if>
     <#if extensions.header?has_content>
         <@header.listHeader extensions.header />

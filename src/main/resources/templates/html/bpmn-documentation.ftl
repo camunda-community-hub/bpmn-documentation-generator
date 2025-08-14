@@ -3,11 +3,16 @@
 <#import "bpmn-processes.ftl" as processes/>
 <#import "bpmn-globals.ftl" as globals/>
 
-<#assign aDateTime=.now/>
-<#assign aDate=aDateTime?date/>
-<#assign aTime=aDateTime?time/>
+<#assign aDateTime=.now />
+<#assign aDate=aDateTime?date />
+<#assign aTime=aDateTime?time />
 
-<#global skipEmptySections=bpmn.suppressEmptySections>
+<#global skipEmptySections=bpmn.suppressEmptySections />
+<#global openSections="" />
+<#if bpmn.openSections>
+    <#global openSections="open" />
+</#if>
+
 
 <html lang="en">
 <head>

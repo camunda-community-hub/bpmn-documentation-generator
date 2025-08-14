@@ -4,7 +4,7 @@
 <#macro listLanes processLaneSets>
 
 <#if (processLaneSets?size = 0) && !skipEmptySections>
-<details>
+<details ${openSections}>
     <summary><h4>Lanes</h4></summary>
     <#if (processLaneSets?size > 0)>
         <#list processLaneSets as laneset>

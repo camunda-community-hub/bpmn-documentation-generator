@@ -2,14 +2,14 @@
 
 <#macro listGlobals bpmn>
 
-    <details>
+    <details ${openSections}>
         <summary><h2>Globals</h2></summary>
         <h3>Messages</h3>
         <#if bpmn.messages?has_content>
             <#list bpmn.messages>
                 <ul>
                     <#items as message>
-                        <li><@util.emptyOrNull message.name "message" /> <sup>(${message.id})</sup></li>
+                        <li><@util.emptyOrNull message.name "message" /> <sup id="${message.id}">(${message.id})</sup></li>
                     </#items>
                 </ul>
             </#list>
@@ -22,7 +22,7 @@
             <#list bpmn.errors>
                 <ul>
                     <#items as error>
-                        <li><@util.emptyOrNull error.name "error" /> <sup>(${error.id})</sup> - Code ${error.errorCode}</li>
+                        <li><@util.emptyOrNull error.name "error" /> <sup id="${error.id}">(${error.id})</sup> - Code ${error.errorCode}</li>
                     </#items>
                 </ul>
             </#list>
@@ -35,7 +35,7 @@
             <#list bpmn.signals>
                 <ul>
                     <#items as signal>
-                        <li><@util.emptyOrNull signal.name "signal" /> <sup>(${signal.id})</sup></li>
+                        <li><@util.emptyOrNull signal.name "signal" /> <sup id="${signal.id}">(${signal.id})</sup></li>
                     </#items>
                 </ul>
             </#list>
@@ -48,7 +48,7 @@
             <#list bpmn.escalations>
                 <ul>
                     <#items as escalation>
-                        <li><@util.emptyOrNull escalation.name "escalation" /> <sup>(${escalation.id})</sup> - Code ${escalation.escalationCode}</li>
+                        <li><@util.emptyOrNull escalation.name "escalation" /> <sup id="${escalation.id}">(${escalation.id})</sup> - Code ${escalation.escalationCode}</li>
                     </#items>
                 </ul>
             </#list>

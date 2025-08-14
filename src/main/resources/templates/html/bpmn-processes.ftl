@@ -6,7 +6,7 @@
 
 <#macro listProcesses processes>
 
-<details>
+<details ${openSections}>
     <summary><h2>Processes</h2></summary>
 
     <ul>
@@ -16,7 +16,7 @@
     </ul>
 
     <#list bpmn.processes as process>
-        <details>
+        <details ${openSections}>
             <summary><h3 id="${process.id}"><@util.emptyOrNull process.name "process"/></h3></summary>
             <sup>(id: ${process.id})</sup><br/><br/>
             <#if process.documentation?has_content>

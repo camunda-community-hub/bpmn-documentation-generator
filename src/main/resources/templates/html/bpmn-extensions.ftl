@@ -10,7 +10,7 @@
 <#macro listExtensions extensions>
     <p>
     <#if extensions.taskDefinition?has_content>
-        <@definition.listDefinition extensions.taskDefinition />
+        <@definition.listTaskDefinition extensions.taskDefinition />
     </#if>
     <#if extensions.headers?has_content>
         <@header.listHeader extensions.headers />

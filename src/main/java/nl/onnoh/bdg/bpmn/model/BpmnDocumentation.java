@@ -17,6 +17,7 @@ public class BpmnDocumentation {
     String fileName;
     String filePath;
     Boolean suppressEmptySections;
+    Boolean openSections;
     String exporter;
     String exporterVersion;
     String executionPlatform;

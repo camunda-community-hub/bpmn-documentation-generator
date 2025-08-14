@@ -11,7 +11,7 @@
 
 <#assign noGateways = processElements?filter(element -> element.flowType?ends_with("Gateway"))/>
 
-<details>
+<details ${openSections}>
     <summary><h4>Gateways</h4></summary>
     <#if (noGateways?size > 0)>
         <#list gatewayTypes as type>
@@ -37,7 +37,7 @@
         <#list type as gatewayType, title>
             <#assign gateways = processElements?filter(element -> element.flowType == gatewayType)/>
             <#if (gateways?size > 0)>
-                <details>
+                <details ${openSections}>
                     <summary><h4>${title}</h4></summary>
                     <#list gateways as gateway>
                         <p>
