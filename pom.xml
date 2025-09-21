@@ -32,7 +32,7 @@
         <maven-exec-plugin.version>3.5.0</maven-exec-plugin.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <maven-jaxb2-plugin.version>3.3.0</maven-jaxb2-plugin.version>
-        <maven-jaxb-plugin.version>4.0.10</maven-jaxb-plugin.version>
+        <maven-jaxb-plugin.version>4.0.11</maven-jaxb-plugin.version>
         <maven-native-plugin.version>0.10.6</maven-native-plugin.version>
         <maven-resource-list-plugin.version>1.0</maven-resource-list-plugin.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
