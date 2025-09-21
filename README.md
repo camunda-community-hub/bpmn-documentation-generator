@@ -1,6 +1,6 @@
 # BPMN Documentation Generator
 
-Generate human-friendly documentation (HTML or Markdown) from a BPMN 2.0 diagram file.
+Generate human-friendly documentation (HTML or Markdown) from a BPMN 2.0/DMN 1.3 diagram file.
 
 This project parses a BPMN file (including Camunda/Zeebe extensions) and produces a structured document with:
 - Overview information (definitions id, exporter, execution platform versions)
@@ -9,6 +9,8 @@ This project parses a BPMN file (including Camunda/Zeebe extensions) and produce
 - Global artifacts (messages, signals, escalations, errors, categories)
 
 The output is rendered via FreeMarker templates and written next to your input BPMN file. If an SVG with the same base name exists, the document will embed it for visual context.
+
+XML schema definitions for both BPMN and DMN are maintained by the Objects Management Group Standards Development Organization (OMG-SDO for short) and can be found here : https://www.omg.org/spec/ 
 
 ---
 
@@ -127,6 +129,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgements
 - BPMN 2.0 XML schemas
+- DMN 1.3 XML schemas
 - FreeMarker template engine
 - Picocli CLI library
 - JAXB and SLF4J

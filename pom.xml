@@ -100,39 +100,74 @@
                 <version>${maven-jaxb-plugin.version}</version>
                 <executions>
                     <execution>
+                        <id>BPMN</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                        <configuration>
+                            <generatePackage>nl.onnoh.bdg.bpmn</generatePackage>
+                            <generateDirectory>${project.build.directory}/generated-sources/xjc/bpmn</generateDirectory>
+                            <schemaDirectory>src/main/resources/xsd/bpmn</schemaDirectory>
+                            <markGenerated>false</markGenerated>
+                            <schemaIncludes>
+                                <include>BPMN20.xsd</include>
+                                <include>BPMNDI.xsd</include>
+                                <include>DC.xsd</include>
+                                <include>DI.xsd</include>
+                                <include>Semantic.xsd</include>
+                                <include>Zeebe.xsd</include>
+                            </schemaIncludes>
+                            <bindingDirectory>src/main/resources/xsd/bpmn</bindingDirectory>
+                            <bindingIncludes>
+                                <include>bpmn-bindings.xjb</include>
+                            </bindingIncludes>
+                            <extension>true</extension>
+                            <args>
+                                <arg>-Xannotate</arg>
+                            </args>
+                            <plugins>
+                                <plugin>
+                                    <groupId>org.jvnet.jaxb</groupId>
+                                    <artifactId>jaxb-plugin-annotate</artifactId>
+                                    <version>${maven-jaxb-plugin.version}</version>
+                                </plugin>
+                            </plugins>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>DMN</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <generatePackage>nl.onnoh.bdg.dmn</generatePackage>
+                            <generateDirectory>${project.build.directory}/generated-sources/xjc/dmn</generateDirectory>
+                            <schemaDirectory>src/main/resources/xsd/dmn</schemaDirectory>
+                            <markGenerated>false</markGenerated>
+                            <schemaIncludes>
+                                <include>DC.xsd</include>
+                                <include>DI.xsd</include>
+                                <include>DMNDI15.xsd</include>
+                                <include>DMN16.xsd</include>
+                            </schemaIncludes>
+                            <bindingDirectory>src/main/resources/xsd/dmn</bindingDirectory>
+                            <bindingIncludes>
+                                <include>dmn-bindings.xjb</include>
+                            </bindingIncludes>
+                            <extension>true</extension>
+                            <args>
+                                <arg>-Xannotate</arg>
+                            </args>
+                            <plugins>
+                                <plugin>
+                                    <groupId>org.jvnet.jaxb</groupId>
+                                    <artifactId>jaxb-plugin-annotate</artifactId>
+                                    <version>${maven-jaxb-plugin.version}</version>
+                                </plugin>
+                            </plugins>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <generatePackage>nl.onnoh.bdg.bpmn</generatePackage>
-                    <schemaDirectory>src/main/resources/xsd</schemaDirectory>
-                    <markGenerated>false</markGenerated>
-                    <schemaIncludes>
-                        <include>BPMN20.xsd</include>
-                        <include>BPMNDI.xsd</include>
-                        <include>DC.xsd</include>
-                        <include>DI.xsd</include>
-                        <include>Semantic.xsd</include>
-                        <include>Zeebe.xsd</include>
-                    </schemaIncludes>
-                    <bindingDirectory>src/main/resources/xsd</bindingDirectory>
-                    <bindingIncludes>
-                        <include>**/*.xjb</include>
-                    </bindingIncludes>
-                    <extension>true</extension>
-                    <args>
-                        <arg>-Xannotate</arg>
-                    </args>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.jvnet.jaxb</groupId>
-                            <artifactId>jaxb-plugin-annotate</artifactId>
-                            <version>${maven-jaxb-plugin.version}</version>
-                        </plugin>
-                    </plugins>
-                </configuration>
             </plugin>
         </plugins>
     </build>
