@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_1x5tar2" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" exporter="Camunda Modeler" exporterVersion="5.37.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.1">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1x5tar2" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.39.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.1">
   <decision id="Decision_1xh7jx6" name="Decision 1">
+    <informationRequirement id="InformationRequirement_1jr6ujx">
+      <requiredInput href="#InputData_1omk9ef" />
+    </informationRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_1j8h01a">
+      <requiredKnowledge href="#BusinessKnowledgeModel_0u1cd8y" />
+    </knowledgeRequirement>
+    <authorityRequirement id="AuthorityRequirement_0qxlcwe">
+      <requiredAuthority href="#KnowledgeSource_158l8e0" />
+    </authorityRequirement>
     <decisionTable id="DecisionTable_0yojmxd">
       <input id="Input_1">
         <inputExpression id="InputExpression_1" typeRef="string">
@@ -10,11 +19,52 @@
       <output id="Output_1" typeRef="string" />
     </decisionTable>
   </decision>
+  <inputData id="InputData_1omk9ef" name="Input Data 1" />
+  <knowledgeSource id="KnowledgeSource_158l8e0" name="Knowledge Source 1">
+    <authorityRequirement id="AuthorityRequirement_1huy3gb">
+      <requiredInput href="#InputData_1omk9ef" />
+    </authorityRequirement>
+  </knowledgeSource>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_0u1cd8y" name="Business Knowledge Model 1">
+    <authorityRequirement id="AuthorityRequirement_0nprifx">
+      <requiredAuthority href="#KnowledgeSource_158l8e0" />
+    </authorityRequirement>
+  </businessKnowledgeModel>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="Decision_1xh7jx6">
         <dc:Bounds height="80" width="180" x="160" y="100" />
       </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1oo1mww" dmnElementRef="InputData_1omk9ef">
+        <dc:Bounds height="45" width="125" x="227" y="228" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0l1nne2" dmnElementRef="KnowledgeSource_158l8e0">
+        <dc:Bounds height="63" width="100" x="160" y="378" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_05w383i" dmnElementRef="BusinessKnowledgeModel_0u1cd8y">
+        <dc:Bounds height="46" width="135" x="413" y="228" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0fvtmqx" dmnElementRef="KnowledgeRequirement_1j8h01a">
+        <di:waypoint x="452" y="228" />
+        <di:waypoint x="340" y="140" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_05cmos5" dmnElementRef="InformationRequirement_1jr6ujx">
+        <di:waypoint x="290" y="228" />
+        <di:waypoint x="250" y="200" />
+        <di:waypoint x="250" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1sr1mt2" dmnElementRef="AuthorityRequirement_0nprifx">
+        <di:waypoint x="260" y="381" />
+        <di:waypoint x="448" y="274" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1fauem2" dmnElementRef="AuthorityRequirement_0qxlcwe">
+        <di:waypoint x="205" y="378" />
+        <di:waypoint x="176" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0fjwzru" dmnElementRef="AuthorityRequirement_1huy3gb">
+        <di:waypoint x="295" y="273" />
+        <di:waypoint x="230" y="378" />
+      </dmndi:DMNEdge>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
 </definitions>
