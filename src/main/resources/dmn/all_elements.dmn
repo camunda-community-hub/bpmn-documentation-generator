@@ -1,35 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1x5tar2" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.39.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.1">
-  <decision id="Decision_1xh7jx6" name="Decision 1">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1x5tar2" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.39.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.1">
+  <description>Bla3</description>
+  <decision id="Decision_1xh7jx6" name="DecideBla">
+    <description>desc</description>
+    <extensionElements>
+      <zeebe:versionTag value="v1" />
+    </extensionElements>
+    <question>Q</question>
+    <allowedAnswers>A</allowedAnswers>
     <informationRequirement id="InformationRequirement_1jr6ujx">
+      <description>Bla Information Requirement</description>
       <requiredInput href="#InputData_1omk9ef" />
     </informationRequirement>
     <knowledgeRequirement id="KnowledgeRequirement_1j8h01a">
+      <description>Bla3 Knowledge Requirement</description>
       <requiredKnowledge href="#BusinessKnowledgeModel_0u1cd8y" />
     </knowledgeRequirement>
     <authorityRequirement id="AuthorityRequirement_0qxlcwe">
+      <description>Bla1 Authority Requirement</description>
       <requiredAuthority href="#KnowledgeSource_158l8e0" />
     </authorityRequirement>
-    <decisionTable id="DecisionTable_0yojmxd">
-      <input id="Input_1">
-        <inputExpression id="InputExpression_1" typeRef="string">
-          <text></text>
+    <decisionTable id="DecisionTable_0yojmxd" hitPolicy="FIRST">
+      <input id="Input_1" label="Bla">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>x=y</text>
         </inputExpression>
       </input>
-      <output id="Output_1" typeRef="string" />
+      <input id="InputClause_1vfokwn" biodi:width="191">
+        <inputExpression id="LiteralExpression_0o2o8j2" typeRef="string">
+          <text>and</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Bla" name="Bladiebla" typeRef="string" />
+      <output id="OutputClause_0j7zhrc" name="or" typeRef="string" />
+      <rule id="DecisionRule_1r3ewmi">
+        <description>bla-annotation</description>
+        <inputEntry id="UnaryTests_1l9qhfe">
+          <text>bla-in</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ckayy3">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0g47vr9">
+          <text>bla-out</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ulc38m">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0xfumb8">
+        <description>bla2-annotation</description>
+        <inputEntry id="UnaryTests_1fme7x1">
+          <text>bla2-in</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lod7hn">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0jm52os">
+          <text>bla2-out</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0c8flhk">
+          <text></text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
-  <inputData id="InputData_1omk9ef" name="Input Data 1" />
+  <inputData id="InputData_1omk9ef" name="Input Data 1">
+    <description>hsahdjhsadkjashdask</description>
+  </inputData>
   <knowledgeSource id="KnowledgeSource_158l8e0" name="Knowledge Source 1">
+    <description>asdasdasdasdasd</description>
     <authorityRequirement id="AuthorityRequirement_1huy3gb">
+      <description>Bla2 Authority Requirement</description>
       <requiredInput href="#InputData_1omk9ef" />
+    </authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_10vpdna">
+      <description>Bla2a Authority Requirement</description>
+      <requiredInput href="#InputData_1omk9ef" />
+    </authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_1uqob16">
+      <requiredAuthority href="#KnowledgeSource_0fck8lz" />
     </authorityRequirement>
   </knowledgeSource>
   <businessKnowledgeModel id="BusinessKnowledgeModel_0u1cd8y" name="Business Knowledge Model 1">
+    <variable id="InformationItem_0irn5qe" name="Business Knowledge Model 1" typeRef="string" />
+    <encapsulatedLogic id="FunctionDefinition_0dyl29w">
+      <formalParameter name="param1" typeRef="string" />
+      <formalParameter name="param2" typeRef="number" />
+      <formalParameter name="param3" typeRef="boolean" />
+      <literalExpression id="LiteralExpression_0j1gjfr">
+        <text>="Hello " + param1</text>
+      </literalExpression>
+    </encapsulatedLogic>
     <authorityRequirement id="AuthorityRequirement_0nprifx">
+      <description>Bla5 Authority Requirement</description>
       <requiredAuthority href="#KnowledgeSource_158l8e0" />
     </authorityRequirement>
   </businessKnowledgeModel>
+  <knowledgeSource id="KnowledgeSource_0fck8lz" />
+  <decision id="Decision_1x42iw6" name="Some literal decision">
+    <variable id="InformationItem_10za0lz" name="Some literal decision" typeRef="string" />
+    <literalExpression id="LiteralExpression_0viosih">
+      <text>="Hello week " + week of year(now())</text>
+    </literalExpression>
+  </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="Decision_1xh7jx6">
@@ -40,9 +114,6 @@
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_0l1nne2" dmnElementRef="KnowledgeSource_158l8e0">
         <dc:Bounds height="63" width="100" x="160" y="378" />
-      </dmndi:DMNShape>
-      <dmndi:DMNShape id="DMNShape_05w383i" dmnElementRef="BusinessKnowledgeModel_0u1cd8y">
-        <dc:Bounds height="46" width="135" x="413" y="228" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_0fvtmqx" dmnElementRef="KnowledgeRequirement_1j8h01a">
         <di:waypoint x="452" y="228" />
@@ -65,6 +136,23 @@
         <di:waypoint x="295" y="273" />
         <di:waypoint x="230" y="378" />
       </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0nzrc0n" dmnElementRef="AuthorityRequirement_10vpdna">
+        <di:waypoint x="276" y="273" />
+        <di:waypoint x="211" y="378" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0q0uhy7" dmnElementRef="BusinessKnowledgeModel_0u1cd8y">
+        <dc:Bounds height="46" width="135" x="413" y="228" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_033git9" dmnElementRef="KnowledgeSource_0fck8lz">
+        <dc:Bounds height="63" width="100" x="160" y="639" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0iqo33g" dmnElementRef="AuthorityRequirement_1uqob16">
+        <di:waypoint x="210" y="639" />
+        <di:waypoint x="210" y="441" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_05ebsnf" dmnElementRef="Decision_1x42iw6">
+        <dc:Bounds height="80" width="180" x="450" y="90" />
+      </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
 </definitions>

@@ -1,8 +1,7 @@
 package nl.onnoh.bdg.dmn.model.decision;
 
-public class Output {
+public class InputExpression {
     String id;
-    String label;
-    String name;
     String typeRef;
+    String text;
 }

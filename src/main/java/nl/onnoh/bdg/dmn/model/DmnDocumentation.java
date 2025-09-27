@@ -1,12 +1,12 @@
 package nl.onnoh.bdg.dmn.model;
 
 import lombok.Data;
-import nl.onnoh.bdg.bpmn.model.definitions.Category;
-import nl.onnoh.bdg.bpmn.model.definitions.Collaboration;
-import nl.onnoh.bdg.bpmn.model.definitions.Error;
-import nl.onnoh.bdg.bpmn.model.definitions.Escalation;
-import nl.onnoh.bdg.bpmn.model.definitions.Message;
-import nl.onnoh.bdg.bpmn.model.definitions.Signal;
+import nl.onnoh.bdg.dmn.model.definitions.BusinessKnowledgeModel;
+import nl.onnoh.bdg.dmn.model.definitions.Decision;
+import nl.onnoh.bdg.dmn.model.requirements.InformationRequirement;
+import nl.onnoh.bdg.dmn.model.definitions.InputData;
+import nl.onnoh.bdg.dmn.model.requirements.KnowledgeRequirement;
+import nl.onnoh.bdg.dmn.model.definitions.KnowledgeSource;
 
 import java.util.List;
 
@@ -21,11 +21,10 @@ public class DmnDocumentation {
     String exporterVersion;
     String executionPlatform;
     String executionPlatformVersion;
-    Collaboration collaboration;
-    List<nl.onnoh.bdg.bpmn.model.definitions.Process> processes;
-    List<Message> messages;
-    List<Signal> signals;
-    List<Category> categories;
-    List<Escalation> escalations;
-    List<Error> errors;
+    List<Decision> decisions;
+    List<BusinessKnowledgeModel> businessKnowledgeModels;
+    List<InformationRequirement> informationRequirements;
+    List<KnowledgeRequirement> knowledgeRequirements;
+    List<KnowledgeSource> knowledgeSources;
+    List<InputData> inputData;
 }

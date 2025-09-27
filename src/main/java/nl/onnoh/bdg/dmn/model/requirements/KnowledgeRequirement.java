@@ -1,4 +1,4 @@
-package nl.onnoh.bdg.dmn.model.definitions;
+package nl.onnoh.bdg.dmn.model.requirements;
 
 import lombok.Data;
 
