@@ -16,10 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static nl.onnoh.bdg.bpmn.BpmnModelConstants.CAMUNDA_ELEMENT_PROPERTIES;
-import static nl.onnoh.bdg.bpmn.BpmnModelConstants.CAMUNDA_ELEMENT_PROPERTY;
-import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.CAMUNDA_EXAMPLE_DATA;
-import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.CAMUNDA_MODELER_EXAMPLE_OUTPUT_JSON;
+import static nl.onnoh.bdg.CamundaConstants.CAMUNDA_ELEMENT_PROPERTIES;
+import static nl.onnoh.bdg.CamundaConstants.CAMUNDA_ELEMENT_PROPERTY;
+import static nl.onnoh.bdg.CamundaConstants.CAMUNDA_EXAMPLE_DATA;
+import static nl.onnoh.bdg.CamundaConstants.CAMUNDA_MODELER_EXAMPLE_OUTPUT_JSON;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_CALLED_DECISION;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_CALLED_ELEMENT;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_EXECUTION_LISTENER;

@@ -147,8 +147,8 @@
                             <schemaIncludes>
                                 <include>DC.xsd</include>
                                 <include>DI.xsd</include>
-                                <include>DMNDI15.xsd</include>
-                                <include>DMN16.xsd</include>
+                                <include>DMNDI13.xsd</include>
+                                <include>DMN13.xsd</include>
                             </schemaIncludes>
                             <bindingDirectory>src/main/resources/xsd/dmn</bindingDirectory>
                             <bindingIncludes>

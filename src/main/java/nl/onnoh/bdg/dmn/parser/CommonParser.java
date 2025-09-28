@@ -1,7 +1,6 @@
 package nl.onnoh.bdg.dmn.parser;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.onnoh.bdg.bpmn.Documentation;
 import nl.onnoh.bdg.bpmn.ExtensionElements;
 import nl.onnoh.bdg.bpmn.ObjectFactory;
 import nl.onnoh.bdg.bpmn.UserTaskForm;
@@ -16,10 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static nl.onnoh.bdg.bpmn.BpmnModelConstants.CAMUNDA_ELEMENT_PROPERTIES;
-import static nl.onnoh.bdg.bpmn.BpmnModelConstants.CAMUNDA_ELEMENT_PROPERTY;
-import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.CAMUNDA_EXAMPLE_DATA;
-import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.CAMUNDA_MODELER_EXAMPLE_OUTPUT_JSON;
+import static nl.onnoh.bdg.CamundaConstants.CAMUNDA_ELEMENT_PROPERTIES;
+import static nl.onnoh.bdg.CamundaConstants.CAMUNDA_ELEMENT_PROPERTY;
+import static nl.onnoh.bdg.CamundaConstants.CAMUNDA_EXAMPLE_DATA;
+import static nl.onnoh.bdg.CamundaConstants.CAMUNDA_MODELER_EXAMPLE_OUTPUT_JSON;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_CALLED_DECISION;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_CALLED_ELEMENT;
 import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_EXECUTION_LISTENER;
@@ -45,18 +44,9 @@ import static nl.onnoh.bdg.bpmn.BpmnModelZeebeConstants.ZEEBE_VERSION_TAG;
 @Slf4j
 public class CommonParser {
 
-    public static String parseDocumentation(List<Desc> documentations) {
-        StringBuilder parsedDocumentation = new StringBuilder();
-        if (documentations != null) {
-            documentations.forEach(documentation -> {
-                documentation.getContent().forEach(content -> {
-                    parsedDocumentation.append(content);
-                    parsedDocumentation.append("\n");
-                });
-            });
-        }
+    public static String parseDocumentation(List<String> documentations) {
+        return String.join(", ", documentations);
 
-        return parsedDocumentation.toString();
     }
 
     public static Map<String, Object> parseExtensionElements(ExtensionElements extensionElements) {

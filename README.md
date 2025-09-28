@@ -134,3 +134,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Picocli CLI library
 - JAXB and SLF4J
 
+## Caveats
+In the DMN13.xsd the `substitutionGroup="namedElement"` on the `definitions` element had to be removed, in order for
+JAXB to generate the class. Find out how to solve this and leave the original specification intact.
