@@ -1,22 +1,19 @@
-<#import "../bpmn-template-util.ftl" as util/>
-<#import "bpmn-collaboration.ftl" as collaboration/>
-<#import "bpmn-processes.ftl" as processes/>
-<#import "bpmn-globals.ftl" as globals/>
+<#import "../dmn-template-util.ftl" as util/>
 
 <#assign aDateTime=.now />
 <#assign aDate=aDateTime?date />
 <#assign aTime=aDateTime?time />
 
-<#global skipEmptySections=bpmn.suppressEmptySections />
+<#global skipEmptySections=dmn.suppressEmptySections />
 <#global openSections="" />
-<#if bpmn.openSections>
+<#if dmn.openSections>
     <#global openSections="open" />
 </#if>
 
 
 <html lang="en">
 <head>
-    <title>BPMN ${bpmn.fileName}</title>
+    <title>DMN ${dmn.fileName}</title>
     <link rel="stylesheet" href="../templates/style/markdown.css" />
     <style>
         .markdown-body {
@@ -36,13 +33,13 @@
 </head>
 <body>
 <article class="markdown-body">
-<h1>BPMN ${bpmn.fileName}</h1>
+<h1>DMN ${dmn.fileName}</h1>
 <p>Generated on ${aDate} at ${aTime}</p>
     <#if skipEmptySections>
         <p><strong>Note:</strong> This documentation skips empty sections.</p>
     </#if>
 <p>
-    <img alt="BPMN ${bpmn.fileName} image" src="${bpmn.fileName?replace('.bpmn', '.svg', 'i')}"/>
+    <img alt="Visual representation of the DMN ${dmn.fileName}" src="${dmn.fileName?replace('.dmn', '.svg', 'i')}"/>
 </p>
 <table>
     <thead>
@@ -55,34 +52,21 @@
     <tbody>
     <tr>
         <td>Definitions Id</td>
-        <td>${bpmn.id}</td>
+        <td>${dmn.id}</td>
         <td>n/a</td>
     </tr>
     <tr>
         <td>Exporter</td>
-        <td>${bpmn.exporter}</td>
-        <td>${bpmn.exporterVersion}</td>
+        <td>${dmn.exporter}</td>
+        <td>${dmn.exporterVersion}</td>
     </tr>
     <tr>
         <td>Execution Platform</td>
-        <td>${bpmn.executionPlatform}</td>
-        <td>${bpmn.executionPlatformVersion}</td>
+        <td>${dmn.executionPlatform}</td>
+        <td>${dmn.executionPlatformVersion}</td>
     </tr>
     </tbody>
 </table>
-
-<#if bpmn.collaboration?has_content>
-    <@collaboration.listCollaboration bpmn.collaboration />
-</#if>
-
-<#if bpmn.processes?has_content>
-    <@processes.listProcesses bpmn.processes />
-<#else>
-    <@util.emptySection skip=skipEmptySections section="processes" quote=false markdown=false />
-</#if>
-
-<@globals.listGlobals bpmn />
-
 </article>
 </body>
 </html>

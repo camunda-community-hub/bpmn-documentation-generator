@@ -32,6 +32,7 @@ import static nl.onnoh.bdg.dmn.parser.DefinitionsParser.parseKnowledgeSource;
 import static nl.onnoh.bdg.template.TemplateService.TEMPLATES_FOLDER;
 import static nl.onnoh.bdg.template.TemplateService.TEMPLATE_SUFFIX;
 import static nl.onnoh.bdg.template.TemplateService.initTemplateEngine;
+import static nl.onnoh.bdg.template.TemplateService.processTemplate;
 
 @CommandLine.Command(name = "dmn"
         , description = "Handling DMN files"
@@ -54,12 +55,12 @@ public class DmnCommand implements Runnable {
     }
 
     private static void generateOutput(String dmnFile, DmnDocumentation dmnDocumentation, String outputType) {
-        String templateFile = TEMPLATES_FOLDER + File.separator + outputType + File.separator + "dmmn-documentation" +TEMPLATE_SUFFIX;
+        String templateFile = "dmn" + File.separator + TEMPLATES_FOLDER + File.separator + outputType + File.separator + "dmn-documentation" +TEMPLATE_SUFFIX;
         String outputFile = dmnFile.replace(".dmn", "." + outputType);
         Map<String, Object> templateVariables = new HashMap<>();
         Configuration configuration = initTemplateEngine();
         templateVariables.put("dmn", dmnDocumentation);
-//        processTemplate(configuration, templateFile, outputFile, templateVariables);
+        processTemplate(configuration, templateFile, outputFile, templateVariables);
     }
 
     private static DmnDocumentation buildTemplateVariables(String dmnFile) {

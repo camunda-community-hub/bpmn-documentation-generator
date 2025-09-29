@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 
 @Slf4j
 @Command(name = "generate", description = "Generate documentation for given BPMN or DMN file."
+        , mixinStandardHelpOptions = true
         , version = "1.0"
         , subcommands = {
           BpmnCommand.class
@@ -26,8 +27,8 @@ public class GenerateDocumentation implements Runnable {
     @Parameters(index = "0", description = "The BPMN/DMN file to document.")
     public String modelFile;
 
-    @Option(names = { "-h", "--help", "-?", "-help"}, usageHelp = true, description = "Display this help and exit")
-    boolean help;
+//    @Option(names = { "-h", "--help", "-?", "-help"}, usageHelp = true, description = "Display this help and exit")
+//    boolean help;
 
     @Option(names = {"-of", "--output-format"}, defaultValue = "html", description = "The document format (default: ${DEFAULT-VALUE}).")
     public String outputFormat;

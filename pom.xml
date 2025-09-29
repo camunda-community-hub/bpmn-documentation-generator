@@ -107,7 +107,7 @@
                         <configuration>
                             <generatePackage>nl.onnoh.bdg.bpmn</generatePackage>
                             <generateDirectory>${project.build.directory}/generated-sources/xjc/bpmn</generateDirectory>
-                            <schemaDirectory>src/main/resources/xsd/bpmn</schemaDirectory>
+                            <schemaDirectory>src/main/resources/bpmn/xsd</schemaDirectory>
                             <markGenerated>false</markGenerated>
                             <schemaIncludes>
                                 <include>BPMN20.xsd</include>
@@ -117,7 +117,7 @@
                                 <include>Semantic.xsd</include>
                                 <include>Zeebe.xsd</include>
                             </schemaIncludes>
-                            <bindingDirectory>src/main/resources/xsd/bpmn</bindingDirectory>
+                            <bindingDirectory>src/main/resources/bpmn/xsd</bindingDirectory>
                             <bindingIncludes>
                                 <include>bpmn-bindings.xjb</include>
                             </bindingIncludes>
@@ -142,7 +142,7 @@
                         <configuration>
                             <generatePackage>nl.onnoh.bdg.dmn</generatePackage>
                             <generateDirectory>${project.build.directory}/generated-sources/xjc/dmn</generateDirectory>
-                            <schemaDirectory>src/main/resources/xsd/dmn</schemaDirectory>
+                            <schemaDirectory>src/main/resources/dmn/xsd</schemaDirectory>
                             <markGenerated>false</markGenerated>
                             <schemaIncludes>
                                 <include>DC.xsd</include>
@@ -150,7 +150,7 @@
                                 <include>DMNDI13.xsd</include>
                                 <include>DMN13.xsd</include>
                             </schemaIncludes>
-                            <bindingDirectory>src/main/resources/xsd/dmn</bindingDirectory>
+                            <bindingDirectory>src/main/resources/dmn/xsd</bindingDirectory>
                             <bindingIncludes>
                                 <include>dmn-bindings.xjb</include>
                             </bindingIncludes>

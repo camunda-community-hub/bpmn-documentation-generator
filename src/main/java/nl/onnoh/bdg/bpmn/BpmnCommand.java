@@ -63,7 +63,7 @@ public class BpmnCommand implements Runnable {
     }
 
     private static void generateOutput(String bpmnFile, BpmnDocumentation bpmnDocumentation, String outputType) {
-        String templateFile = TEMPLATES_FOLDER + File.separator + outputType + File.separator + "bpmn-documentation" +TEMPLATE_SUFFIX;
+        String templateFile = "bpmn" + File.separator + TEMPLATES_FOLDER + File.separator + outputType + File.separator + "bpmn-documentation" +TEMPLATE_SUFFIX;
         String outputFile = bpmnFile.replace(".bpmn", "." + outputType);
         Map<String, Object> templateVariables = new HashMap<>();
         Configuration configuration = initTemplateEngine();
