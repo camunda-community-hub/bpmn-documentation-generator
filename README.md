@@ -1,5 +1,11 @@
 # BPMN Documentation Generator
 
+[![](https://img.shields.io/badge/Community%20Extension-An%20open%20source%20community%20maintained%20project-FF4700)](https://github.com/camunda-community-hub/community)
+[![](https://img.shields.io/badge/Lifecycle-Stable-brightgreen)](https://github.com/Camunda-Community-Hub/community/blob/main/extension-lifecycle.md#stable-)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+[![Compatible with: Camunda Platform 8](https://img.shields.io/badge/Compatible%20with-Camunda%20Platform%208-0072Ce)](https://github.com/camunda-community-hub/community/blob/main/extension-lifecycle.md#compatiblilty)
+
 Generate human-friendly documentation (HTML or Markdown) from a BPMN 2.0/DMN 1.3 diagram file.
 
 This project parses a BPMN file (including Camunda/Zeebe extensions) and produces a structured document with:
@@ -48,14 +54,20 @@ Alternatively, if you prefer running the compiled classes directly, ensure depen
 
 ### Command
 ```
-Usage: generate [-h?] [-o] [-of=<outputFormat>] [-s] <bpmnFile>
-Generate documentation for given BPMN file.
-      <bpmnFile>              The BPMN file to document.
-  -h, -?, --help, -help       Display this help and exit
-  -o, --open-sections         Open all sections (default: false)
-  -of, --output-format=<fmt>  The document format (default: html)
+Usage: generate [-hosV] [-of=<outputFormat>] <modelFile> [COMMAND]
+Generate documentation for given BPMN or DMN file.
+      <modelFile>       The BPMN/DMN file to document.
+  -h, --help            Show this help message and exit.
+  -o, --open-sections   Open all sections (default: false).
+      -of, --output-format=<outputFormat>
+                        The document format (default: html).
   -s, --suppress-empty-sections
-                              Suppress empty sections (default: false)
+                        Suppress empty sections (default: false).
+  -V, --version         Print version information and exit.
+Commands:
+  bpmn  Handling BPMN files
+  dmn   Handling DMN files
+  help  Display help information about the specified command.
 ```
 
 ### Output
@@ -85,6 +97,13 @@ mvn -q org.codehaus.mojo:exec-maven-plugin:3.5.0:java \
 ```
 
 After running, check next to your BPMN file for the new `.html` or `.markdown` file.
+
+## BPMN
+
+## DMN
+
+Borrowed the constants from https://github.com/camunda/camunda-bpm-platform/blob/master/model-api/dmn-model/src/main/java/org/camunda/bpm/model/dmn/impl/DmnModelConstants.java
+
 
 ## How it works
 - JAXB unmarshals the BPMN XML into generated classes (based on the XSDs in `src/main/resources/xsd`).
