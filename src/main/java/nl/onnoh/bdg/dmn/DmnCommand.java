@@ -112,6 +112,10 @@ public class DmnCommand implements Runnable {
                         log.warn("Unknown DRG element : {}", drgElement.getName());
                 }
             });
+            dmnDocumentation.setDecisions(decisions);
+            dmnDocumentation.setInputData(inputData);
+            dmnDocumentation.setBusinessKnowledgeModels(businessKnowledgeModels);
+            dmnDocumentation.setKnowledgeSources(knowledgeSources);
 
         } catch (JAXBException e) {
             log.error("JAXB exception {}", e.getMessage());
