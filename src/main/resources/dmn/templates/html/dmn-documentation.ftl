@@ -1,4 +1,7 @@
 <#import "../dmn-template-util.ftl" as util/>
+<#import "dmn-decisions.ftl" as decisions/>
+<#import "dmn-input-data.ftl" as inputdata/>
+<#import "dmn-knowledge-source.ftl" as knowledgesource/>
 
 <#assign aDateTime=.now />
 <#assign aDate=aDateTime?date />
@@ -67,6 +70,21 @@
     </tr>
     </tbody>
 </table>
+    <#if dmn.decisions?has_content>
+        <@decisions.listDecisions dmn.decisions />
+    <#else>
+        <@util.emptySection skip=skipEmptySections section="decisions" quote=false markdown=false />
+    </#if>
+    <#if dmn.inputData?has_content>
+        <@inputdata.listInputData dmn.inputData />
+    <#else>
+        <@util.emptySection skip=skipEmptySections section="input data" quote=false markdown=false />
+    </#if>
+    <#if dmn.knowledgeSources?has_content>
+        <@knowledgesource.listKnowledgeSources dmn.knowledgeSources />
+    <#else>
+        <@util.emptySection skip=skipEmptySections section="knowledge sources" quote=false markdown=false />
+    </#if>
 </article>
 </body>
 </html>

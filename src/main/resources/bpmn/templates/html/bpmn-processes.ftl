@@ -10,12 +10,12 @@
     <summary><h2>Processes</h2></summary>
 
     <ul>
-        <#list bpmn.processes as process>
+        <#list processes as process>
             <li><a href="#${process.id}"><@util.emptyOrNull process.name "process" /></a></li>
         </#list>
     </ul>
 
-    <#list bpmn.processes as process>
+    <#list processes as process>
         <details ${openSections}>
             <summary><h3 id="${process.id}"><@util.emptyOrNull process.name "process"/></h3></summary>
             <sup>(id: ${process.id})</sup><br/><br/>
