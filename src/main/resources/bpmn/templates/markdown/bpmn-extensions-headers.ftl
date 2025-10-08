@@ -1,12 +1,24 @@
-<#macro listHeader header>
+<#macro listHeader headers>
 
-<#if header?has_content>
-#### Task Headers
-    <#list header as key, value>
-* **${key}:** ${value}
-    </#list>
-<#else>
-No header defined.
-</#if>
+    <#if headers?has_content>
+###### Headers
+|
+        <#list headers[0] as headerKey, headerValue>
+            <#list headerValue as key, value>
+ ${key?capitalize} |
+            </#list>
+        </#list>
+|-|-|
+|
+        <#list headers as header>
+            <#list header as headerKey, headerValue>
+                <#list headerValue as key, value>
+ ${value} |
+                </#list>
+            </#list>
+        </#list>
+    <#else>
+<@util.emptySection skip=skipEmptySections section="headers defined" quote=false markdown=true/>
+    </#if>
 
 </#macro>
