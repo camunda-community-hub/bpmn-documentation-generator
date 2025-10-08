@@ -1,7 +1,8 @@
-<#import "../dmn-template-util.ftl" as util/>
-<#import "dmn-decisions.ftl" as decisions/>
-<#import "dmn-input-data.ftl" as inputdata/>
-<#import "dmn-knowledge-source.ftl" as knowledgesource/>
+<#import "../dmn-template-util.ftl" as util />
+<#import "dmn-decisions.ftl" as decisions />
+<#import "dmn-input-data.ftl" as inputdata />
+<#import "dmn-knowledge-source.ftl" as knowledgesources />
+<#import "dmn-business-knowledge-models.ftl" as businessknowledgemodels />
 
 <#assign aDateTime=.now />
 <#assign aDate=aDateTime?date />
@@ -75,13 +76,18 @@
     <#else>
         <@util.emptySection skip=skipEmptySections section="decisions" quote=false markdown=false />
     </#if>
+    <#if dmn.businessKnowledgeModels?has_content>
+        <@businessknowledgemodels.listBusinessKnowledgeModels dmn.businessKnowledgeModels />
+    <#else>
+        <@util.emptySection skip=skipEmptySections section="business knowledge models" quote=false markdown=false />
+    </#if>
     <#if dmn.inputData?has_content>
         <@inputdata.listInputData dmn.inputData />
     <#else>
         <@util.emptySection skip=skipEmptySections section="input data" quote=false markdown=false />
     </#if>
     <#if dmn.knowledgeSources?has_content>
-        <@knowledgesource.listKnowledgeSources dmn.knowledgeSources />
+        <@knowledgesources.listKnowledgeSources dmn.knowledgeSources />
     <#else>
         <@util.emptySection skip=skipEmptySections section="knowledge sources" quote=false markdown=false />
     </#if>

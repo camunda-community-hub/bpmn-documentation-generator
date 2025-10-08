@@ -151,7 +151,7 @@
         <di:waypoint x="210" y="441" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="DMNShape_05ebsnf" dmnElementRef="Decision_1x42iw6">
-        <dc:Bounds height="80" width="180" x="450" y="90" />
+        <dc:Bounds height="80" width="180" x="440" y="70" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
