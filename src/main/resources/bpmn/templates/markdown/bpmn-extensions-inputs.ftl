@@ -1,12 +1,25 @@
-<#macro listInput input>
+<#macro listInput inputs>
 
-<#if input?has_content>
-#### Input
-    <#list input as key, value>
-* **${key}:** ${value}
-    </#list>
-<#else>
-No input defined.
-</#if>
+    <#if inputs?has_content>
+###### Inputs
+
+|
+        <#list inputs[0] as inputKey, inputValue>
+            <#list inputValue as key, value>
+ ${key?capitalize} |
+            </#list>
+        </#list>
+|-|-|-|
+        <#list inputs as input>
+            <#list input as inputKey, inputValue>
+|
+                <#list inputValue as key, value>
+ ${value} |
+                </#list>
+            </#list>
+        </#list>
+    <#else>
+<@util.emptySection skip=skipEmptySections section="inputs defined" quote=false markdown=true/>
+    </#if>
 
 </#macro>

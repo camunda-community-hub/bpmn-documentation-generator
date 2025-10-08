@@ -44,7 +44,7 @@ Generated on ${aDate} at ${aTime}
 </#if>
 
 <#if dmn.knowledgeSources?has_content>
-    <@knowledgesource.listKnowledgeSources dmn.knowledgeSources />
+    <@knowledgesources.listKnowledgeSources dmn.knowledgeSources />
 <#else>
     <@util.emptySection skip=skipEmptySections section="knowledge sources" quote=false markdown=true />
 </#if>

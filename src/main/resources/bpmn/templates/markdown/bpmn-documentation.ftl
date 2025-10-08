@@ -9,6 +9,12 @@
 <#assign aDate = aDateTime?date/>
 <#assign aTime = aDateTime?time/>
 
+<#global skipEmptySections=bpmn.suppressEmptySections />
+<#global openSections="" />
+<#if bpmn.openSections>
+    <#global openSections="open" />
+</#if>
+
 # BPMN ${bpmn.fileName}
 
 Generated on ${aDate} at ${aTime}
@@ -33,7 +39,7 @@ Generated on ${aDate} at ${aTime}
             <#if process.documentation?has_content>
 > ${process.documentation}
             <#else>
-                <@util.emptySection skipEmptySections=skipEmptySections sectionName="documentation" quote=false markdown=true/>
+                <@util.emptySection skip=skipEmptySections section="documentation" quote=false markdown=true/>
             </#if>
             <#if process.laneSets?has_content>
                 <@lanes.listLanes processLaneSets=process.laneSets/>
@@ -45,7 +51,7 @@ Generated on ${aDate} at ${aTime}
             </#if>
         </#list>
     <#else>
-        <@util.emptySection skipEmptySections=skipEmptySections sectionName="processes" quote=false markdown=true/>
+        <@util.emptySection skip=skipEmptySections section="processes" quote=false markdown=true/>
     </#if>
 
 ## Globals

@@ -3,17 +3,17 @@
         <#if variable = "Unnamed">
             <#switch type>
                 <#on "template">
-                    No template attached
+No template attached
                 <#on "template version">
-                    n/a
+n/a
                 <#default>
-                    ${variable} ${type}
+${variable} ${type}
             </#switch>
         <#else>
-            ${variable}
+${variable}
         </#if>
     <#else>
-        &lt;Empty&gt; ${type}
+&lt;Empty&gt; ${type}
     </#if>
 </#macro>
 
