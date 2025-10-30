@@ -6,12 +6,18 @@ import nl.onnoh.bdg.dmn.ObjectFactory;
 import nl.onnoh.bdg.dmn.TBusinessKnowledgeModel;
 import nl.onnoh.bdg.dmn.TDRGElement;
 import nl.onnoh.bdg.dmn.TDecision;
+import nl.onnoh.bdg.dmn.TDecisionTable;
 import nl.onnoh.bdg.dmn.TInputData;
 import nl.onnoh.bdg.dmn.TKnowledgeSource;
+import nl.onnoh.bdg.dmn.TLiteralExpression;
 import nl.onnoh.bdg.dmn.model.definitions.BusinessKnowledgeModel;
 import nl.onnoh.bdg.dmn.model.definitions.Decision;
 import nl.onnoh.bdg.dmn.model.definitions.InputData;
 import nl.onnoh.bdg.dmn.model.definitions.KnowledgeSource;
+
+import static nl.onnoh.bdg.dmn.parser.CommonParser.parseExtensionElements;
+import static nl.onnoh.bdg.dmn.parser.DecisionParser.parseDecisionTable;
+import static nl.onnoh.bdg.dmn.parser.DecisionParser.parseLiteralExpression;
 
 @Slf4j
 public class DefinitionsParser {
@@ -20,14 +26,19 @@ public class DefinitionsParser {
         ObjectFactory objectFactory = new ObjectFactory();
         JAXBElement<TDecision> decision = objectFactory.createDecision((TDecision) value);
         log.debug("Decision: {}", decision.getValue().getId());
-
+        log.info("Decision: {}", decision);
         Decision parsedDecision = new Decision();
         parsedDecision.setId(decision.getValue().getId());
         parsedDecision.setName(decision.getValue().getName());
         parsedDecision.setDocumentation(decision.getValue().getDescription());
         parsedDecision.setQuestion(decision.getValue().getQuestion());
         parsedDecision.setAllowedAnswers(decision.getValue().getAllowedAnswers());
-
+        if (decision.getValue().getExpression().getDeclaredType().getClass().equals(TDecisionTable.class)) {
+            parsedDecision.setDecisionTable(parseDecisionTable((TDecisionTable) decision.getValue().getExpression().getValue()));
+        } else if (decision.getValue().getExpression().getDeclaredType().getClass().equals(TLiteralExpression.class)) {
+            parsedDecision.setLiteralExpression(parseLiteralExpression((TLiteralExpression) decision.getValue().getExpression().getValue()));
+        }
+        parsedDecision.setExtensions(parseExtensionElements(decision.getValue().getExtensionElements()));
         return parsedDecision;
     }
 

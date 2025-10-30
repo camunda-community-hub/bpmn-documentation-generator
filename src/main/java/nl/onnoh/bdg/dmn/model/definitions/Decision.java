@@ -1,8 +1,9 @@
 package nl.onnoh.bdg.dmn.model.definitions;
 
 import lombok.Data;
-import nl.onnoh.bdg.dmn.model.common.LiteralExpression;
 import nl.onnoh.bdg.dmn.model.common.Variable;
+import nl.onnoh.bdg.dmn.model.decision.DecisionTable;
+import nl.onnoh.bdg.dmn.model.decision.LiteralExpression;
 import nl.onnoh.bdg.dmn.model.requirements.AuthorityRequirement;
 import nl.onnoh.bdg.dmn.model.requirements.InformationRequirement;
 import nl.onnoh.bdg.dmn.model.requirements.KnowledgeRequirement;
@@ -22,5 +23,6 @@ public class Decision {
     List<AuthorityRequirement> authorityRequirements;
     Map<String, Object> extensions;
     Variable variable;
+    DecisionTable decisionTable;
     LiteralExpression literalExpression;
 }
