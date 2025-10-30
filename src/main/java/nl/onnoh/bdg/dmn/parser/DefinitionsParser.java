@@ -33,9 +33,9 @@ public class DefinitionsParser {
         parsedDecision.setDocumentation(decision.getValue().getDescription());
         parsedDecision.setQuestion(decision.getValue().getQuestion());
         parsedDecision.setAllowedAnswers(decision.getValue().getAllowedAnswers());
-        if (decision.getValue().getExpression().getDeclaredType().getClass().equals(TDecisionTable.class)) {
+        if (decision.getValue().getExpression().getDeclaredType().equals(TDecisionTable.class)) {
             parsedDecision.setDecisionTable(parseDecisionTable((TDecisionTable) decision.getValue().getExpression().getValue()));
-        } else if (decision.getValue().getExpression().getDeclaredType().getClass().equals(TLiteralExpression.class)) {
+        } else if (decision.getValue().getExpression().getDeclaredType().equals(TLiteralExpression.class)) {
             parsedDecision.setLiteralExpression(parseLiteralExpression((TLiteralExpression) decision.getValue().getExpression().getValue()));
         }
         parsedDecision.setExtensions(parseExtensionElements(decision.getValue().getExtensionElements()));
