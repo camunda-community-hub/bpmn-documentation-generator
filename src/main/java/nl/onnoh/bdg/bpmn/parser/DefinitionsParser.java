@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static nl.onnoh.bdg.CamundaConstants.CAMUNDA_ATTRIBUTE_ID;
 import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ATTRIBUTE_CATEGORY_VALUE_REF;
 import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ATTRIBUTE_DIRECTION;
 import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ATTRIBUTE_SOURCE_REF;
@@ -40,7 +41,6 @@ import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ELEMENT_ASSOCIATION;
 import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ELEMENT_DOCUMENTATION;
 import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ELEMENT_GROUP;
 import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ELEMENT_TEXT_ANNOTATION;
-import static nl.onnoh.bdg.bpmn.BpmnModelConstants.CAMUNDA_ATTRIBUTE_ID;
 import static nl.onnoh.bdg.bpmn.parser.CommonParser.parseDocumentation;
 import static nl.onnoh.bdg.bpmn.parser.CommonParser.parseExtensionElements;
 import static nl.onnoh.bdg.bpmn.parser.FlowElementParser.parseFlowElements;

@@ -25,10 +25,4 @@ public class BpmnModelZeebeConstants {
     public static final String ZEEBE_MODELER_TEMPLATE_VERSION = "modelerTemplateVersion";
     public static final String ZEEBE_MODELER_TEMPLATE_ICON = "modelerTemplateIcon";
 
-    public static final String MODELER_EXECUTION_PLATFORM = "executionPlatform";
-    public static final String MODELER_EXECUTION_PLATFORM_VERSION = "executionPlatformVersion";
-
-    public static final String CAMUNDA_MODELER_EXAMPLE_OUTPUT_JSON = "camundaModeler:exampleOutputJson";
-    public static final String CAMUNDA_EXAMPLE_DATA = "exampleData";
-
 }
