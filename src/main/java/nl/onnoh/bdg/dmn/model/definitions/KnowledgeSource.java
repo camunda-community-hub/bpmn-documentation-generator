@@ -9,6 +9,6 @@ import java.util.List;
 public class KnowledgeSource {
     String id;
     String name;
-    String documentation;
+    String description;
     List<AuthorityRequirement> authorityRequirements;
 }

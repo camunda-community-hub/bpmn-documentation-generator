@@ -7,7 +7,6 @@ import java.util.List;
 @Data
 public class Rule {
     String id;
-    String name;
     String description;
     List<InputEntry> inputEntries;
     List<OutputEntry> outputEntries;

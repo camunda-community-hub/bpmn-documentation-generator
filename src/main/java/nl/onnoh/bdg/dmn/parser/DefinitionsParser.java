@@ -15,7 +15,12 @@ import nl.onnoh.bdg.dmn.model.definitions.Decision;
 import nl.onnoh.bdg.dmn.model.definitions.InputData;
 import nl.onnoh.bdg.dmn.model.definitions.KnowledgeSource;
 
+import static nl.onnoh.bdg.dmn.parser.CommonParser.parseEncapsulatedLogic;
 import static nl.onnoh.bdg.dmn.parser.CommonParser.parseExtensionElements;
+import static nl.onnoh.bdg.dmn.parser.CommonParser.parseVariable;
+import static nl.onnoh.bdg.dmn.parser.CommonParser.parsedAuthorityRequirements;
+import static nl.onnoh.bdg.dmn.parser.CommonParser.parsedInformationRequirements;
+import static nl.onnoh.bdg.dmn.parser.CommonParser.parsedKnowledgeRequirements;
 import static nl.onnoh.bdg.dmn.parser.DecisionParser.parseDecisionTable;
 import static nl.onnoh.bdg.dmn.parser.DecisionParser.parseLiteralExpression;
 
@@ -26,19 +31,21 @@ public class DefinitionsParser {
         ObjectFactory objectFactory = new ObjectFactory();
         JAXBElement<TDecision> decision = objectFactory.createDecision((TDecision) value);
         log.debug("Decision: {}", decision.getValue().getId());
-        log.info("Decision: {}", decision);
         Decision parsedDecision = new Decision();
         parsedDecision.setId(decision.getValue().getId());
         parsedDecision.setName(decision.getValue().getName());
-        parsedDecision.setDocumentation(decision.getValue().getDescription());
+        parsedDecision.setDescription(decision.getValue().getDescription());
         parsedDecision.setQuestion(decision.getValue().getQuestion());
         parsedDecision.setAllowedAnswers(decision.getValue().getAllowedAnswers());
-        if (decision.getValue().getExpression().getDeclaredType().equals(TDecisionTable.class)) {
+        if (decision.getValue().getExpression().getDeclaredType().equals(TDecisionTable.class))
             parsedDecision.setDecisionTable(parseDecisionTable((TDecisionTable) decision.getValue().getExpression().getValue()));
-        } else if (decision.getValue().getExpression().getDeclaredType().equals(TLiteralExpression.class)) {
+        if (decision.getValue().getExpression().getDeclaredType().equals(TLiteralExpression.class))
             parsedDecision.setLiteralExpression(parseLiteralExpression((TLiteralExpression) decision.getValue().getExpression().getValue()));
-        }
+        if (decision.getValue().getVariable() != null) parsedDecision.setVariable(parseVariable(decision.getValue().getVariable()));
         parsedDecision.setExtensions(parseExtensionElements(decision.getValue().getExtensionElements()));
+        parsedDecision.setAuthorityRequirements(parsedAuthorityRequirements(decision.getValue().getAuthorityRequirements()));
+        parsedDecision.setKnowledgeRequirements(parsedKnowledgeRequirements(decision.getValue().getKnowledgeRequirements()));
+        parsedDecision.setInformationRequirements(parsedInformationRequirements(decision.getValue().getInformationRequirements()));
         return parsedDecision;
     }
 
@@ -50,7 +57,7 @@ public class DefinitionsParser {
         InputData parsedInputData = new InputData();
         parsedInputData.setId(inputData.getValue().getId());
         parsedInputData.setName(inputData.getValue().getName());
-        parsedInputData.setDocumentation(inputData.getValue().getDescription());
+        parsedInputData.setDescription(inputData.getValue().getDescription());
         return parsedInputData;
     }
 
@@ -62,8 +69,8 @@ public class DefinitionsParser {
         KnowledgeSource parsedKnowledgeSource = new KnowledgeSource();
         parsedKnowledgeSource.setId(knowledgeSource.getValue().getId());
         parsedKnowledgeSource.setName(knowledgeSource.getValue().getName());
-        parsedKnowledgeSource.setDocumentation(knowledgeSource.getValue().getDescription());
-
+        parsedKnowledgeSource.setDescription(knowledgeSource.getValue().getDescription());
+        parsedKnowledgeSource.setAuthorityRequirements(parsedAuthorityRequirements(knowledgeSource.getValue().getAuthorityRequirements()));
         return parsedKnowledgeSource;
     }
 
@@ -75,8 +82,11 @@ public class DefinitionsParser {
         BusinessKnowledgeModel parsedBusinessKnowledgeModel = new BusinessKnowledgeModel();
         parsedBusinessKnowledgeModel.setId(businessKnowledgeModel.getValue().getId());
         parsedBusinessKnowledgeModel.setName(businessKnowledgeModel.getValue().getName());
-        parsedBusinessKnowledgeModel.setDocumentation(businessKnowledgeModel.getValue().getDescription());
-
+        parsedBusinessKnowledgeModel.setDescription(businessKnowledgeModel.getValue().getDescription());
+        parsedBusinessKnowledgeModel.setAuthorityRequirements(parsedAuthorityRequirements(businessKnowledgeModel.getValue().getAuthorityRequirements()));
+        parsedBusinessKnowledgeModel.setKnowledgeRequirements(parsedKnowledgeRequirements(businessKnowledgeModel.getValue().getKnowledgeRequirements()));
+        if (businessKnowledgeModel.getValue().getVariable() != null) parsedBusinessKnowledgeModel.setVariable(parseVariable(businessKnowledgeModel.getValue().getVariable()));
+        if (businessKnowledgeModel.getValue().getEncapsulatedLogic() != null) parsedBusinessKnowledgeModel.setEncapsulatedLogic(parseEncapsulatedLogic(businessKnowledgeModel.getValue().getEncapsulatedLogic()));
         return parsedBusinessKnowledgeModel;
     }
 

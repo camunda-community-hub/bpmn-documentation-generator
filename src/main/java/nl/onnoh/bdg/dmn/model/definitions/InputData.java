@@ -6,5 +6,5 @@ import lombok.Data;
 public class InputData {
     String id;
     String name;
-    String documentation;
+    String description;
 }
