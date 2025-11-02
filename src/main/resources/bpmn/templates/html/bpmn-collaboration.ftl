@@ -10,7 +10,7 @@
     <#if collaboration.documentation?has_content>
         <blockquote>${collaboration.documentation}</blockquote>
     <#else>
-        <@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=false/>
+        <@util.emptySection skip=skipEmptySections section="documentation" quote=true />
     </#if>
 
     <#if collaboration.extensions?has_content>
@@ -37,7 +37,7 @@
                 <#if participant.documentation?has_content>
                     <blockquote>${participant.documentation}</blockquote>
                 <#else>
-                    <@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=false/>
+                    <@util.emptySection skip=skipEmptySections section="documentation" quote=true />
                 </#if>
                 <p>Connected to process <a href="#${participant.processRef}"><strong>${participant.processName}</strong></a></p>
                 <#if participant.extensions?has_content>

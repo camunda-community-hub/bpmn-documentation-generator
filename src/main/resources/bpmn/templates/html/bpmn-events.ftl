@@ -32,7 +32,7 @@
             </#list>
         </#list>
     <#else>
-        <@util.emptySection skip=skipEmptySections section="events" quote=false markdown=false />
+        <@util.emptySection skip=skipEmptySections section="events" quote=false />
     </#if>
 </details>
 </#if>
@@ -67,7 +67,7 @@
                         <#if event.documentation?has_content>
                             <blockquote>${event.documentation}</blockquote>
                         <#else>
-                            <@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=false/>
+                            <@util.emptySection skip=skipEmptySections section="documentation" quote=true />
                         </#if>
                         </p>
                         <#if event.eventDefinitions?has_content>

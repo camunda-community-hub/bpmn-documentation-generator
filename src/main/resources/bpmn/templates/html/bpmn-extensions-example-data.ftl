@@ -14,7 +14,7 @@
             </#list>
         </pre>
     <#else>
-        <@util.emptySection skip=skipEmptySections section="example data" quote=false markdown=false/>
+        <@util.emptySection skip=skipEmptySections section="example data" quote=false />
     </#if>
 
 </#macro>

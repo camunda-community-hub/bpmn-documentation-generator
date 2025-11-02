@@ -12,6 +12,7 @@
 <#if bpmn.openSections>
     <#global openSections="open" />
 </#if>
+<#global markdown=false />
 
 
 <html lang="en">
@@ -78,7 +79,7 @@
 <#if bpmn.processes?has_content>
     <@processes.listProcesses bpmn.processes />
 <#else>
-    <@util.emptySection skip=skipEmptySections section="processes" quote=false markdown=false />
+    <@util.emptySection skip=skipEmptySections section="processes" quote=false />
 </#if>
 
 <@globals.listGlobals bpmn />

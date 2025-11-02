@@ -21,7 +21,7 @@
         </tbody>
     </table>
 <#else>
-    <@util.emptySection skip=skipEmptySections section="task definition" quote=false markdown=false/>
+    <@util.emptySection skip=skipEmptySections section="task definition" quote=false />
 </#if>
 
 </#macro>

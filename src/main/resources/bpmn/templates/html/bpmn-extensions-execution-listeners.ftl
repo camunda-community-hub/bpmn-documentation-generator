@@ -25,7 +25,7 @@
             </tbody>
         </table>
     <#else>
-        <@util.emptySection skip=skipEmptySections section="execution listeners defined" quote=false markdown=false/>
+        <@util.emptySection skip=skipEmptySections section="execution listeners defined" quote=false />
     </#if>
 
 </#macro>

@@ -33,7 +33,7 @@
             </#list>
         </#list>
     <#else>
-        <@util.emptySection skip=skipEmptySections section="tasks" quote=false markdown=false />
+        <@util.emptySection skip=skipEmptySections section="tasks" quote=false />
     </#if>
 </details>
 </#if>
@@ -68,7 +68,7 @@
                                 <#if task.documentation?has_content>
                                     <blockquote>${task.documentation}</blockquote>
                                 <#else>
-                                    <@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=false />
+                                    <@util.emptySection skip=skipEmptySections section="documentation" quote=true />
                                 </#if>
                             </p>
                             <p>

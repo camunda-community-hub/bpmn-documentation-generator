@@ -14,7 +14,7 @@
                 </ul>
             </#list>
         <#else>
-            <@util.emptySection skip=skipEmptySections section="global messages" quote=false markdown=false/>
+            <@util.emptySection skip=skipEmptySections section="global messages" quote=false />
         </#if>
 
         <h3>Errors</h3>
@@ -27,7 +27,7 @@
                 </ul>
             </#list>
         <#else>
-            <@util.emptySection skip=skipEmptySections section="global errors" quote=false markdown=false/>
+            <@util.emptySection skip=skipEmptySections section="global errors" quote=false />
         </#if>
 
         <h3>Signals</h3>
@@ -40,7 +40,7 @@
                 </ul>
             </#list>
         <#else>
-            <@util.emptySection skip=skipEmptySections section="global signals" quote=false markdown=false/>
+            <@util.emptySection skip=skipEmptySections section="global signals" quote=false />
         </#if>
 
         <h3>Escalations</h3>
@@ -53,7 +53,7 @@
                 </ul>
             </#list>
         <#else>
-            <@util.emptySection skip=skipEmptySections section="global escalations" quote=false markdown=false/>
+            <@util.emptySection skip=skipEmptySections section="global escalations" quote=false />
         </#if>
 
     </details> <!-- End of Globals -->

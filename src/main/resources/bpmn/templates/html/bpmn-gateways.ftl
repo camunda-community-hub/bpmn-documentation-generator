@@ -28,7 +28,7 @@
             </#list>
         </#list>
     <#else>
-        <@util.emptySection skip=skipEmptySections section="gateways" quote=false markdown=false />
+        <@util.emptySection skip=skipEmptySections section="gateways" quote=false />
     </#if>
 </details>
 
@@ -62,7 +62,7 @@
                         <#if gateway.documentation?has_content>
                             <blockquote>${gateway.documentation}</blockquote>
                         <#else>
-                            <@util.emptySection skip=skipEmptySections section="gateways" quote=false markdown=false/>
+                            <@util.emptySection skip=skipEmptySections section="gateways" quote=false />
                         </#if>
                         </p>
                         <p>

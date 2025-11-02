@@ -10,7 +10,7 @@
 | ${key?capitalize} | ${value} |
         </#list>
     <#else>
-<@util.emptySection skip=skipEmptySections section="task definition" quote=false markdown=true/>
+<@util.emptySection skip=skipEmptySections section="task definition" quote=false />
     </#if>
 
 </#macro>

@@ -20,7 +20,7 @@
                 </#list>
             </#list>
     <#else>
-<@util.emptySection skip=skipEmptySections section="outputs defined" quote=false markdown=true/>
+<@util.emptySection skip=skipEmptySections section="outputs defined" quote=false />
     </#if>
 
 </#macro>

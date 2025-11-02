@@ -15,7 +15,7 @@ ${value}
     </#list>
 ```
     <#else>
-<@util.emptySection skip=skipEmptySections section="example data" quote=false markdown=true/>
+<@util.emptySection skip=skipEmptySections section="example data" quote=false />
     </#if>
 
 </#macro>

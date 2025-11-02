@@ -17,7 +17,7 @@ ${variable}
     </#if>
 </#macro>
 
-<#macro emptySection skip section="content" quote=true markdown=false>
+<#macro emptySection skip section="content" quote=true>
     <#if !skip>
         <#if markdown>
             <#if quote>
@@ -33,4 +33,32 @@ No ${section}
             </#if>
         </#if>
     </#if>
+</#macro>
+
+<#macro showDocumentation documentation="Empty" section="documentation" quote=true>
+
+    <#if documentation?has_content>
+        <#if documentation != "Empty">
+            <#if markdown>
+                <#if quote>
+                    > ${documentation}
+                <#else>
+                    ${documentation}
+                </#if>
+            <#else>
+                <#if quote>
+                    <blockquote>
+                        ${documentation}
+                    </blockquote>
+                <#else>
+                    <p>
+                        ${documentation}
+                    </p>
+                </#if>
+            </#if>
+        <#else>
+            <@emptySection skip=skipEmptySections section=section quote=quote />
+        </#if>
+    </#if>
+
 </#macro>
