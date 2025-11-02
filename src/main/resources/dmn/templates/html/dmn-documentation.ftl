@@ -13,7 +13,7 @@
 <#if dmn.openSections>
     <#global openSections="open" />
 </#if>
-
+<#global markdown=false />
 
 <html lang="en">
 <head>
@@ -71,25 +71,28 @@
     </tr>
     </tbody>
 </table>
+
+    <@util.showDocumentation dmn.description />
+
     <#if dmn.decisions?has_content>
         <@decisions.listDecisions dmn.decisions />
     <#else>
-        <@util.emptySection skip=skipEmptySections section="decisions" quote=false markdown=false />
+        <@util.emptySection skip=skipEmptySections section="decisions" quote=false />
     </#if>
     <#if dmn.businessKnowledgeModels?has_content>
         <@businessknowledgemodels.listBusinessKnowledgeModels dmn.businessKnowledgeModels />
     <#else>
-        <@util.emptySection skip=skipEmptySections section="business knowledge models" quote=false markdown=false />
+        <@util.emptySection skip=skipEmptySections section="business knowledge models" quote=false />
     </#if>
     <#if dmn.inputData?has_content>
         <@inputdata.listInputData dmn.inputData />
     <#else>
-        <@util.emptySection skip=skipEmptySections section="input data" quote=false markdown=false />
+        <@util.emptySection skip=skipEmptySections section="input data" quote=false />
     </#if>
     <#if dmn.knowledgeSources?has_content>
         <@knowledgesources.listKnowledgeSources dmn.knowledgeSources />
     <#else>
-        <@util.emptySection skip=skipEmptySections section="knowledge sources" quote=false markdown=false />
+        <@util.emptySection skip=skipEmptySections section="knowledge sources" quote=false />
     </#if>
 </article>
 </body>

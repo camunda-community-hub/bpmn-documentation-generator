@@ -1,5 +1,7 @@
-<#import "../dmn-template-util.ftl" as util/>
-
+<#import "../dmn-template-util.ftl" as util />
+<#import "dmn-authority-requirements.ftl" as authorityRequirements />
+<#import "dmn-knowledge-requirements.ftl" as knowledgeRequirements />
+<#import "dmn-business-knowledge-model.ftl" as businessKnowledgeModelTable />
 <#macro listBusinessKnowledgeModels businessKnowledgeModels>
 
     <details ${openSections}>
@@ -15,11 +17,9 @@
             <details ${openSections}>
                 <summary><h3 id="${businessKnowledgeModel.id}"><@util.emptyOrNull businessKnowledgeModel.name "business knowledge model"/></h3></summary>
                 <sup>(id: ${businessKnowledgeModel.id})</sup><br/><br/>
-                <#if businessKnowledgeModel.documentation?has_content>
-                    <blockquote>${businessKnowledgeModel.documentation}</blockquote>
-                <#else>
-                    <@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=false />
-                </#if>
+                <@businessKnowledgeModelTable.showBusinessKnowledgeModel businessKnowledgeModel />
+                <@authorityRequirements.listAuthorityRequirements businessKnowledgeModel.authorityRequirements />
+                <@knowledgeRequirements.listKnowledgeRequirements businessKnowledgeModel.knowledgeRequirements />
             </details>
         </#list>
 

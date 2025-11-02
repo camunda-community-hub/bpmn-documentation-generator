@@ -1,4 +1,5 @@
 <#import "../dmn-template-util.ftl" as util/>
+<#import "dmn-authority-requirements.ftl" as authorityRequirements />
 
 <#macro listKnowledgeSources knowledgeSources>
 
@@ -15,11 +16,8 @@
             <details ${openSections}>
                 <summary><h3 id="${knowledgeSource.id}"><@util.emptyOrNull knowledgeSource.name "knowledge source"/></h3></summary>
                 <sup>(id: ${knowledgeSource.id})</sup><br/><br/>
-                <#if knowledgeSource.documentation?has_content>
-                    <blockquote>${knowledgeSource.documentation}</blockquote>
-                <#else>
-                    <@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=false />
-                </#if>
+                <@util.showDocumentation knowledgeSource.description />
+                <@authorityRequirements.listAuthorityRequirements knowledgeSource.authorityRequirements />
             </details>
         </#list>
 

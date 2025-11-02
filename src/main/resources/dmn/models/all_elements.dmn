@@ -12,6 +12,9 @@
       <description>Bla Information Requirement</description>
       <requiredInput href="#InputData_1omk9ef" />
     </informationRequirement>
+    <informationRequirement id="InformationRequirement_0o77mqd">
+      <requiredDecision href="#Decision_1x42iw6" />
+    </informationRequirement>
     <knowledgeRequirement id="KnowledgeRequirement_1j8h01a">
       <description>Bla3 Knowledge Requirement</description>
       <requiredKnowledge href="#BusinessKnowledgeModel_0u1cd8y" />
@@ -63,6 +66,20 @@
           <text></text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0pp8ntk">
+        <inputEntry id="UnaryTests_0kq4qa3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0s1j26b">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_068ae1g">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05yj2ct">
+          <text></text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <inputData id="InputData_1omk9ef" name="Input Data 1">
@@ -81,9 +98,13 @@
     <authorityRequirement id="AuthorityRequirement_1uqob16">
       <requiredAuthority href="#KnowledgeSource_0fck8lz" />
     </authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_1rwc5rz">
+      <requiredDecision href="#Decision_1xh7jx6" />
+    </authorityRequirement>
   </knowledgeSource>
-  <businessKnowledgeModel id="BusinessKnowledgeModel_0u1cd8y" name="Business Knowledge Model 1">
-    <variable id="InformationItem_0irn5qe" name="Business Knowledge Model 1" typeRef="string" />
+  <businessKnowledgeModel id="BusinessKnowledgeModel_0u1cd8y" name="Business Knowledge Model">
+    <description>Business Knowledge Model Description</description>
+    <variable id="InformationItem_0irn5qe" name="Business Knowledge Model" typeRef="string" />
     <encapsulatedLogic id="FunctionDefinition_0dyl29w">
       <formalParameter name="param1" typeRef="string" />
       <formalParameter name="param2" typeRef="number" />
@@ -92,56 +113,80 @@
         <text>="Hello " + param1</text>
       </literalExpression>
     </encapsulatedLogic>
+    <knowledgeRequirement id="KnowledgeRequirement_0fi6h0m">
+      <requiredKnowledge href="#BusinessKnowledgeModel_132qgli" />
+    </knowledgeRequirement>
     <authorityRequirement id="AuthorityRequirement_0nprifx">
       <description>Bla5 Authority Requirement</description>
       <requiredAuthority href="#KnowledgeSource_158l8e0" />
     </authorityRequirement>
   </businessKnowledgeModel>
-  <knowledgeSource id="KnowledgeSource_0fck8lz" />
+  <knowledgeSource id="KnowledgeSource_0fck8lz" name="Empty Knowledge Source" />
   <decision id="Decision_1x42iw6" name="Some literal decision">
     <variable id="InformationItem_10za0lz" name="Some literal decision" typeRef="string" />
+    <informationRequirement id="InformationRequirement_15td0q4">
+      <requiredInput href="#InputData_1omk9ef" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1x02885">
+      <requiredDecision href="#Decision_1xh7jx6" />
+    </informationRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_0juwkej">
+      <requiredKnowledge href="#BusinessKnowledgeModel_0u1cd8y" />
+    </knowledgeRequirement>
+    <authorityRequirement id="AuthorityRequirement_0ys7995">
+      <requiredAuthority href="#KnowledgeSource_158l8e0" />
+    </authorityRequirement>
     <literalExpression id="LiteralExpression_0viosih">
       <text>="Hello week " + week of year(now())</text>
     </literalExpression>
   </decision>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_132qgli" name="Empty Business Knowledge Model">
+    <variable id="InformationItem_0fygaee" name="Empty Business Knowledge Model" />
+    <encapsulatedLogic id="FunctionDefinition_1nh2pz8">
+      <literalExpression id="LiteralExpression_1omahvt" />
+    </encapsulatedLogic>
+    <knowledgeRequirement id="KnowledgeRequirement_1nsrl7g">
+      <requiredKnowledge href="#BusinessKnowledgeModel_0u1cd8y" />
+    </knowledgeRequirement>
+  </businessKnowledgeModel>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="Decision_1xh7jx6">
         <dc:Bounds height="80" width="180" x="160" y="100" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_1oo1mww" dmnElementRef="InputData_1omk9ef">
-        <dc:Bounds height="45" width="125" x="227" y="228" />
+        <dc:Bounds height="45" width="125" x="447" y="477" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_0l1nne2" dmnElementRef="KnowledgeSource_158l8e0">
         <dc:Bounds height="63" width="100" x="160" y="378" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_0fvtmqx" dmnElementRef="KnowledgeRequirement_1j8h01a">
-        <di:waypoint x="452" y="228" />
+        <di:waypoint x="661" y="387" />
         <di:waypoint x="340" y="140" />
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="DMNEdge_05cmos5" dmnElementRef="InformationRequirement_1jr6ujx">
-        <di:waypoint x="290" y="228" />
+        <di:waypoint x="510" y="477" />
         <di:waypoint x="250" y="200" />
         <di:waypoint x="250" y="180" />
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="DMNEdge_1sr1mt2" dmnElementRef="AuthorityRequirement_0nprifx">
         <di:waypoint x="260" y="381" />
-        <di:waypoint x="448" y="274" />
+        <di:waypoint x="622" y="428" />
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="DMNEdge_1fauem2" dmnElementRef="AuthorityRequirement_0qxlcwe">
         <di:waypoint x="205" y="378" />
         <di:waypoint x="176" y="180" />
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="DMNEdge_0fjwzru" dmnElementRef="AuthorityRequirement_1huy3gb">
-        <di:waypoint x="295" y="273" />
-        <di:waypoint x="230" y="378" />
+        <di:waypoint x="447" y="488" />
+        <di:waypoint x="260" y="393" />
       </dmndi:DMNEdge>
       <dmndi:DMNEdge id="DMNEdge_0nzrc0n" dmnElementRef="AuthorityRequirement_10vpdna">
-        <di:waypoint x="276" y="273" />
-        <di:waypoint x="211" y="378" />
+        <di:waypoint x="447" y="497" />
+        <di:waypoint x="260" y="403" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="DMNShape_0q0uhy7" dmnElementRef="BusinessKnowledgeModel_0u1cd8y">
-        <dc:Bounds height="46" width="135" x="413" y="228" />
+        <dc:Bounds height="46" width="135" x="622" y="387" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_033git9" dmnElementRef="KnowledgeSource_0fck8lz">
         <dc:Bounds height="63" width="100" x="160" y="639" />
@@ -151,7 +196,45 @@
         <di:waypoint x="210" y="441" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="DMNShape_05ebsnf" dmnElementRef="Decision_1x42iw6">
-        <dc:Bounds height="80" width="180" x="440" y="70" />
+        <dc:Bounds height="80" width="180" x="440" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1tyxr1h" dmnElementRef="AuthorityRequirement_1rwc5rz">
+        <di:waypoint x="237" y="180" />
+        <di:waypoint x="171" y="378" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_02tm34q" dmnElementRef="KnowledgeRequirement_0juwkej">
+        <di:waypoint x="675" y="387" />
+        <di:waypoint x="543" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0qixioe" dmnElementRef="InformationRequirement_15td0q4">
+        <di:waypoint x="510" y="477" />
+        <di:waypoint x="530" y="200" />
+        <di:waypoint x="530" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_18jlpje" dmnElementRef="AuthorityRequirement_0ys7995">
+        <di:waypoint x="260" y="379" />
+        <di:waypoint x="580" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_09bietl" dmnElementRef="InformationRequirement_1x02885">
+        <di:waypoint x="340" y="140" />
+        <di:waypoint x="420" y="140" />
+        <di:waypoint x="440" y="140" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0jbswhf" dmnElementRef="InformationRequirement_0o77mqd">
+        <di:waypoint x="440" y="140" />
+        <di:waypoint x="360" y="140" />
+        <di:waypoint x="340" y="140" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0wj2lfm" dmnElementRef="KnowledgeRequirement_1nsrl7g">
+        <di:waypoint x="689" y="433" />
+        <di:waypoint x="681" y="617" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0j9s89p" dmnElementRef="KnowledgeRequirement_0fi6h0m">
+        <di:waypoint x="660" y="617" />
+        <di:waypoint x="660" y="433" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0rmjlji" dmnElementRef="BusinessKnowledgeModel_132qgli">
+        <dc:Bounds height="46" width="135" x="592" y="617" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

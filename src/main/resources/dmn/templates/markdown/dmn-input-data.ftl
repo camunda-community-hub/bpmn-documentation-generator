@@ -12,11 +12,7 @@
     <#list inputdata as input>
     <#--            <details ${openSections}>-->
 ### <@util.emptyOrNull input.name "input data"/><sup>(id: ${input.id})</sup>
-        <#if input.documentation?has_content>
-> ${input.documentation}
-        <#else>
-<@util.emptySection skip=skipEmptySections section="documentation" quote=true markdown=true />
-        </#if>
+<@util.showDocumentation input.description />
     <#--            </details>-->
     </#list>
 <#--    </details> -->
