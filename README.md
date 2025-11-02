@@ -1,4 +1,4 @@
-# BPMN Documentation Generator
+# Model Documentation Generator
 
 [![](https://img.shields.io/badge/Community%20Extension-An%20open%20source%20community%20maintained%20project-FF4700)](https://github.com/camunda-community-hub/community)
 [![](https://img.shields.io/badge/Lifecycle-Stable-brightgreen)](https://github.com/Camunda-Community-Hub/community/blob/main/extension-lifecycle.md#stable-)
@@ -8,13 +8,13 @@
 
 Generate human-friendly documentation (HTML or Markdown) from a BPMN 2.0/DMN 1.3 diagram file.
 
-This project parses a BPMN file (including Camunda/Zeebe extensions) and produces a structured document with:
+This project parses a BPMN or DMN file (including Camunda/Zeebe extensions) and produces a structured document with:
 - Overview information (definitions id, exporter, execution platform versions)
 - Collaboration details and participants
 - Processes, lanes, tasks, gateways, and events
 - Global artifacts (messages, signals, escalations, errors, categories)
 
-The output is rendered via FreeMarker templates and written next to your input BPMN file. If an SVG with the same base name exists, the document will embed it for visual context.
+The output is rendered via FreeMarker templates and written next to your input model file. If an SVG with the same base name exists, the document will embed it for visual context.
 
 XML schema definitions for both BPMN and DMN are maintained by the Objects Management Group Standards Development Organization (OMG-SDO for short) and can be found here : https://www.omg.org/spec/ 
 
@@ -30,7 +30,7 @@ XML schema definitions for both BPMN and DMN are maintained by the Objects Manag
 - Template-based rendering (easy to customize)
 
 ## Requirements
-- Java 23 (JDK) installed and available on your PATH
+- Java 21 (JDK) installed and available on your PATH
 - Maven 3.9+
 
 Note: The POM targets Java 23. If you must use an older JDK, you can lower the java.version and compiler release in `pom.xml` accordingly, but this project is configured and tested for 23.
