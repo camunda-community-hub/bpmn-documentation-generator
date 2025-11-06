@@ -9,6 +9,7 @@ public final class DmnModelConstants {
     public static final String DMN14_NS = "https://www.omg.org/spec/DMN/20211108/MODEL/";
     public static final String DMN15_NS = "https://www.omg.org/spec/DMN/20230324/MODEL/";
     public static final String LATEST_DMN_NS = DMN13_NS;
+    public static final String DMN_TARGET_NS = "http://camunda.org/schema/1.0/dmn";
 
     /**
      * The DMN 1.1 namespace URL release with Camunda 7.4.0

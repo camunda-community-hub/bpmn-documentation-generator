@@ -31,7 +31,7 @@ public final class BpmnModelConstants {
 
     /** The BPMN 2.0 namespace */
     public static final String BPMN20_NS = "http://www.omg.org/spec/BPMN/20100524/MODEL";
-
+    public static final String BPMN_TARGET_NS = "http://bpmn.io/schema/bpmn";
     /** The BPMNDI namespace */
     public static final String BPMNDI_NS = "http://www.omg.org/spec/BPMN/20100524/DI";
 

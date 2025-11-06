@@ -7,11 +7,11 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.HelpCommand;
 import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.Callable;
 
 @Slf4j
 @Command(name = "generate", description = "Generate documentation for given BPMN or DMN file."
@@ -22,11 +22,10 @@ import java.nio.file.Paths;
         , DmnCommand.class
         , HelpCommand.class
     })
-public class GenerateDocumentation implements Runnable {
+public class GenerateDocumentation implements Callable<Integer> {
 
-    @Parameters(index = "0", description = "The BPMN/DMN file to document.")
+//    @CommandLine.Parameters(index = "0", description = "The BPMN/DMN file to document.")
     public String modelFile;
-
 //    @Option(names = { "-h", "--help", "-?", "-help"}, usageHelp = true, description = "Display this help and exit")
 //    boolean help;
 
@@ -39,25 +38,26 @@ public class GenerateDocumentation implements Runnable {
     @Option(names = {"-o", "--open-sections"}, defaultValue = "false", description = "Open all sections (default: ${DEFAULT-VALUE}).")
     public boolean openSections;
 
-    public void run() {
+    @Override
+    public Integer call() {
         System.out.println("#GenerateDocumentation.call");
         if (!checkFile(modelFile)) {
-            System.exit(1);
+            return 1;
         }
+        return 0;
     }
 
     public static void main(String... args) {
-        GenerateDocumentation app = new GenerateDocumentation();
-        int exitCode = new CommandLine(app)
-                .setExecutionStrategy(new CommandLine.RunAll())
-                .execute(args);
-
-        System.out.println("#GenerateDocumentation.main after. open sections: " + (app.openSections));
+        System.out.println("#GenerateDocumentation.main");
+        int exitCode = new CommandLine(new GenerateDocumentation()).execute(args);
         System.exit(exitCode);
-
     }
 
-    private static boolean checkFile(String bpmnFile) {
+    public static boolean checkFile(String bpmnFile) {
+        if (bpmnFile == null || bpmnFile.isEmpty()) {
+            log.error("No file specified.");
+            return false;
+        }
         Path filePath = Paths.get(bpmnFile);
         if (!Files.exists(filePath)) {
             log.error("File not found: {}", bpmnFile);

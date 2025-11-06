@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import static nl.onnoh.bdg.CamundaConstants.MODELER_EXECUTION_PLATFORM;
 import static nl.onnoh.bdg.CamundaConstants.MODELER_EXECUTION_PLATFORM_VERSION;
@@ -25,6 +26,7 @@ import static nl.onnoh.bdg.dmn.DmnModelConstants.DMN_ELEMENT_BUSINESS_KNOWLEDGE_
 import static nl.onnoh.bdg.dmn.DmnModelConstants.DMN_ELEMENT_DECISION;
 import static nl.onnoh.bdg.dmn.DmnModelConstants.DMN_ELEMENT_INPUT_DATA;
 import static nl.onnoh.bdg.dmn.DmnModelConstants.DMN_ELEMENT_KNOWLEDGE_SOURCE;
+import static nl.onnoh.bdg.dmn.DmnModelConstants.DMN_TARGET_NS;
 import static nl.onnoh.bdg.dmn.parser.DefinitionsParser.parseBusinessKnowledgeModel;
 import static nl.onnoh.bdg.dmn.parser.DefinitionsParser.parseDecision;
 import static nl.onnoh.bdg.dmn.parser.DefinitionsParser.parseInputData;
@@ -38,20 +40,29 @@ import static nl.onnoh.bdg.template.TemplateService.processTemplate;
         , description = "Handling DMN files"
 )
 @Slf4j
-public class DmnCommand implements Runnable {
+public class DmnCommand implements Callable {
+
+    @CommandLine.Parameters(index = "0", description = "The DMN file to document.")
+    private String modelFile;
 
     @CommandLine.ParentCommand // picocli injects the parent instance
     private GenerateDocumentation parentCommand;
 
-    public void run() {
-        DmnDocumentation dmnDocumentation = buildTemplateVariables(parentCommand.modelFile);
-        if (dmnDocumentation == null) System.exit(1);
+    @Override
+    public Integer call() {
+        if (!GenerateDocumentation.checkFile(modelFile)) return 1;
+        DmnDocumentation dmnDocumentation = buildTemplateVariables(modelFile);
+        if (dmnDocumentation == null) {
+            log.error("Invalid DMN file: {}", modelFile);
+            return 1;
+        }
         dmnDocumentation.setSuppressEmptySections(parentCommand.suppressEmptySections);
         dmnDocumentation.setOpenSections(parentCommand.openSections);
 
-        generateOutput(parentCommand.modelFile, dmnDocumentation, parentCommand.outputFormat);
+        generateOutput(modelFile, dmnDocumentation, parentCommand.outputFormat);
         log.info("Generated DMN documentation.");
         log.debug("Data object : {}", dmnDocumentation);
+        return 0;
     }
 
     private static void generateOutput(String dmnFile, DmnDocumentation dmnDocumentation, String outputType) {
@@ -75,6 +86,7 @@ public class DmnCommand implements Runnable {
             jaxbContext = JAXBContext.newInstance(Definitions.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             Definitions definitions = (Definitions) jaxbUnmarshaller.unmarshal(new File(dmnFile));
+            if (definitions == null || DMN_TARGET_NS.equalsIgnoreCase(definitions.getNamespace())) return null;
             dmnDocumentation.setId(definitions.getId());
             dmnDocumentation.setFilePath(dmnFile);
             dmnDocumentation.setFileName(new File(dmnFile).getName());
@@ -118,7 +130,7 @@ public class DmnCommand implements Runnable {
             dmnDocumentation.setKnowledgeSources(knowledgeSources);
 
         } catch (JAXBException e) {
-            log.error("JAXB exception {}", e.getMessage());
+            log.debug("JAXB exception {}", e.getMessage());
             return null;
         }
         return dmnDocumentation;

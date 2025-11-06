@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import static nl.onnoh.bdg.CamundaConstants.MODELER_EXECUTION_PLATFORM;
 import static nl.onnoh.bdg.CamundaConstants.MODELER_EXECUTION_PLATFORM_VERSION;
@@ -30,6 +31,7 @@ import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ELEMENT_ESCALATION;
 import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ELEMENT_MESSAGE;
 import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ELEMENT_PROCESS;
 import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_ELEMENT_SIGNAL;
+import static nl.onnoh.bdg.bpmn.BpmnModelConstants.BPMN_TARGET_NS;
 import static nl.onnoh.bdg.bpmn.parser.DefinitionsParser.parseCategory;
 import static nl.onnoh.bdg.bpmn.parser.DefinitionsParser.parseCollaboration;
 import static nl.onnoh.bdg.bpmn.parser.DefinitionsParser.parseError;
@@ -46,20 +48,30 @@ import static nl.onnoh.bdg.template.TemplateService.processTemplate;
         , description = "Handling BPMN files"
 )
 @Slf4j
-public class BpmnCommand implements Runnable {
+public class BpmnCommand implements Callable {
+
+    @CommandLine.Parameters(index = "0", description = "The BPMN file to document.")
+    private String modelFile;
 
     @CommandLine.ParentCommand // picocli injects the parent instance
     private GenerateDocumentation parentCommand;
 
-    public void run() {
-        BpmnDocumentation bpmnDocumentation = buildTemplateVariables(parentCommand.modelFile);
-        if (bpmnDocumentation == null) System.exit(1);
+    @Override
+    public Integer call() {
+        if (!GenerateDocumentation.checkFile(modelFile)) return 1;
+        BpmnDocumentation bpmnDocumentation = buildTemplateVariables(modelFile);
+        if (bpmnDocumentation == null) {
+            log.error("Invalid BPMN file: {}", modelFile);
+            return 1;
+        }
         bpmnDocumentation.setSuppressEmptySections(parentCommand.suppressEmptySections);
         bpmnDocumentation.setOpenSections(parentCommand.openSections);
 
-        generateOutput(parentCommand.modelFile, bpmnDocumentation, parentCommand.outputFormat);
+        generateOutput(modelFile, bpmnDocumentation, parentCommand.outputFormat);
         log.info("Generated BPMN documentation.");
         log.debug("Data object : {}", bpmnDocumentation);
+
+        return 0;
     }
 
     private static void generateOutput(String bpmnFile, BpmnDocumentation bpmnDocumentation, String outputType) {
@@ -85,7 +97,7 @@ public class BpmnCommand implements Runnable {
             jaxbContext = JAXBContext.newInstance(Definitions.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             Definitions definitions = (Definitions) jaxbUnmarshaller.unmarshal(new File(bpmnFile));
-
+            if (definitions == null || BPMN_TARGET_NS.equalsIgnoreCase(definitions.getTargetNamespace())) return null;
             bpmnDocumentation.setId(definitions.getId());
             bpmnDocumentation.setFilePath(bpmnFile);
             bpmnDocumentation.setFileName(new File(bpmnFile).getName());
@@ -140,7 +152,7 @@ public class BpmnCommand implements Runnable {
             updateParticipantInformation(bpmnDocumentation);
 
         } catch (JAXBException e) {
-            log.error("JAXB exception {}", e.getMessage());
+            log.debug("JAXB exception {}", e.getMessage());
             return null;
         }
         return bpmnDocumentation;
