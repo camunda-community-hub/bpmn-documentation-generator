@@ -46,11 +46,11 @@ You can run the CLI using the Maven Exec plugin without changing the POM by spec
 
 ```
 mvn -q org.codehaus.mojo:exec-maven-plugin:3.5.0:java \
-  -Dexec.mainClass=nl.onnoh.bdg.GenerateDocumentation \
+  -Dexec.mainClass=nl.onnoh.mdg.GenerateDocumentation \
   -Dexec.args="<path/to/your.bpmn> [options]"
 ```
 
-Alternatively, if you prefer running the compiled classes directly, ensure dependencies are on the classpath (e.g., via a fat jar or your IDE). The canonical entrypoint is `nl.onnoh.bdg.GenerateDocumentation`.
+Alternatively, if you prefer running the compiled classes directly, ensure dependencies are on the classpath (e.g., via a fat jar or your IDE). The canonical entrypoint is `nl.onnoh.mdg.GenerateDocumentation`.
 
 ### Command
 ```
@@ -82,17 +82,17 @@ Assuming you want to document the sample diagram included in this repo:
 ```
 # HTML (default)
 mvn -q org.codehaus.mojo:exec-maven-plugin:3.5.0:java \
-  -Dexec.mainClass=nl.onnoh.bdg.GenerateDocumentation \
+  -Dexec.mainClass=nl.onnoh.mdg.GenerateDocumentation \
   -Dexec.args="src/main/resources/bpmn/all_elements.bpmn"
 
 # Markdown
 mvn -q org.codehaus.mojo:exec-maven-plugin:3.5.0:java \
-  -Dexec.mainClass=nl.onnoh.bdg.GenerateDocumentation \
+  -Dexec.mainClass=nl.onnoh.mdg.GenerateDocumentation \
   -Dexec.args="src/main/resources/bpmn/all_elements.bpmn --output-format markdown"
 
 # Suppress empty sections and open sections (HTML only effect)
 mvn -q org.codehaus.mojo:exec-maven-plugin:3.5.0:java \
-  -Dexec.mainClass=nl.onnoh.bdg.GenerateDocumentation \
+  -Dexec.mainClass=nl.onnoh.mdg.GenerateDocumentation \
   -Dexec.args="src/main/resources/bpmn/all_elements.bpmn -s -o"
 ```
 
@@ -140,7 +140,7 @@ When you rebuild and re-run, your changes will reflect in the generated docs.
 ## Development
 - Open the project in your IDE with Maven support.
 - Generated JAXB sources are placed under `target/generated-sources/xjc`.
-- Main class: `nl.onnoh.bdg.GenerateDocumentation`.
+- Main class: `nl.onnoh.mdg.GenerateDocumentation`.
 - Logging: SLF4J Simple; set `-Dorg.slf4j.simpleLogger.defaultLogLevel=debug` to see verbose logs when running.
 
 ## License

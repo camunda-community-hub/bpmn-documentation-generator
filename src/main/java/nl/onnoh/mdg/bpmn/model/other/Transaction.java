@@ -1,0 +1,11 @@
+package nl.onnoh.mdg.bpmn.model.other;
+
+import nl.onnoh.mdg.bpmn.TFlowElement;
+import nl.onnoh.mdg.bpmn.model.common.FlowElement;
+
+
+public class Transaction extends FlowElement {
+    public Transaction(String processId, String flowType, TFlowElement flowElement) {
+        super(processId, flowType, flowElement);
+    }
+}
