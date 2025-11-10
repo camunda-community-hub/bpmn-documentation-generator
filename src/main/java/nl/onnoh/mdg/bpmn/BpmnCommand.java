@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
+import static nl.onnoh.mdg.CamundaConstants.CAMUNDA_ATTRIBUTE_RELATION_ID;
 import static nl.onnoh.mdg.CamundaConstants.MODELER_EXECUTION_PLATFORM;
 import static nl.onnoh.mdg.CamundaConstants.MODELER_EXECUTION_PLATFORM_VERSION;
 import static nl.onnoh.mdg.bpmn.BpmnModelConstants.BPMN_ELEMENT_CATEGORY;
@@ -110,6 +111,9 @@ public class BpmnCommand implements Callable {
                         break;
                     case MODELER_EXECUTION_PLATFORM_VERSION:
                         bpmnDocumentation.setExecutionPlatformVersion(value);
+                        break;
+                    case CAMUNDA_ATTRIBUTE_RELATION_ID:
+                        bpmnDocumentation.setRelationId(value);
                         break;
                     default:
                         log.warn("Unknown definition attribute: {}", key.getLocalPart());

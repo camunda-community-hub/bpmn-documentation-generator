@@ -59,6 +59,13 @@
         <td>${bpmn.id}</td>
         <td>n/a</td>
     </tr>
+    <#if bpmn.relationId?has_content>
+        <tr>
+            <td>Relation ID</td>
+            <td>${bpmn.relationId}</td>
+            <td>n/a</td>
+        </tr>
+    </#if>
     <tr>
         <td>Exporter</td>
         <td>${bpmn.exporter}</td>
