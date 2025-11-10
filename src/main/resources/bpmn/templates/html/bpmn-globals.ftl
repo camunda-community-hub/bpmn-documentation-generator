@@ -22,7 +22,7 @@
             <#list bpmn.errors>
                 <ul>
                     <#items as error>
-                        <li><@util.emptyOrNull error.name "error" /> <sup id="${error.id}">(${error.id})</sup> - Code ${error.errorCode}</li>
+                        <li><@util.emptyOrNull error.name "error" /> <sup id="${error.id}">(${error.id})</sup> - <@util.emptyOrNull error.errorCode "error code" /></li>
                     </#items>
                 </ul>
             </#list>
@@ -48,7 +48,7 @@
             <#list bpmn.escalations>
                 <ul>
                     <#items as escalation>
-                        <li><@util.emptyOrNull escalation.name "escalation" /> <sup id="${escalation.id}">(${escalation.id})</sup> - Code ${escalation.escalationCode}</li>
+                        <li><@util.emptyOrNull escalation.name "escalation" /> <sup id="${escalation.id}">(${escalation.id})</sup> - <@util.emptyOrNull escalation.escalationCode "escalation code" /></li>
                     </#items>
                 </ul>
             </#list>

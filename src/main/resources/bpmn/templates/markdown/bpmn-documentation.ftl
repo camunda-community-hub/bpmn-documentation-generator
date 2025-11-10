@@ -4,6 +4,7 @@
 <#import "bpmn-tasks.ftl" as tasks/>
 <#import "bpmn-events.ftl" as events/>
 <#import "bpmn-gateways.ftl" as gateways/>
+<#import "bpmn-globals.ftl" as globals />
 
 <#assign aDateTime = .now/>
 <#assign aDate = aDateTime?date/>
@@ -58,48 +59,4 @@ Generated on ${aDate} at ${aTime}
         <@util.emptySection skip=skipEmptySections section="processes" quote=false />
     </#if>
 
-## Globals
-
-### Messages
-    <#if bpmn.messages?has_content>
-        <#list bpmn.messages>
-                <#items as message>
-* <@util.emptyOrNull message.name "message" /> <sup>(${message.id})</sup>
-                </#items>
-        </#list>
-    <#else>
-No global messages.
-    </#if>
-
-### Errors
-    <#if bpmn.errors?has_content>
-        <#list bpmn.errors>
-            <#items as error>
-* <@util.emptyOrNull error.name "error" /> <sup>(${error.id})</sup> - Code ${error.errorCode}
-            </#items>
-        </#list>
-    <#else>
-No global errors.
-    </#if>
-
-### Signals
-    <#if bpmn.signals?has_content>
-        <#list bpmn.signals>
-            <#items as signal>
-* <@util.emptyOrNull signal.name "signal" /> <sup>(${signal.id})</sup>
-            </#items>
-        </#list>
-    <#else>
-No global signals.
-    </#if>
-
-### Escalations
-    <#if bpmn.escalations?has_content>
-        <#list bpmn.escalations>
-            <#items as escalation>
-* <@util.emptyOrNull escalation.name "escalation" /> <sup>(${escalation.id})</sup> - Code ${escalation.escalationCode}
-            </#items>
-        </#list>
-    <#else>
-No global escalations.
-    </#if>
+<@globals.listGlobals bpmn />
