@@ -18,8 +18,7 @@
         <imageName>mdg</imageName>
         <mainClass>nl.onnoh.mdg.GenerateDocumentation</mainClass>
         <!-- Code Dependencies -->
-<!--        <freemarker.version>2.3.34</freemarker.version>-->
-        <freemarker.version></freemarker.version>
+        <freemarker.version>2.3.34</freemarker.version>
         <jaxb-api.version>4.0.4</jaxb-api.version>
         <jaxb-impl.version>4.0.6</jaxb-impl.version>
         <lombok.version>1.18.42</lombok.version>
@@ -43,16 +42,16 @@
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.freemarker</groupId>-->
-<!--            <artifactId>freemarker</artifactId>-->
-<!--            <version>${freemarker.version}</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.freemarker</groupId>
-            <artifactId>freemarker-gae</artifactId>
-            <version>2.3.34</version>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.freemarker</groupId>-->
+<!--            <artifactId>freemarker-gae</artifactId>-->
+<!--            <version>2.3.34</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
@@ -93,190 +92,148 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven-jar-plugin.version}</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>${mainClass}</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-shade-plugin</artifactId>-->
-<!--                <version>${maven-shade-plugin.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>shade</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <createDependencyReducedPom>false</createDependencyReducedPom>-->
-<!--                            <transformers>-->
-<!--                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">-->
-<!--                                    <mainClass>${mainClass}</mainClass>-->
-<!--                                </transformer>-->
-<!--                            </transformers>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                        <path>
-                            <groupId>info.picocli</groupId>
-                            <artifactId>picocli-codegen</artifactId>
-                            <version>${pico-cli.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                    <compilerArgs>
-                        <arg>-Aproject=${project.groupId}/${project.artifactId}</arg>
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-                <version>${maven-native-plugin.version}</version>
-                <extensions>true</extensions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.graalvm.buildtools</groupId>
-                        <artifactId>graalvm-reachability-metadata</artifactId>
-                        <version>${maven-native-plugin.version}</version>
-                        <classifier>repository</classifier>
-                        <type>zip</type>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>build-native</id>
-                        <goals>
-                            <goal>compile-no-fork</goal>
-                        </goals>
-                        <phase>package</phase>
-                    </execution>
-                    <execution>
-                        <id>test-native</id>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <phase>test</phase>
-                    </execution>
-                </executions>
-                <configuration>
-                    <metadataRepository>
-                        <enabled>true</enabled>
-                    </metadataRepository>
-                    <imageName>${imageName}</imageName>
-                    <mainClass>nl.onnoh.mdg.GenerateDocumentation</mainClass>
-                    <buildArgs>
-                        <!--                        <buildArg>-H:+PrintAnalysisCallTree</buildArg>-->
-                        <buildArg>-H:+UnlockExperimentalVMOptions</buildArg>
-                        <buildArg>
-                            -H:ResourceConfigurationFiles=target/classes/META-INF/native-image/${project.groupId}/${project.artifactId}/resource-config.json
-                        </buildArg>
-                        <buildArg>-H:Log=registerResource:5</buildArg>
-                        <buildArg>--enable-url-protocols=https</buildArg>
-                    </buildArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jvnet.jaxb</groupId>
-                <artifactId>jaxb-maven-plugin</artifactId>
-                <version>${maven-jaxb-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>BPMN</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <generatePackage>nl.onnoh.mdg.bpmn</generatePackage>
-                            <generateDirectory>${project.build.directory}/generated-sources/xjc/bpmn</generateDirectory>
-                            <schemaDirectory>src/main/resources/bpmn/xsd</schemaDirectory>
-                            <markGenerated>false</markGenerated>
-                            <schemaIncludes>
-                                <include>BPMN20.xsd</include>
-                                <include>BPMNDI.xsd</include>
-                                <include>DC.xsd</include>
-                                <include>DI.xsd</include>
-                                <include>Semantic.xsd</include>
-                                <include>Zeebe.xsd</include>
-                            </schemaIncludes>
-                            <bindingDirectory>src/main/resources/bpmn/xsd</bindingDirectory>
-                            <bindingIncludes>
-                                <include>bpmn-bindings.xjb</include>
-                            </bindingIncludes>
-                            <extension>true</extension>
-                            <args>
-                                <arg>-Xannotate</arg>
-                            </args>
-                            <plugins>
-                                <plugin>
-                                    <groupId>org.jvnet.jaxb</groupId>
-                                    <artifactId>jaxb-plugin-annotate</artifactId>
-                                    <version>${maven-jaxb-plugin.version}</version>
-                                </plugin>
-                            </plugins>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>DMN</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <generatePackage>nl.onnoh.mdg.dmn</generatePackage>
-                            <generateDirectory>${project.build.directory}/generated-sources/xjc/dmn</generateDirectory>
-                            <schemaDirectory>src/main/resources/dmn/xsd</schemaDirectory>
-                            <markGenerated>false</markGenerated>
-                            <schemaIncludes>
-                                <include>DC.xsd</include>
-                                <include>DI.xsd</include>
-                                <include>DMNDI13.xsd</include>
-                                <include>DMN13.xsd</include>
-                            </schemaIncludes>
-                            <bindingDirectory>src/main/resources/dmn/xsd</bindingDirectory>
-                            <bindingIncludes>
-                                <include>dmn-bindings.xjb</include>
-                            </bindingIncludes>
-                            <extension>true</extension>
-                            <args>
-                                <arg>-Xannotate</arg>
-                            </args>
-                            <plugins>
-                                <plugin>
-                                    <groupId>org.jvnet.jaxb</groupId>
-                                    <artifactId>jaxb-plugin-annotate</artifactId>
-                                    <version>${maven-jaxb-plugin.version}</version>
-                                </plugin>
-                            </plugins>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
     <profiles>
+        <profile>
+            <id>jar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>${maven-jar-plugin.version}</version>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <mainClass>${mainClass}</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>${maven-shade-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                                <configuration>
+                                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                                    <transformers>
+                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                            <mainClass>${mainClass}</mainClass>
+                                        </transformer>
+                                    </transformers>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>${maven-compiler-plugin.version}</version>
+                        <configuration>
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>org.projectlombok</groupId>
+                                    <artifactId>lombok</artifactId>
+                                    <version>${lombok.version}</version>
+                                </path>
+                                <path>
+                                    <groupId>info.picocli</groupId>
+                                    <artifactId>picocli-codegen</artifactId>
+                                    <version>${pico-cli.version}</version>
+                                </path>
+                            </annotationProcessorPaths>
+                            <compilerArgs>
+                                <arg>-Aproject=${project.groupId}/${project.artifactId}</arg>
+                            </compilerArgs>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.jvnet.jaxb</groupId>
+                        <artifactId>jaxb-maven-plugin</artifactId>
+                        <version>${maven-jaxb-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>BPMN</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <generatePackage>nl.onnoh.mdg.bpmn</generatePackage>
+                                    <generateDirectory>${project.build.directory}/generated-sources/xjc/bpmn</generateDirectory>
+                                    <schemaDirectory>src/main/resources/bpmn/xsd</schemaDirectory>
+                                    <markGenerated>false</markGenerated>
+                                    <schemaIncludes>
+                                        <include>BPMN20.xsd</include>
+                                        <include>BPMNDI.xsd</include>
+                                        <include>DC.xsd</include>
+                                        <include>DI.xsd</include>
+                                        <include>Semantic.xsd</include>
+                                        <include>Zeebe.xsd</include>
+                                    </schemaIncludes>
+                                    <bindingDirectory>src/main/resources/bpmn/xsd</bindingDirectory>
+                                    <bindingIncludes>
+                                        <include>bpmn-bindings.xjb</include>
+                                    </bindingIncludes>
+                                    <extension>true</extension>
+                                    <args>
+                                        <arg>-Xannotate</arg>
+                                    </args>
+                                    <plugins>
+                                        <plugin>
+                                            <groupId>org.jvnet.jaxb</groupId>
+                                            <artifactId>jaxb-plugin-annotate</artifactId>
+                                            <version>${maven-jaxb-plugin.version}</version>
+                                        </plugin>
+                                    </plugins>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>DMN</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <generatePackage>nl.onnoh.mdg.dmn</generatePackage>
+                                    <generateDirectory>${project.build.directory}/generated-sources/xjc/dmn</generateDirectory>
+                                    <schemaDirectory>src/main/resources/dmn/xsd</schemaDirectory>
+                                    <markGenerated>false</markGenerated>
+                                    <schemaIncludes>
+                                        <include>DC.xsd</include>
+                                        <include>DI.xsd</include>
+                                        <include>DMNDI13.xsd</include>
+                                        <include>DMN13.xsd</include>
+                                    </schemaIncludes>
+                                    <bindingDirectory>src/main/resources/dmn/xsd</bindingDirectory>
+                                    <bindingIncludes>
+                                        <include>dmn-bindings.xjb</include>
+                                    </bindingIncludes>
+                                    <extension>true</extension>
+                                    <args>
+                                        <arg>-Xannotate</arg>
+                                    </args>
+                                    <plugins>
+                                        <plugin>
+                                            <groupId>org.jvnet.jaxb</groupId>
+                                            <artifactId>jaxb-plugin-annotate</artifactId>
+                                            <version>${maven-jaxb-plugin.version}</version>
+                                        </plugin>
+                                    </plugins>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>native</id>
             <build>
@@ -287,6 +244,16 @@
                         <artifactId>native-maven-plugin</artifactId>
                         <version>${maven-native-plugin.version}</version>
                         <extensions>true</extensions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.graalvm.buildtools</groupId>
+                                <artifactId>graalvm-reachability-metadata</artifactId>
+                                <version>${maven-native-plugin.version}</version>
+                                <classifier>repository</classifier>
+                                <type>zip</type>
+                            </dependency>
+                        </dependencies>
+
                         <executions>
                             <execution>
                                 <id>build-native</id>
@@ -304,15 +271,21 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <imageName>${imageName}</imageName>
+                            <mainClass>nl.onnoh.mdg.GenerateDocumentation</mainClass>
                             <fallback>false</fallback>
                             <buildArgs>
                                 <buildArg>-H:IncludeLocales=nl,en</buildArg>
+                                <buildArg>-H:+UnlockExperimentalVMOptions</buildArg>
+                                <buildArg>
+                                    -H:ResourceConfigurationFiles=target/classes/META-INF/native-image/${project.groupId}/${project.artifactId}/resource-config.json
+                                </buildArg>
+                                <buildArg>-H:Log=registerResource:5</buildArg>
+                                <buildArg>--enable-url-protocols=https</buildArg>
                             </buildArgs>
                             <metadataRepository>
                                 <enabled>true</enabled>
                             </metadataRepository>
-                            <imageName>${imageName}</imageName>
-                            <mainClass>nl.onnoh.mdg.GenerateDocumentation</mainClass>
                         </configuration>
                     </plugin>
 

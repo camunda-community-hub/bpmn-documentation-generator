@@ -130,13 +130,12 @@ public class DmnCommand implements Callable {
             dmnDocumentation.setKnowledgeSources(knowledgeSources);
 
         } catch (JAXBException e) {
-            log.debug("JAXB exception {}", e.getMessage());
+            log.error("JAXB exception {}", e.getMessage());
             return null;
         } catch (Exception e) {
             log.error("Error parsing DMN file: {}", dmnFile, e);
             return null;
         }
-        log.info("Parsed DMN file: {}", dmnDocumentation);
         return dmnDocumentation;
     }
 

@@ -156,13 +156,12 @@ public class BpmnCommand implements Callable {
             updateParticipantInformation(bpmnDocumentation);
 
         } catch (JAXBException e) {
-            log.debug("JAXB exception {}", e.getMessage());
+            log.error("JAXB exception {}", e.getMessage());
             return null;
         } catch (Exception e) {
             log.error("Error parsing BPMN file: {}", bpmnFile, e);
             return null;
         }
-        log.info("Parsed BPMN file: {}", bpmnDocumentation);
         return bpmnDocumentation;
     }
 
