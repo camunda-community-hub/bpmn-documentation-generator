@@ -8,7 +8,8 @@
     <#if bpmn.messages?has_content>
         <#list bpmn.messages>
             <#items as message>
-* <@util.emptyOrNull message.name "message" /> <sup id="${message.id}">(${message.id})</sup>
+<#assign messageName><#compress><@util.emptyOrNull message.name "message" /></#compress></#assign>
+* ${messageName?trim}
             </#items>
         </#list>
     <#else>
@@ -19,7 +20,9 @@
     <#if bpmn.errors?has_content>
         <#list bpmn.errors>
             <#items as error>
-* <@util.emptyOrNull error.name "error" /> <sup id="${error.id}">(${error.id})</sup> - <@util.emptyOrNull error.errorCode "error code" />
+<#assign errorName><#compress><@util.emptyOrNull error.name "error" /></#compress></#assign>
+<#assign errorCode><#compress><@util.emptyOrNull error.errorCode "error code" /></#compress></#assign>
+* ${errorName?trim} - ${errorCode?trim}
             </#items>
         </#list>
     <#else>
@@ -30,7 +33,8 @@
     <#if bpmn.signals?has_content>
         <#list bpmn.signals>
             <#items as signal>
-* <@util.emptyOrNull signal.name "signal" /> <sup id="${signal.id}">(${signal.id})</sup>
+<#assign signalName><#compress><@util.emptyOrNull signal.name "signal" /></#compress></#assign>
+* ${signalName?trim}
             </#items>
         </#list>
     <#else>
@@ -41,7 +45,9 @@
     <#if bpmn.escalations?has_content>
         <#list bpmn.escalations>
             <#items as escalation>
-* <@util.emptyOrNull escalation.name "escalation" /> <sup id="${escalation.id}">(${escalation.id})</sup> - <@util.emptyOrNull escalation.escalationCode "escalation code" />
+<#assign escalationName><#compress><@util.emptyOrNull escalation.name "escalation" /></#compress></#assign>
+<#assign escalationCode><#compress><@util.emptyOrNull escalation.escalationCode "escalation code" /></#compress></#assign>
+* ${escalationName?trim} - ${escalationCode?trim}
             </#items>
         </#list>
     <#else>

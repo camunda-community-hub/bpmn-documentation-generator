@@ -20,13 +20,14 @@
             <#if (gateways?size > 0)>
 ##### ${title}
                 <#list gateways as gateway>
-* <@util.emptyOrNull gateway.name "gateway" /> (${gateway.id})
+<#assign gatewayName><#compress><@util.emptyOrNull gateway.name "gateway" /></#compress></#assign>
+* [${gatewayName}](#${gateway.id})
                 </#list>
             </#if>
         </#list>
     </#list>
 <#else>
-    <@util.emptySection skip=skipEmptySections section="gateways" quote=false />
+<@util.emptySection skip=skipEmptySections section="gateways" quote=false />
 </#if>
 
 </#macro>

@@ -21,7 +21,12 @@
             <#if (events?size > 0)>
 ##### ${title}
                 <#list events as event>
-* <@util.emptyOrNull event.name "event" /> (${event.id})
+<#assign eventName>
+<#compress>
+<@util.emptyOrNull event.name "event" />
+</#compress>
+</#assign>
+* ${eventName?trim}
                 </#list>
             </#if>
         </#list>

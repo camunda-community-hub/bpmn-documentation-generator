@@ -23,7 +23,7 @@ Generated on ${aDate} at ${aTime}
 [](${bpmn.fileName?replace('.bpmn', '.svg', 'i')})
 
 | Property | Value | Version |
-|-|-|-|
+|---|---|---|
 | Definitions Id | ${bpmn.id} | n/a |
 <#if bpmn.diagramRelationId?has_content>
 | Diagram Relation ID | ${bpmn.diagramRelationId}| n/a |
@@ -31,32 +31,51 @@ Generated on ${aDate} at ${aTime}
 | Exporter | ${bpmn.exporter} | ${bpmn.exporterVersion} |
 | Execution Platform | ${bpmn.executionPlatform} | ${bpmn.executionPlatformVersion} |
 
+## Table of Contents
+* [Collaboration](#collaboration)
+* [Processes](#processes)
+* [Tasks](#tasks)
+* [Events](#events)
+* [Gateways](#gateways)
+* [Globals](#globals)
+
+<a id="collaboration"></a>
 <#if bpmn.collaboration?has_content>
     <@collaboration.listCollaboration bpmn.collaboration />
 </#if>
-
+<a id="processes"></a>
 ## Processes
 
     <#if bpmn.processes?has_content>
         <#list bpmn.processes as process>
+<a id="${process.id}"></a>
 ### <@util.emptyOrNull process.name "process" />
-<sup>(id: ${process.id})</sup><br/><br/>
+
             <#if process.documentation?has_content>
 > ${process.documentation}
             <#else>
-                <@util.emptySection skip=skipEmptySections section="documentation" quote=false />
+<@util.emptySection skip=skipEmptySections section="documentation" quote=false />
             </#if>
+
             <#if process.laneSets?has_content>
-                <@lanes.listLanes processLaneSets=process.laneSets/>
+<@lanes.listLanes processLaneSets=process.laneSets/>
             </#if>
+
             <#if process.elements?has_content>
-                <@tasks.listTasks processElements=process.elements/>
-                <@events.listEvents processElements=process.elements/>
-                <@gateways.listGateways processElements=process.elements/>
+<a id="tasks"></a>
+<@tasks.listTasks processElements=process.elements/>
+
+<a id="events"></a>
+<@events.listEvents processElements=process.elements/>
+
+<a id="gateways"></a>
+<@gateways.listGateways processElements=process.elements/>
+
             </#if>
         </#list>
     <#else>
-        <@util.emptySection skip=skipEmptySections section="processes" quote=false />
+<@util.emptySection skip=skipEmptySections section="processes" quote=false />
     </#if>
 
+<a id="globals"></a>
 <@globals.listGlobals bpmn />

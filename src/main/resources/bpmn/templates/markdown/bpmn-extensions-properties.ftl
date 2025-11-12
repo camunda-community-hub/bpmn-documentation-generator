@@ -9,7 +9,7 @@
  ${key?capitalize} |
             </#list>
         </#list>
-|-|-|
+|---|---|
 |
         <#list properties as property>
             <#list property as propertyKey, propertyValue>

@@ -17,7 +17,7 @@
 #### ***Properties***
 
 | Name | Value |
-|-|-|
+| --- | --- |
             <#list extensionValue>
                 <#items as itemKey, itemValue>
 | ${itemKey} | ${itemValue} |
@@ -48,22 +48,31 @@ ${itemValue}
 
     <#list collaboration.participants>
         <#items as participant>
-* [<@util.emptyOrNull participant.name "participant" />](${participant.id})
+<#assign participantName>
+<#compress>
+<@util.emptyOrNull participant.name?trim "participant" />
+</#compress>
+</#assign>
+* [${participantName?trim}](#${participant.id})
         </#items>
     </#list>
 
     <#list collaboration.participants>
         <#items as participant>
+<#assign participantName>
+<#compress>
+<@util.emptyOrNull participant.name?trim "participant" />
+</#compress>
+</#assign>
 <a id="${participant.id}"></a>
-### <@util.emptyOrNull participant.name "participant" />
-<sup>(id: ${participant.id})</sup><br/>
+### ${participantName?trim}
             <#if participant.documentation?has_content>
 > ${participant.documentation}
             <#else>
 > Not documented.
             </#if>
 
-process [**${participant.processRef}**](${participant.processRef})
+Process [**${participant.processRef}**](#${participant.processRef})
 
             <#list collaboration.extensions>
                 <#items as extensionKey, extensionValue>
@@ -71,7 +80,7 @@ process [**${participant.processRef}**](${participant.processRef})
 #### ***Properties***
 
 | Name | Value |
-|-|-|
+| --- |--- |
                         <#list extensionValue>
                             <#items as itemKey, itemValue>
 | ${itemKey} | ${itemValue} |

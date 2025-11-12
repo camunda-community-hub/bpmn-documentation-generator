@@ -5,16 +5,17 @@
 #### Lanes
 
 <#list processLaneSets as laneset>
-Lane set : <@util.emptyOrNull laneset.name "lane" /> <sup>(${laneset.id})</sup>
+Lane set : <@util.emptyOrNull laneset.name "lane set" />
+
     <#list laneset.lanes as lane>
-##### ${lane.name}
-<sup>(id: ${lane.id})</sup>
+##### <@util.emptyOrNull lane.name "lane" />
         <#if lane.documentation?has_content>
 > ${lane.documentation}
         <#else>
 > Not documented.
         </#if>
-    </#list> <!-- End of Lanes -->
-</#list> <!-- End of LaneSets -->
+    </#list>
+
+</#list>
 
 </#macro>

@@ -2,19 +2,18 @@
     <#if variable?has_content>
         <#if variable = "Unnamed">
             <#switch type>
-                <#on "template">
-No template attached
-                <#on "template version">
-n/a
-                <#default>
-${variable} ${type}
+<#on "template">No template attached
+<#on "template version">n/a
+<#default>
+${variable?trim} ${type}
             </#switch>
-        <#else>
-${variable}
-        </#if>
-    <#else>
+<#else>
+${variable?trim}
+</#if>
+<#else>
 &lt;Empty&gt; ${type}
-    </#if>
+</#if>
+
 </#macro>
 
 <#macro emptySection skip section="content" quote=true>
@@ -41,9 +40,9 @@ No ${section}
         <#if documentation != "Empty">
             <#if markdown>
                 <#if quote>
-                    > ${documentation}
+> ${documentation}
                 <#else>
-                    ${documentation}
+${documentation}
                 </#if>
             <#else>
                 <#if quote>
