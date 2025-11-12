@@ -113,7 +113,7 @@ public class BpmnCommand implements Callable {
                         bpmnDocumentation.setExecutionPlatformVersion(value);
                         break;
                     case CAMUNDA_ATTRIBUTE_RELATION_ID:
-                        bpmnDocumentation.setRelationId(value);
+                        bpmnDocumentation.setDiagramRelationId(value);
                         break;
                     default:
                         log.warn("Unknown definition attribute: {}", key.getLocalPart());

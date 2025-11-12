@@ -59,10 +59,10 @@
         <td>${bpmn.id}</td>
         <td>n/a</td>
     </tr>
-    <#if bpmn.relationId?has_content>
+    <#if bpmn.diagramRelationId?has_content>
         <tr>
-            <td>Relation ID</td>
-            <td>${bpmn.relationId}</td>
+            <td>Diagram Relation ID</td>
+            <td>${bpmn.diagramRelationId}</td>
             <td>n/a</td>
         </tr>
     </#if>

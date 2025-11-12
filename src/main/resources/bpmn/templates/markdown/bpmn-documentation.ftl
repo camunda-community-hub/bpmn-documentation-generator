@@ -25,8 +25,8 @@ Generated on ${aDate} at ${aTime}
 | Property | Value | Version |
 |-|-|-|
 | Definitions Id | ${bpmn.id} | n/a |
-<#if bpmn.relationId?has_content>
-| Relation ID | ${bpmn.relationId}| n/a |
+<#if bpmn.diagramRelationId?has_content>
+| Diagram Relation ID | ${bpmn.diagramRelationId}| n/a |
 </#if>
 | Exporter | ${bpmn.exporter} | ${bpmn.exporterVersion} |
 | Execution Platform | ${bpmn.executionPlatform} | ${bpmn.executionPlatformVersion} |

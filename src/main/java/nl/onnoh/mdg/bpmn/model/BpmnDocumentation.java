@@ -22,7 +22,7 @@ public class BpmnDocumentation {
     String exporterVersion;
     String executionPlatform;
     String executionPlatformVersion;
-    String relationId;
+    String diagramRelationId;
     Collaboration collaboration;
     List<Process> processes;
     List<Message> messages;
