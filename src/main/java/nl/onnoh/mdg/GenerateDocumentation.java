@@ -40,7 +40,6 @@ public class GenerateDocumentation implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        System.out.println("#GenerateDocumentation.call");
         if (!checkFile(modelFile)) {
             return 1;
         }
@@ -48,27 +47,26 @@ public class GenerateDocumentation implements Callable<Integer> {
     }
 
     public static void main(String... args) {
-        System.out.println("#GenerateDocumentation.main");
         int exitCode = new CommandLine(new GenerateDocumentation()).execute(args);
         System.exit(exitCode);
     }
 
-    public static boolean checkFile(String bpmnFile) {
-        if (bpmnFile == null || bpmnFile.isEmpty()) {
+    public static boolean checkFile(String modelFile) {
+        if (modelFile == null || modelFile.isEmpty()) {
             log.error("No file specified.");
             return false;
         }
-        Path filePath = Paths.get(bpmnFile);
+        Path filePath = Paths.get(modelFile);
         if (!Files.exists(filePath)) {
-            log.error("File not found: {}", bpmnFile);
+            log.error("File not found: {}", modelFile);
             return false;
         }
         if (!Files.isRegularFile(filePath)) {
-            log.error("Not a regular file: {}", bpmnFile);
+            log.error("Not a regular file: {}", modelFile);
             return false;
         }
         if (!Files.isReadable(filePath)) {
-            log.error("Error reading file: {}", bpmnFile);
+            log.error("Error reading file: {}", modelFile);
             return false;
         }
         return true;

@@ -77,7 +77,9 @@ public class BpmnCommand implements Callable {
 
     private static void generateOutput(String bpmnFile, BpmnDocumentation bpmnDocumentation, String outputType) {
         String templateFile = "bpmn" + File.separator + TEMPLATES_FOLDER + File.separator + outputType + File.separator + "bpmn-documentation" +TEMPLATE_SUFFIX;
-        String outputFile = bpmnFile.replace(".bpmn", "." + outputType);
+        String outputFileExtension = ".html";
+        if ("markdown".equalsIgnoreCase(outputType)) outputFileExtension = "md";
+        String outputFile = bpmnFile.replace(".bpmn", outputFileExtension);
         Map<String, Object> templateVariables = new HashMap<>();
         Configuration configuration = initTemplateEngine();
         templateVariables.put("bpmn", bpmnDocumentation);
