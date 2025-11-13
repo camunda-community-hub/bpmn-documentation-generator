@@ -68,7 +68,7 @@ public class DmnCommand implements Callable {
     private static void generateOutput(String dmnFile, DmnDocumentation dmnDocumentation, String outputType) {
         String templateFile = "dmn" + File.separator + TEMPLATES_FOLDER + File.separator + outputType + File.separator + "dmn-documentation" +TEMPLATE_SUFFIX;
         String outputFileExtension = ".html";
-        if ("markdown".equalsIgnoreCase(outputType)) outputFileExtension = "md";
+        if ("markdown".equalsIgnoreCase(outputType)) outputFileExtension = ".md";
         String outputFile = dmnFile.replace(".dmn", outputFileExtension);
         Map<String, Object> templateVariables = new HashMap<>();
         Configuration configuration = initTemplateEngine();
