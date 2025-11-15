@@ -18,7 +18,8 @@
 # DMN ${dmn.fileName}
 
 Generated on ${aDate} at ${aTime}
-[](${dmn.fileName?replace('.dmn', '.svg', 'i')})
+
+![Visual representation of the DMN ${dmn.fileName}](${dmn.fileName?replace('.dmn', '.png', 'i')})
 
 | Property  | Value  | Version  |
 |---|---|---|
@@ -29,25 +30,25 @@ Generated on ${aDate} at ${aTime}
 <@util.showDocumentation dmn.description />
 
 <#if dmn.decisions?has_content>
-    <@decisions.listDecisions dmn.decisions />
+<@decisions.listDecisions dmn.decisions />
 <#else>
-    <@util.emptySection skip=skipEmptySections section="decisions" quote=false />
+<@util.emptySection skip=skipEmptySections section="decisions" quote=false />
 </#if>
 
 <#if dmn.businessKnowledgeModels?has_content>
-    <@businessknowledgemodels.listbBusinessKnowledgeModels dmn.businessKnowledgeModels />
+<@businessknowledgemodels.listbBusinessKnowledgeModels dmn.businessKnowledgeModels />
 <#else>
-    <@util.emptySection skip=skipEmptySections section="business knowledge models" quote=false />
+<@util.emptySection skip=skipEmptySections section="business knowledge models" quote=false />
 </#if>
 
 <#if dmn.inputData?has_content>
-    <@inputdata.listInputData dmn.inputData />
+<@inputdata.listInputData dmn.inputData />
 <#else>
-    <@util.emptySection skip=skipEmptySections section="input data" quote=false />
+<@util.emptySection skip=skipEmptySections section="input data" quote=false />
 </#if>
 
 <#if dmn.knowledgeSources?has_content>
-    <@knowledgesources.listKnowledgeSources dmn.knowledgeSources />
+<@knowledgesources.listKnowledgeSources dmn.knowledgeSources />
 <#else>
-    <@util.emptySection skip=skipEmptySections section="knowledge sources" quote=false />
+<@util.emptySection skip=skipEmptySections section="knowledge sources" quote=false />
 </#if>

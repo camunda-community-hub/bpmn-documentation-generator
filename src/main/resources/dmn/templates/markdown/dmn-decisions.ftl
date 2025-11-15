@@ -11,19 +11,20 @@
 ## Decisions
 
 <#list decisions as decision>
-* <a href="#${decision.id}"><@util.emptyOrNull decision.name "decision" /></a>
+<#assign decisionName><#compress><@util.emptyOrNull decision.name "decision"/></#compress></#assign>
+* [${decisionName?trim}](#${decision.id})
 </#list>
 
 <#list decisions as decision>
-<#--            <details ${openSections}>-->
-### <@util.emptyOrNull decision.name "decision"/><sup>(id: ${decision.id})</sup>
+<#assign decisionName><#compress><@util.emptyOrNull decision.name "decision"/></#compress></#assign>
+<a id="${decision.id}"></a>
+### ${decisionName?trim}
 <@util.showDocumentation decision.description />
 <@decisionTable.showDecisionTable decision.decisionTable />
 <@literalExpression.showLiteralExpression decision.literalExpression />
 <@authorityRequirements.listAuthorityRequirements decision.authorityRequirements />
 <@knowledgeRequirements.listKnowledgeRequirements decision.knowledgeRequirements />
 <@informationRequirements.listInformationRequirements decision.informationRequirements />
-<#--            </details>-->
 </#list>
-<#--    </details> -->
+
 </#macro>

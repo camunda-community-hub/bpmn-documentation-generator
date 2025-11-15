@@ -4,17 +4,20 @@
 
     <#if authorityRequirements?has_content>
 ### Authority Requirements
+
         <#list authorityRequirements as authorityRequirement>
-${authorityRequirement.id}
-<@util.showDocumentation authorityRequirement.description />
+<a id="${authorityRequirement.id}"></a>
             <#if authorityRequirement.requiredDecisionHref?has_content>
-Decision ${authorityRequirement.requiredDecisionHref}
+* [Decision](${authorityRequirement.requiredDecisionHref})
+<@util.showDocumentation authorityRequirement.description />
             </#if>
             <#if authorityRequirement.requiredInputHref?has_content>
-Input ${authorityRequirement.requiredInputHref}
+* [Input Data](${authorityRequirement.requiredInputHref})
+<@util.showDocumentation authorityRequirement.description />
             </#if>
             <#if authorityRequirement.requiredAuthorityHref?has_content>
-Authority ${authorityRequirement.requiredAuthorityHref}
+* [Knowledge Source](${authorityRequirement.requiredAuthorityHref})
+<@util.showDocumentation authorityRequirement.description />
             </#if>
         </#list>
     </#if>

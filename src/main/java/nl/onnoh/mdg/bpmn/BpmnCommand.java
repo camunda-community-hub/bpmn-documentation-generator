@@ -84,6 +84,7 @@ public class BpmnCommand implements Callable {
         Configuration configuration = initTemplateEngine();
         templateVariables.put("bpmn", bpmnDocumentation);
         processTemplate(configuration, templateFile, outputFile, templateVariables);
+        log.info("Written output file: {}", outputFile);
     }
 
     private static BpmnDocumentation buildTemplateVariables(String bpmnFile) {

@@ -4,8 +4,8 @@
 
     <#if literalExpression?has_content>
         <#if literalExpression != "None">
+<a id="${literalExpression.id}"></a>
 ### Literal Expression
-<sup>${literalExpression.id}</sup>
 
 <@util.emptyOrNull literalExpression.expressionLanguage />
 

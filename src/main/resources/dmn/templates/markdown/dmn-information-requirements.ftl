@@ -5,16 +5,15 @@
     <#if informationRequirements?has_content>
 ### Information Requirements
         <#list informationRequirements as informationRequirement>
-${informationRequirement.id}
 <@util.showDocumentation informationRequirement.description />
             <#if informationRequirement.requiredDecisionHref?has_content>
-Decision ${informationRequirement.requiredDecisionHref}
+* [Decision](${informationRequirement.requiredDecisionHref})
             </#if>
             <#if informationRequirement.requiredInputHref?has_content>
-Input ${informationRequirement.requiredInputHref}
+* [Input Data](${informationRequirement.requiredInputHref})
             </#if>
             <#if informationRequirement.requiredinformationHref?has_content>
-Information ${informationRequirement.requiredInformationHref}
+* [Business Knowledge Model](${informationRequirement.requiredInformationHref})
             </#if>
         </#list>
     </#if>

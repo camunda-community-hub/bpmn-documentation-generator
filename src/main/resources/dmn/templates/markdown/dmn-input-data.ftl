@@ -6,14 +6,16 @@
 ## Input Data
 
     <#list inputdata as input>
-* <a href="#${input.id}"><@util.emptyOrNull input.name "input data" /></a>
+<#assign inputName><#compress><@util.emptyOrNull input.name "input data" /></#compress></#assign>
+* [${inputName}](#${input.id})
     </#list>
 
     <#list inputdata as input>
-    <#--            <details ${openSections}>-->
-### <@util.emptyOrNull input.name "input data"/><sup>(id: ${input.id})</sup>
+<#assign inputName><#compress><@util.emptyOrNull input.name "input data" /></#compress></#assign>
+<a id="${input.id}"></a>
+### ${inputName?trim}
+
 <@util.showDocumentation input.description />
-    <#--            </details>-->
     </#list>
-<#--    </details> -->
+
 </#macro>

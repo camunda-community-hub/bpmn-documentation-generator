@@ -74,6 +74,7 @@ public class DmnCommand implements Callable {
         Configuration configuration = initTemplateEngine();
         templateVariables.put("dmn", dmnDocumentation);
         processTemplate(configuration, templateFile, outputFile, templateVariables);
+        log.info("Written output file: {}", outputFile);
     }
 
     private static DmnDocumentation buildTemplateVariables(String dmnFile) {

@@ -41,13 +41,13 @@
                 <tr>
                     <td colspan="2">
                         <#if businessKnowledgeModel.variable?has_content>
-                            <tr><td colspan="2">Result</td></tr>
-                            <tr><td>Variable name</td><td>Result type</td></tr>
-                            <tr><td><@util.emptyOrNull businessKnowledgeModel.variable.name /></td><td><@util.emptyOrNull businessKnowledgeModel.variable.typeRef /></td></tr>
-                        <#else>
-                            No result
-                        </#if>
-                    </td>
+                <tr><td colspan="2">Result</td></tr>
+                <tr><td>Variable name</td><td>Result type</td></tr>
+                <tr><td><@util.emptyOrNull businessKnowledgeModel.variable.name /></td><td><@util.emptyOrNull businessKnowledgeModel.variable.typeRef /></td></tr>
+            <#else>
+                No result
+                </#if>
+                </td>
                 </tr>
             </table>
         </#if>

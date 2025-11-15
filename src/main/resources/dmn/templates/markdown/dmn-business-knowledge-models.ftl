@@ -5,20 +5,20 @@
 
 <#macro listbBusinessKnowledgeModels businessKnowledgeModels>
 
-<#--    <details ${openSections}>-->
 ## Business Knowledge Models
 
     <#list businessKnowledgeModels as businessKnowledgeModel>
-* <a href="#${businessKnowledgeModel.id}"><@util.emptyOrNull businessKnowledgeModel.name "business knowledge model" /></a>
+<#assign businessKnowledgeModelName><#compress><@util.emptyOrNull businessKnowledgeModel.name "business knowledge model" /></#compress></#assign>
+* [${businessKnowledgeModelName?trim}](#${businessKnowledgeModel.id})
     </#list>
 
     <#list businessKnowledgeModels as businessKnowledgeModel>
-    <#--            <details ${openSections}>-->
-### <@util.emptyOrNull businessKnowledgeModel.name "business knowledge model"/><sup>(id: ${businessKnowledgeModel.id})</sup>
+<a id="${businessKnowledgeModel.id}"></a>
+<#assign businessKnowledgeModelName><#compress><@util.emptyOrNull businessKnowledgeModel.name "business knowledge model" /></#compress></#assign>
+### ${businessKnowledgeModelName?trim}
 <@businessKnowledgeModelTable.showBusinessKnowledgeModel businessKnowledgeModel />
 <@authorityRequirements.listAuthorityRequirements businessKnowledgeModel.authorityRequirements />
 <@knowledgeRequirements.listKnowledgeRequirements businessKnowledgeModel.knowledgeRequirements />
-    <#--            </details>-->
     </#list>
-<#--    </details> -->
+
 </#macro>

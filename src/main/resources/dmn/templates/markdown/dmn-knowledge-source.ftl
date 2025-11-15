@@ -3,19 +3,19 @@
 
 <#macro listKnowledgeSources knowledgeSources>
 
-<#--    <details ${openSections}>-->
 ## Knowledge Sources
 
     <#list knowledgeSources as knowledgeSource>
-* <a href="#${knowledgeSource.id}"><@util.emptyOrNull knowledgeSource.name "knowledge source" /></a>
+<#assign knowledgeSourceName><#compress><@util.emptyOrNull knowledgeSource.name "knowledge source" /></#compress></#assign>
+* [${knowledgeSourceName?trim}](#${knowledgeSource.id})
     </#list>
 
     <#list knowledgeSources as knowledgeSource>
-    <#--            <details ${openSections}>-->
-### <@util.emptyOrNull knowledgeSource.name "knowledge source"/><sup>(id: ${knowledgeSource.id})</sup>
+<#assign knowledgeSourceName><#compress><@util.emptyOrNull knowledgeSource.name "knowledge source" /></#compress></#assign>
+<a id="${knowledgeSource.id}"></a>
+### ${knowledgeSourceName?trim}
 <@util.showDocumentation knowledgeSource.description />
 <@authorityRequirements.listAuthorityRequirements knowledgeSource.authorityRequirements />
-    <#--            </details>-->
     </#list>
-<#--    </details> -->
+
 </#macro>
