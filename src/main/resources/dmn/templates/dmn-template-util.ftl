@@ -1,20 +1,41 @@
-<#macro emptyOrNull variable="Unnamed" type="element">
+<#macro emptyOrNull variable="Unnamed" type="element" style="normal">
+
     <#if variable?has_content>
         <#if variable = "Unnamed">
             <#switch type>
+                <#on "">
+                    <#assign str = "" />
                 <#on "template">
-No template attached
+                    <#assign str = "No template attached" />
                 <#on "template version">
-n/a
+                    <#assign str="n/a" />
                 <#default>
-${variable} ${type}
+                    <#assign str="${variable} ${type}" />
             </#switch>
         <#else>
-${variable}
+            <#assign str="${variable}" />
         </#if>
     <#else>
-&lt;Empty&gt; ${type}
+        <#assign str="&lt;Empty&gt ${type}" />
     </#if>
+
+    <#switch style>
+        <#on "bold">
+            <#if markdown>
+**${str}**
+            <#else>
+                <strong>${str}</strong>
+            </#if>
+        <#on "italic">
+            <#if markdown>
+_${str}_
+            <#else>
+                <em>${str}</em>
+            </#if>
+        <#on "normal">
+${str}
+    </#switch>
+
 </#macro>
 
 <#macro emptySection skip section="content" quote=true>

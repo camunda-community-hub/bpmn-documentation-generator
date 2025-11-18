@@ -29,7 +29,7 @@
           <text>x=y</text>
         </inputExpression>
       </input>
-      <input id="InputClause_1vfokwn" biodi:width="191">
+      <input id="InputClause_1vfokwn" label="x" biodi:width="191">
         <inputExpression id="LiteralExpression_0o2o8j2" typeRef="string">
           <text>and</text>
         </inputExpression>
@@ -42,7 +42,7 @@
           <text>bla-in</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0ckayy3">
-          <text></text>
+          <text>"1"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0g47vr9">
           <text>bla-out</text>
