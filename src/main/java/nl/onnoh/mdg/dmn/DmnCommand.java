@@ -57,6 +57,7 @@ public class DmnCommand implements Callable {
             return 1;
         }
         dmnDocumentation.setSuppressEmptySections(parentCommand.suppressEmptySections);
+        dmnDocumentation.setImageFormat(parentCommand.imageFormat);
         dmnDocumentation.setOpenSections(parentCommand.openSections);
 
         generateOutput(modelFile, dmnDocumentation, parentCommand.outputFormat);

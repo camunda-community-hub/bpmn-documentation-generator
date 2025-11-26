@@ -32,6 +32,10 @@ public class GenerateDocumentation implements Callable<Integer> {
     @Option(names = {"-of", "--output-format"}, defaultValue = "html", description = "The document format (default: ${DEFAULT-VALUE}).")
     public String outputFormat;
 
+    @Option(names = {"-if", "--image-format"}, defaultValue = "svg", description = "The image format included in the documentation (default: ${DEFAULT-VALUE}).")
+    public String imageFormat;
+
+
     @Option(names = {"-s", "--suppress-empty-sections"}, defaultValue = "false", description = "Suppress empty sections (default: ${DEFAULT-VALUE}).")
     public boolean suppressEmptySections;
 

@@ -21,6 +21,7 @@ public class DmnDocumentation {
     String exporterVersion;
     String executionPlatform;
     String executionPlatformVersion;
+    String imageFormat;
     String description;
     List<Decision> decisions;
     List<BusinessKnowledgeModel> businessKnowledgeModels;

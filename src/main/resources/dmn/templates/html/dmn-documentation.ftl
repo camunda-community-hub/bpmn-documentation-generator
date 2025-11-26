@@ -43,7 +43,7 @@
         <p><strong>Note:</strong> This documentation skips empty sections.</p>
     </#if>
 <p>
-    <img alt="Visual representation of the DMN ${dmn.fileName}" src="${dmn.fileName?replace('.dmn', '.svg', 'i')}"/>
+    <img alt="Visual representation of the DMN ${dmn.fileName}" src="${dmn.fileName?replace('.dmn', '.' + dmn.imageFormat, 'i')}"/>
 </p>
 <table>
     <thead>

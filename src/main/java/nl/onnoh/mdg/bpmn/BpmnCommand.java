@@ -67,6 +67,7 @@ public class BpmnCommand implements Callable {
         }
         bpmnDocumentation.setSuppressEmptySections(parentCommand.suppressEmptySections);
         bpmnDocumentation.setOpenSections(parentCommand.openSections);
+        bpmnDocumentation.setImageFormat(parentCommand.imageFormat);
 
         generateOutput(modelFile, bpmnDocumentation, parentCommand.outputFormat);
         log.info("Generated BPMN documentation.");

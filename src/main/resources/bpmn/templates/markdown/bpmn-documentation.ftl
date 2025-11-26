@@ -20,7 +20,7 @@
 # BPMN ${bpmn.fileName}
 
 Generated on ${aDate} at ${aTime}
-![Visual representation of the BPMN ${bpmn.fileName}](${bpmn.fileName?replace('.bpmn', '.svg', 'i')})
+![Visual representation of the BPMN ${bpmn.fileName}](${bpmn.fileName?replace('.bpmn', '.' + bpmn.imageFormat , 'i')})
 
 | Property | Value | Version |
 |---|---|---|

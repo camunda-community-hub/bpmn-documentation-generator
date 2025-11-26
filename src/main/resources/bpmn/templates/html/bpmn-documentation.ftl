@@ -43,7 +43,7 @@
         <p><strong>Note:</strong> This documentation skips empty sections.</p>
     </#if>
 <p>
-    <img alt="Visual representation of the BPMN ${bpmn.fileName}" src="${bpmn.fileName?replace('.bpmn', '.svg', 'i')}"/>
+    <img alt="Visual representation of the BPMN ${bpmn.fileName}" src="${bpmn.fileName?replace('.bpmn', '.' + bpmn.imageFormat, 'i')}"/>
 </p>
 <table>
     <thead>

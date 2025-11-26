@@ -19,7 +19,7 @@
 
 Generated on ${aDate} at ${aTime}
 
-![Visual representation of the DMN ${dmn.fileName}](${dmn.fileName?replace('.dmn', '.png', 'i')})
+![Visual representation of the DMN ${dmn.fileName}](${dmn.fileName?replace('.dmn', '.' + dmn.imageFormat, 'i')})
 
 | Property  | Value  | Version  |
 |---|---|---|
