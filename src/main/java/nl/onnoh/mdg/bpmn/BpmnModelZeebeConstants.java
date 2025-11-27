@@ -7,6 +7,7 @@ public class BpmnModelZeebeConstants {
     public static final String ZEEBE_TASK_DEFINITION = "taskDefinition";
     public static final String ZEEBE_FORM_DEFINITION = "formDefinition";
     public static final String ZEEBE_USER_TASK_FORM = "userTaskForm";
+    public static final String ZEEBE_USER_TASK = "userTask";
     public static final String ZEEBE_IO_MAPPING = "ioMapping";
     public static final String ZEEBE_IO_MAPPING_INPUT = "input";
     public static final String ZEEBE_IO_MAPPING_OUTPUT = "output";

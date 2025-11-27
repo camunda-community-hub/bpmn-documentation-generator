@@ -39,6 +39,7 @@ import static nl.onnoh.mdg.bpmn.BpmnModelZeebeConstants.ZEEBE_NS;
 import static nl.onnoh.mdg.bpmn.BpmnModelZeebeConstants.ZEEBE_SCRIPT;
 import static nl.onnoh.mdg.bpmn.BpmnModelZeebeConstants.ZEEBE_SUBSCRIPTION;
 import static nl.onnoh.mdg.bpmn.BpmnModelZeebeConstants.ZEEBE_TASK_DEFINITION;
+import static nl.onnoh.mdg.bpmn.BpmnModelZeebeConstants.ZEEBE_USER_TASK;
 import static nl.onnoh.mdg.bpmn.BpmnModelZeebeConstants.ZEEBE_USER_TASK_FORM;
 import static nl.onnoh.mdg.bpmn.BpmnModelZeebeConstants.ZEEBE_VERSION_TAG;
 
@@ -100,6 +101,9 @@ public class CommonParser {
                         break;
                     case ZEEBE_EXECUTION_LISTENERS:
                         parsedExtensionElements.put(ZEEBE_EXECUTION_LISTENERS, parseZeebeChildElements(element, ZEEBE_EXECUTION_LISTENER));
+                        break;
+                    case ZEEBE_USER_TASK:
+                        parsedExtensionElements.put(ZEEBE_USER_TASK, parseZeebeChildElements(element, ZEEBE_USER_TASK));
                         break;
                     case ZEEBE_USER_TASK_FORM:
                         ObjectFactory objectFactory = new ObjectFactory();
