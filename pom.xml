@@ -36,7 +36,7 @@
         <maven-shade-plugin.version>3.6.1</maven-shade-plugin.version>
         <maven-jaxb2-plugin.version>3.3.0</maven-jaxb2-plugin.version>
         <maven-jaxb-plugin.version>4.0.12</maven-jaxb-plugin.version>
-        <maven-native-plugin.version>0.11.3</maven-native-plugin.version>
+        <maven-native-plugin.version>0.11.4</maven-native-plugin.version>
         <maven-resource-list-plugin.version>1.0</maven-resource-list-plugin.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
     </properties>
