@@ -26,7 +26,7 @@
         <slf4j.version>2.0.17</slf4j.version>
         <!-- Test Dependencies -->
         <assertj.version>3.27.3</assertj.version>
-        <junit.version>6.0.2</junit.version>
+        <junit.version>6.0.3</junit.version>
         <!-- Plugin Dependencies -->
         <graalvm-hint.version>1.2.0</graalvm-hint.version>
         <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
